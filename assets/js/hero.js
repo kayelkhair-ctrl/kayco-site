@@ -176,7 +176,7 @@
         velocity[i3 + 1] += (home[i3 + 1] - pos[i3 + 1]) * RETURN;
         velocity[i3 + 2] += (home[i3 + 2] - pos[i3 + 2]) * RETURN;
 
-        // Scroll dispersion, push outward from centre
+        // Scroll dispersion, push outward from center
         if (disperseForce > 0.001) {
           velocity[i3]     += pos[i3] * 0.004 * disperseForce;
           velocity[i3 + 1] += pos[i3 + 1] * 0.004 * disperseForce;

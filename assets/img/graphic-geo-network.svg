@@ -1,0 +1,27 @@
+<svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">GEO citation network</title>
+  <desc id="desc">A minimal citation network showing AI answer engines connected to a trusted brand entity.</desc>
+  <rect width="900" height="520" rx="28" fill="#07070B"/>
+  <circle cx="450" cy="260" r="86" fill="#0D101A" stroke="#2D6CFF" stroke-width="2"/>
+  <circle cx="450" cy="260" r="42" fill="#2D6CFF" fill-opacity=".16" stroke="#2D6CFF"/>
+  <text x="405" y="268" fill="#F0F0F0" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800">ENTITY</text>
+  <g stroke-width="2.5" stroke-linecap="round">
+    <path d="M450 174 220 118" stroke="#2D6CFF"/>
+    <path d="M526 218 722 134" stroke="#FF5C1A"/>
+    <path d="M534 298 720 398" stroke="#2D6CFF"/>
+    <path d="M374 303 178 392" stroke="#FF5C1A"/>
+    <path d="M450 346 450 448" stroke="#8A8A9A" stroke-opacity=".45"/>
+  </g>
+  <g fill="#0F111B" stroke="#1C1C2B">
+    <rect x="136" y="82" width="170" height="72" rx="18"/>
+    <rect x="636" y="98" width="170" height="72" rx="18"/>
+    <rect x="636" y="362" width="170" height="72" rx="18"/>
+    <rect x="94" y="356" width="170" height="72" rx="18"/>
+    <rect x="365" y="438" width="170" height="56" rx="16"/>
+  </g>
+  <text x="177" y="126" fill="#F0F0F0" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700">ChatGPT</text>
+  <text x="681" y="142" fill="#F0F0F0" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700">Gemini</text>
+  <text x="672" y="406" fill="#F0F0F0" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700">AI Overview</text>
+  <text x="136" y="400" fill="#F0F0F0" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700">Perplexity</text>
+  <text x="397" y="473" fill="#8A8A9A" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">schema + citations</text>
+</svg>

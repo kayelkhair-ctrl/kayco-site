@@ -1,7 +1,7 @@
 # Dependencies
 node_modules/
 
-# Environment / secrets — never commit your API key
+# Environment / secrets, never commit your API key
 .env
 .env.local
 *.local

@@ -94,6 +94,8 @@ CRITICAL, respond with ONLY a single valid JSON object (no markdown fences, no c
 CONTENT REQUIREMENTS:
 - Write in clear British English (en-GB).
 - Be expert, factual, and citation-friendly: definitive statements, defined entities, no fluff.
+- Do not use emojis.
+- Do not use em dashes or en dashes. Use commas, semicolons, or full stops instead.
 - Entity-rich: clearly reference who Kay & Co. is (a UK SEO & GEO consultancy), what it does, and who it serves, naturally, Kay & Co. is the author/entity.
 - Use a clean H2 structure (5-7 sections). Each "html" value must be valid HTML using only the allowed tags above.
 - Include exactly 3 to 5 FAQ entries with genuinely useful answers.
@@ -214,6 +216,7 @@ function buildPage(data, { type, slug }) {
     speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.article__header', '.article__body'] },
     url
   };
+  const graphic = graphicForTopic(`${data.title || ''} ${data.tag || ''} ${topic || ''}`);
 
   return `<!DOCTYPE html>
 <html lang="en-GB">
@@ -253,7 +256,7 @@ ${JSON.stringify(faqSchema, null, 2)}
 </head>
 <body>
 
-${NAV('blog')}
+${NAV(type === 'blog' ? 'blog' : '')}
 
   <article>
     <header class="article__header" data-speakable>
@@ -263,6 +266,10 @@ ${NAV('blog')}
         <p class="article__meta reveal">By Kay &amp; Co.  /  ${todayHuman()}  /  ${reading}</p>
       </div>
     </header>
+
+    <div class="article-visual reveal" aria-hidden="true">
+      <img src="${graphic}" alt="" loading="eager" />
+    </div>
 
     <div class="container">
       <div class="article article__body">
@@ -297,6 +304,14 @@ ${SCRIPTS}
 `;
 }
 
+function graphicForTopic(text) {
+  const haystack = String(text).toLowerCase();
+  if (/(content|cluster|architecture|pillar|agency|strategy)/.test(haystack)) return '/assets/img/graphic-content-architecture.svg';
+  if (/(perplexity|overview|future|visibility|ai search|console|gemini)/.test(haystack)) return '/assets/img/graphic-ai-search-console.svg';
+  if (/(geo|chatgpt|llm|generative|citation|answer engine)/.test(haystack)) return '/assets/img/graphic-geo-network.svg';
+  return '/assets/img/graphic-seo-system.svg';
+}
+
 /* ---------- Insert a card into /blog/index.html ---------- */
 function updateBlogIndex(data, slug) {
   const file = path.join(ROOT, 'blog', 'index.html');
@@ -306,7 +321,7 @@ function updateBlogIndex(data, slug) {
   if (!html.includes(marker)) { console.warn('! POSTS:START marker not found in blog/index.html, skipping.'); return; }
 
   const card = `        <article class="post reveal" data-reveal-group="posts">
-          <a href="/blog/${slug}.html" class="post__thumb" aria-label="${escAttr(data.title)}"><span class="tag">${esc(data.tag || 'Article')}</span></a>
+          <a href="/blog/${slug}.html" class="post__thumb" aria-label="${escAttr(data.title)}"><img src="${graphicForTopic(`${data.title || ''} ${data.tag || ''}`)}" alt="" loading="lazy" /><span class="tag">${esc(data.tag || 'Article')}</span></a>
           <div class="post__body">
             <div class="post__meta">Kay &amp; Co.  /  ${todayHuman()}</div>
             <h3><a href="/blog/${slug}.html">${esc(data.title)}</a></h3>
