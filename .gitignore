@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Environment / secrets — never commit your API key
+.env
+.env.local
+*.local
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
