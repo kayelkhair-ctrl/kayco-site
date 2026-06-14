@@ -1,8 +1,8 @@
 /* ============================================================
-   Kay & Co. — Hero particle field (Three.js)
-   - 2000+ particles forming a constellation network
-   - React to cursor (drift toward), repel on click
-   - Disperse on scroll
+   Kay & Co., Hero particle field (Three.js)
+ , 2000+ particles forming a constellation network
+ , React to cursor (drift toward), repel on click
+ , Disperse on scroll
    Loads only on pages that include <canvas id="hero-canvas">.
    ============================================================ */
 (function () {
@@ -100,7 +100,7 @@
           scene.add(textMesh);
         },
         undefined,
-        function () { /* font load failed — particles remain the focus */ }
+        function () { /* font load failed, particles remain the focus */ }
       );
     } catch (e) { /* noop */ }
   }
@@ -176,7 +176,7 @@
         velocity[i3 + 1] += (home[i3 + 1] - pos[i3 + 1]) * RETURN;
         velocity[i3 + 2] += (home[i3 + 2] - pos[i3 + 2]) * RETURN;
 
-        // Scroll dispersion — push outward from center
+        // Scroll dispersion, push outward from centre
         if (disperseForce > 0.001) {
           velocity[i3]     += pos[i3] * 0.004 * disperseForce;
           velocity[i3 + 1] += pos[i3 + 1] * 0.004 * disperseForce;
@@ -189,7 +189,7 @@
       geo.attributes.position.needsUpdate = true;
     }
 
-    // Constellation lines — recompute on a subset every few frames
+    // Constellation lines, recompute on a subset every few frames
     if (frame % 2 === 0) {
       let v = 0;
       for (let a = 0; a < LINE_SAMPLE && v < linePositions.length - 6; a++) {

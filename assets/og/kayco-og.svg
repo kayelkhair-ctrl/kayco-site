@@ -1,0 +1,25 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Kay &amp; Co.</title>
+  <desc id="desc">Open Graph image for Kay &amp; Co., a UK SEO and GEO optimisation consultancy.</desc>
+  <rect width="1200" height="630" fill="#050508"/>
+  <g opacity=".55">
+    <path d="M130 130h940M130 250h940M130 370h940M130 490h940" stroke="#1C1C2B" stroke-width="2"/>
+    <path d="M230 80v470M430 80v470M630 80v470M830 80v470M1030 80v470" stroke="#1C1C2B" stroke-width="2"/>
+  </g>
+  <circle cx="924" cy="168" r="7" fill="#2D6CFF"/>
+  <circle cx="771" cy="362" r="7" fill="#FF5C1A"/>
+  <circle cx="1032" cy="458" r="7" fill="#F0F0F0"/>
+  <path d="M924 168 771 362 1032 458" stroke="#2D6CFF" stroke-opacity=".45" stroke-width="3"/>
+  <g transform="translate(130 128)">
+    <rect x="0" y="0" width="106" height="106" rx="24" fill="#050508"/>
+    <rect x="1.5" y="1.5" width="103" height="103" rx="22.5" stroke="#2D6CFF" stroke-opacity=".7" stroke-width="3"/>
+    <path d="M32 28v50" stroke="#F0F0F0" stroke-width="9" stroke-linecap="round"/>
+    <path d="M67 28 42 53l25 25" stroke="#F0F0F0" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M82 35a23 23 0 0 0 0 36" stroke="#FF5C1A" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <text x="130" y="310" fill="#F0F0F0" font-family="Inter, Arial, sans-serif" font-size="76" font-weight="800">Kay &amp; Co.</text>
+  <text x="130" y="384" fill="#F0F0F0" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="700">UK SEO + GEO Optimisation</text>
+  <text x="130" y="444" fill="#8A8A9A" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="500">Rank on Google. Get cited by AI answer engines.</text>
+  <rect x="130" y="505" width="268" height="48" rx="24" fill="#2D6CFF"/>
+  <text x="158" y="537" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700">kayco.net</text>
+</svg>

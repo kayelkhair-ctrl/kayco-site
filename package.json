@@ -2,7 +2,7 @@
   "name": "kayco-site",
   "version": "1.0.0",
   "private": true,
-  "description": "Kay & Co. — UK SEO & GEO optimization consultancy website (kayco.net)",
+  "description": "Kay & Co., UK SEO & GEO optimisation consultancy website (kayco.net)",
   "scripts": {
     "blog": "node generate-page.js --type=blog",
     "info": "node generate-page.js --type=info",

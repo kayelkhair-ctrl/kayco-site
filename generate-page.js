@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /* ============================================================
-   Kay & Co. — Automated content pipeline
+   Kay & Co., Automated content pipeline
    ------------------------------------------------------------
    Generates an on-brand HTML page using the Claude API, then:
-     • saves it to /blog/<slug>.html  or  /info/<slug>.html
-     • inserts a card into /blog/index.html (blog only)
-     • adds the URL to sitemap.xml
+     * saves it to /blog/<slug>.html  or  /info/<slug>.html
+     * inserts a card into /blog/index.html (blog only)
+     * adds the URL to sitemap.xml
 
    Usage:
      node generate-page.js --type=blog --topic="What is GEO?"
@@ -39,23 +39,23 @@ const type = (args.type || 'blog').toLowerCase();
 const topic = args.topic;
 
 if (!topic) {
-  console.error('✗ Missing --topic. Example:\n  node generate-page.js --type=blog --topic="What is GEO?"');
+  console.error('Error, Missing --topic. Example:\n  node generate-page.js --type=blog --topic="What is GEO?"');
   process.exit(1);
 }
 if (!['blog', 'info'].includes(type)) {
-  console.error('✗ --type must be "blog" or "info".');
+  console.error('Error, --type must be "blog" or "info".');
   process.exit(1);
 }
 const API_KEY = process.env.ANTHROPIC_API_KEY;
 if (!API_KEY) {
-  console.error('✗ ANTHROPIC_API_KEY is not set. Export it first:\n  export ANTHROPIC_API_KEY="sk-ant-..."');
+  console.error('Error, ANTHROPIC_API_KEY is not set. Export it first:\n  export ANTHROPIC_API_KEY="sk-ant-..."');
   process.exit(1);
 }
 
 /* ---------- Helpers ---------- */
 function slugify(s) {
   return s.toLowerCase().trim()
-    .replace(/['"’]/g, '')
+    .replace(/['"\u2019]/g, '')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
     .slice(0, 80);
@@ -70,12 +70,12 @@ function todayHuman() {
 /* ---------- The prompt sent to Claude ---------- */
 function buildPrompt(topic, type) {
   const kind = type === 'blog' ? 'blog article' : 'evergreen information page';
-  return `You are the senior content strategist at Kay & Co., a UK-based SEO and GEO (Generative Engine Optimization) consultancy. Kay & Co. helps UK businesses rank on Google and get cited by AI answer engines such as ChatGPT, Perplexity, and Google Gemini.
+  return `You are the senior content strategist at Kay & Co., a UK-based SEO and GEO (Generative Engine Optimisation) consultancy. Kay & Co. helps UK businesses rank on Google and get cited by AI answer engines such as ChatGPT, Perplexity, and Google Gemini.
 
 Write an expert-level, citation-friendly ${kind} on this topic:
 "${topic}"
 
-CRITICAL — respond with ONLY a single valid JSON object (no markdown fences, no commentary) matching exactly this shape:
+CRITICAL, respond with ONLY a single valid JSON object (no markdown fences, no commentary) matching exactly this shape:
 {
   "title": "SEO-optimised <title>, under 60 chars, do not append the brand (it is added automatically)",
   "metaDescription": "compelling meta description, 150-160 chars",
@@ -94,11 +94,11 @@ CRITICAL — respond with ONLY a single valid JSON object (no markdown fences, n
 CONTENT REQUIREMENTS:
 - Write in clear British English (en-GB).
 - Be expert, factual, and citation-friendly: definitive statements, defined entities, no fluff.
-- Entity-rich: clearly reference who Kay & Co. is (a UK SEO & GEO consultancy), what it does, and who it serves, naturally — Kay & Co. is the author/entity.
+- Entity-rich: clearly reference who Kay & Co. is (a UK SEO & GEO consultancy), what it does, and who it serves, naturally, Kay & Co. is the author/entity.
 - Use a clean H2 structure (5-7 sections). Each "html" value must be valid HTML using only the allowed tags above.
 - Include exactly 3 to 5 FAQ entries with genuinely useful answers.
 - Optimise for both traditional search and generative engines (mention GEO/AI answer engines where relevant).
-- Do NOT include <h1>, <html>, <head>, <script>, or style attributes — only the inner content tags listed.
+- Do NOT include <h1>, <html>, <head>, <script>, or style attributes, only the inner content tags listed.
 - Return strictly valid JSON. Escape any double quotes inside string values.`;
 }
 
@@ -138,7 +138,7 @@ function extractJSON(text) {
 
 /* ---------- Shared markup ---------- */
 const NAV = (active) => `  <header class="nav">
-    <a class="nav__logo" href="/" aria-label="Kay & Co. home"><span class="dot"></span>Kay&nbsp;&amp;&nbsp;Co.</a>
+    <a class="nav__logo" href="/" aria-label="Kay & Co. home"><span class="logo-mark" aria-hidden="true"><img src="/assets/img/kayco-logo-mark.svg" alt="" /></span><span class="logo-wordmark">Kay&nbsp;&amp;&nbsp;Co.</span></a>
     <nav aria-label="Primary">
       <ul class="nav__links" id="menu">
         <li><a href="/">Home</a></li>
@@ -147,7 +147,7 @@ const NAV = (active) => `  <header class="nav">
         <li><a href="/blog/"${active==='blog'?' class="active"':''}>Blog</a></li>
         <li><a href="/about.html">About</a></li>
         <li><a href="/contact.html">Contact</a></li>
-        <li><a href="/contact.html" class="btn btn-primary nav__cta">Get found <span class="arrow">→</span></a></li>
+        <li><a href="/contact.html" class="btn btn-primary nav__cta">Get found <span class="arrow">&rarr;</span></a></li>
       </ul>
     </nav>
     <button class="nav__burger" aria-label="Toggle menu" aria-controls="menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -156,14 +156,15 @@ const NAV = (active) => `  <header class="nav">
 const FOOTER = `  <footer class="footer">
     <div class="container">
       <div class="footer__grid">
-        <div class="footer__brand"><a class="nav__logo" href="/"><span class="dot"></span>Kay&nbsp;&amp;&nbsp;Co.</a><p>UK SEO &amp; GEO optimization consultancy. We make brands impossible to ignore — in search and in AI.</p></div>
-        <div><h4>Services</h4><ul><li><a href="/services/seo.html">SEO Strategy</a></li><li><a href="/services/geo-optimization.html">GEO Optimization</a></li><li><a href="/blog/">Content Strategy</a></li></ul></div>
+        <div class="footer__brand"><a class="nav__logo" href="/"><span class="logo-mark" aria-hidden="true"><img src="/assets/img/kayco-logo-mark.svg" alt="" /></span><span class="logo-wordmark">Kay&nbsp;&amp;&nbsp;Co.</span></a><p>UK SEO &amp; GEO optimisation consultancy. We make brands impossible to ignore, in search and in AI.</p></div>
+        <div><h4>Services</h4><ul><li><a href="/services/seo.html">SEO Strategy</a></li><li><a href="/services/geo-optimization.html">GEO Optimisation</a></li><li><a href="/blog/">Content Strategy</a></li></ul></div>
+        <div><h4>Resources</h4><ul><li><a href="/info/ai-seo.html">AI SEO</a></li><li><a href="/info/answer-engine-optimization.html">Answer Engine Optimisation</a></li><li><a href="/info/google-ai-overviews.html">Google AI Overviews</a></li><li><a href="/info/llm-seo.html">LLM SEO</a></li><li><a href="/info/ai-visibility.html">AI Visibility</a></li></ul></div>
         <div><h4>Company</h4><ul><li><a href="/about.html">About</a></li><li><a href="/blog/">Blog</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
         <div><h4>Get in touch</h4><ul><li><a href="mailto:hello@kayco.net">hello@kayco.net</a></li><li><a href="/contact.html">Book an audit</a></li><li><span style="color:var(--grey-dim)">United Kingdom</span></li></ul></div>
       </div>
       <div class="footer__bottom">
-        <p>© <span data-year>2026</span> Kay &amp; Co. All rights reserved. UK SEO &amp; GEO consultancy.</p>
-        <div class="footer__social"><a href="https://www.linkedin.com/company/kayco" aria-label="LinkedIn" rel="noopener">in</a><a href="https://x.com/kayco" aria-label="X" rel="noopener">X</a></div>
+        <p>&copy; <span data-year>2026</span> Kay &amp; Co. All rights reserved. UK SEO &amp; GEO consultancy.</p>
+        <a class="footer__email" href="mailto:hello@kayco.net">hello@kayco.net</a>
       </div>
     </div>
   </footer>`;
@@ -205,7 +206,7 @@ function buildPage(data, { type, slug }) {
     datePublished: todayISO(), dateModified: todayISO(), inLanguage: 'en-GB',
     mainEntityOfPage: url,
     author: { '@type': 'Organization', name: 'Kay & Co.', url: `${SITE}/` },
-    publisher: { '@type': 'Organization', name: 'Kay & Co.', logo: { '@type': 'ImageObject', url: `${SITE}/assets/og/kayco-logo.png` } }
+    publisher: { '@type': 'Organization', name: 'Kay & Co.', logo: { '@type': 'ImageObject', url: `${SITE}/assets/img/kayco-logo.svg` } }
   };
 
   const speakableSchema = {
@@ -232,7 +233,7 @@ function buildPage(data, { type, slug }) {
   <meta property="og:description" content="${desc}" />
   <meta property="og:url" content="${url}" />
   <meta property="og:locale" content="en_GB" />
-  <meta property="og:image" content="${SITE}/assets/og/kayco-og.png" />
+  <meta property="og:image" content="${SITE}/assets/og/kayco-og.svg" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -259,7 +260,7 @@ ${NAV('blog')}
       <div class="container">
         <span class="tag-pill reveal">${tag}</span>
         <h1 class="reveal">${title}</h1>
-        <p class="article__meta reveal">By Kay &amp; Co. · ${todayHuman()} · ${reading}</p>
+        <p class="article__meta reveal">By Kay &amp; Co.  /  ${todayHuman()}  /  ${reading}</p>
       </div>
     </header>
 
@@ -283,7 +284,7 @@ ${faqItems}
       <div class="cta reveal">
         <h2>Ready to be <span class="gradient-text">found everywhere?</span></h2>
         <p>Kay &amp; Co. gets UK brands ranked on Google and cited by AI. Start with a visibility audit.</p>
-        <div class="cta__actions"><a href="/contact.html" class="btn btn-primary">Book a visibility audit <span class="arrow">→</span></a><a href="/services/geo-optimization.html" class="btn btn-ghost">Explore GEO</a></div>
+        <div class="cta__actions"><a href="/contact.html" class="btn btn-primary">Book a visibility audit <span class="arrow">&rarr;</span></a><a href="/services/geo-optimization.html" class="btn btn-ghost">Explore GEO</a></div>
       </div>
     </div>
   </section>
@@ -299,24 +300,24 @@ ${SCRIPTS}
 /* ---------- Insert a card into /blog/index.html ---------- */
 function updateBlogIndex(data, slug) {
   const file = path.join(ROOT, 'blog', 'index.html');
-  if (!fs.existsSync(file)) { console.warn('! blog/index.html not found — skipping card insertion.'); return; }
+  if (!fs.existsSync(file)) { console.warn('! blog/index.html not found, skipping card insertion.'); return; }
   let html = fs.readFileSync(file, 'utf8');
   const marker = '<!-- POSTS:START -->';
-  if (!html.includes(marker)) { console.warn('! POSTS:START marker not found in blog/index.html — skipping.'); return; }
+  if (!html.includes(marker)) { console.warn('! POSTS:START marker not found in blog/index.html, skipping.'); return; }
 
   const card = `        <article class="post reveal" data-reveal-group="posts">
           <a href="/blog/${slug}.html" class="post__thumb" aria-label="${escAttr(data.title)}"><span class="tag">${esc(data.tag || 'Article')}</span></a>
           <div class="post__body">
-            <div class="post__meta">Kay &amp; Co. · ${todayHuman()}</div>
+            <div class="post__meta">Kay &amp; Co.  /  ${todayHuman()}</div>
             <h3><a href="/blog/${slug}.html">${esc(data.title)}</a></h3>
             <p>${esc(data.metaDescription)}</p>
-            <a class="card__link" href="/blog/${slug}.html">Read article <span class="arrow">→</span></a>
+            <a class="card__link" href="/blog/${slug}.html">Read article <span class="arrow">&rarr;</span></a>
           </div>
         </article>`;
 
   html = html.replace(marker, `${marker}\n${card}`);
   fs.writeFileSync(file, html, 'utf8');
-  console.log('✓ Added post card to blog/index.html');
+  console.log(' Added post card to blog/index.html');
 }
 
 /* ---------- Add URL to sitemap.xml ---------- */
@@ -325,21 +326,21 @@ function updateSitemap(url) {
   const today = todayISO();
   const entry = `  <url>\n    <loc>${url}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>`;
 
-  if (!fs.existsSync(file)) { console.warn('! sitemap.xml not found — skipping.'); return; }
+  if (!fs.existsSync(file)) { console.warn('! sitemap.xml not found, skipping.'); return; }
   let xml = fs.readFileSync(file, 'utf8');
-  if (xml.includes(`<loc>${url}</loc>`)) { console.log('• URL already in sitemap — skipped.'); return; }
+  if (xml.includes(`<loc>${url}</loc>`)) { console.log('* URL already in sitemap, skipped.'); return; }
   xml = xml.replace('</urlset>', `${entry}\n</urlset>`);
   fs.writeFileSync(file, xml, 'utf8');
-  console.log('✓ Added URL to sitemap.xml');
+  console.log(' Added URL to sitemap.xml');
 }
 
 /* ---------- Main ---------- */
 (async function main() {
-  console.log(`\n⚡ Kay & Co. content pipeline`);
+  console.log(`\nKay & Co. content pipeline`);
   console.log(`   type:  ${type}`);
   console.log(`   topic: ${topic}\n`);
 
-  console.log('→ Calling Claude (' + MODEL + ')…');
+  console.log('Calling Claude (' + MODEL + ')...');
   const raw = await callClaude(buildPrompt(topic, type));
   const data = extractJSON(raw);
 
@@ -353,13 +354,13 @@ function updateSitemap(url) {
   const outFile = path.join(outDir, `${slug}.html`);
   const pageHTML = buildPage(data, { type, slug });
   fs.writeFileSync(outFile, pageHTML, 'utf8');
-  console.log(`✓ Wrote ${dir}/${slug}.html`);
+  console.log(` Wrote ${dir}/${slug}.html`);
 
   if (type === 'blog') updateBlogIndex(data, slug);
   updateSitemap(`${SITE}/${dir}/${slug}.html`);
 
-  console.log(`\n✅ Done. Review the page, then run ./deploy.sh to publish.\n`);
+  console.log(`\nDone. Review the page, then run ./deploy.sh to publish.\n`);
 })().catch((err) => {
-  console.error('\n✗ Generation failed:\n' + err.message + '\n');
+  console.error('\nError, Generation failed:\n' + err.message + '\n');
   process.exit(1);
 });

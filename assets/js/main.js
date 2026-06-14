@@ -1,5 +1,5 @@
 /* ============================================================
-   Kay & Co. — Site interactions
+   Kay & Co., Site interactions
    Nav, mobile menu, GSAP scroll reveals, stat counters,
    3D card tilt, FAQ accordion, contact form.
    ============================================================ */
@@ -141,12 +141,12 @@
         if (status) { status.className = 'form__status err'; status.textContent = 'Please add your name, a valid email, and a message.'; }
         return;
       }
-      // No backend on a static host — open a pre-filled mailto so the message still sends.
-      const subject = encodeURIComponent(`New enquiry from ${name} — Kay & Co.`);
+      // No backend on a static host, open a pre-filled mailto so the message still sends.
+      const subject = encodeURIComponent(`New enquiry from ${name}, Kay & Co.`);
       const body = encodeURIComponent(
-        `Name: ${name}\nEmail: ${email}\nCompany: ${data.get('company') || '—'}\nService: ${data.get('service') || '—'}\n\n${message}`
+        `Name: ${name}\nEmail: ${email}\nCompany: ${data.get('company') || ' - '}\nService: ${data.get('service') || ' - '}\n\n${message}`
       );
-      if (status) { status.className = 'form__status ok'; status.textContent = 'Thanks — opening your email client to send this securely.'; }
+      if (status) { status.className = 'form__status ok'; status.textContent = 'Thanks, opening your email client to send this securely.'; }
       window.location.href = `mailto:hello@kayco.net?subject=${subject}&body=${body}`;
       form.reset();
     });

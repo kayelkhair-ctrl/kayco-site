@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============================================================
-# Kay & Co. — deploy script
+# Kay & Co., deploy script
 # Commits all changes and pushes to main. Cloudflare Pages
 # (connected to this repo) rebuilds automatically on push.
 # ============================================================

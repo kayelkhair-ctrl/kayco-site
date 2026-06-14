@@ -1,5 +1,5 @@
-# Kay & Co. — robots.txt
-# UK SEO & GEO optimization consultancy — kayco.net
+# Kay & Co., robots.txt
+# UK SEO & GEO optimisation consultancy, kayco.net
 
 User-agent: *
 Allow: /
