@@ -1,89 +1,78 @@
 /* ============================================================
    Kay & Co. hero canvas
-   Draws the generated hero image into canvas and animates the
-   image surface itself with cursor, scroll, and data-flow motion.
+   Lightweight transparent overlay: lime/blue network graph
+   over the static CSS hero photo. No per-frame image redraw,
+   no shadowBlur — pre-rendered glow sprites instead.
    ============================================================ */
 (function () {
   const canvas = document.getElementById('net-canvas');
   if (!canvas) return;
 
-  const ctx = canvas.getContext('2d', { alpha: false });
+  const section = canvas.closest('.hero');
+  const ctx = canvas.getContext('2d', { alpha: true });
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const image = new Image();
-  image.decoding = 'async';
-  image.src = canvas.dataset.image || '/assets/img/home-hero-ai-search-premium.jpg';
 
   const LIME = '#C6F500';
   const BLUE = '#2D6CFF';
-  const DARK = '#050508';
   const WHITE = '#F6F4EF';
 
   let W = 1;
   let H = 1;
   let DPR = 1;
-  let base = { x: 0, y: 0, w: 1, h: 1 };
   let particles = [];
   let paths = [];
   let flow = 0;
-  let scrollEase = 0;
   let clickWave = 0;
-  let started = false;
+  let visible = true;
+  let raf = null;
 
-  const pointer = {
-    x: 0,
-    y: 0,
-    tx: 0,
-    ty: 0,
-    active: false
-  };
+  const pointer = { x: 0, y: 0, tx: 0, ty: 0, active: false };
 
   function seeded(n) {
     const x = Math.sin(n) * 10000;
     return x - Math.floor(x);
   }
 
+  function makeGlow(color, size) {
+    const c = document.createElement('canvas');
+    c.width = c.height = size;
+    const g = c.getContext('2d');
+    const grad = g.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+    grad.addColorStop(0, color);
+    grad.addColorStop(1, 'rgba(0,0,0,0)');
+    g.fillStyle = grad;
+    g.fillRect(0, 0, size, size);
+    return c;
+  }
+
+  const limeGlow = makeGlow('rgba(198,245,0,0.95)', 48);
+  const blueGlow = makeGlow('rgba(45,108,255,0.95)', 48);
+  const coreGlow = makeGlow('rgba(198,245,0,0.55)', 260);
+
   function resize() {
     const rect = canvas.getBoundingClientRect();
-    DPR = Math.min(window.devicePixelRatio || 1, 1.5);
+    DPR = Math.min(window.devicePixelRatio || 1, 1.25);
     W = Math.max(1, rect.width);
     H = Math.max(1, rect.height);
     canvas.width = Math.round(W * DPR);
     canvas.height = Math.round(H * DPR);
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    pointer.x = pointer.tx = W * 0.5;
-    pointer.y = pointer.ty = H * 0.5;
-    computeCover();
+    pointer.x = pointer.tx = W * 0.62;
+    pointer.y = pointer.ty = H * 0.45;
     buildScene();
   }
 
-  function computeCover() {
-    if (!image.naturalWidth) return;
-    const scale = Math.max(W / image.naturalWidth, H / image.naturalHeight) * 1.025;
-    base.w = image.naturalWidth * scale;
-    base.h = image.naturalHeight * scale;
-    base.x = (W - base.w) * 0.5;
-    base.y = (H - base.h) * 0.5;
-  }
-
-  function imagePoint(nx, ny) {
-    if (!image.naturalWidth) return { x: W * nx, y: H * ny };
-    return {
-      x: base.x + base.w * nx,
-      y: base.y + base.h * ny
-    };
-  }
-
   function buildScene() {
-    const centre = imagePoint(0.63, 0.43);
+    const centre = { x: W * 0.62, y: H * 0.45 };
     const nodes = [
       centre,
-      imagePoint(0.43, 0.18),
-      imagePoint(0.72, 0.16),
-      imagePoint(0.35, 0.56),
-      imagePoint(0.96, 0.39),
-      imagePoint(0.66, 0.82),
-      imagePoint(0.90, 0.70),
-      imagePoint(0.32, 0.38)
+      { x: W * 0.42, y: H * 0.20 },
+      { x: W * 0.74, y: H * 0.18 },
+      { x: W * 0.34, y: H * 0.58 },
+      { x: W * 0.95, y: H * 0.40 },
+      { x: W * 0.66, y: H * 0.84 },
+      { x: W * 0.90, y: H * 0.70 },
+      { x: W * 0.30, y: H * 0.40 }
     ];
 
     paths = nodes.slice(1).map((n, i) => ({
@@ -93,7 +82,7 @@
       color: i % 3 === 1 ? BLUE : LIME
     }));
 
-    const count = Math.round(Math.min(240, Math.max(120, (W * H) / 3600)));
+    const count = Math.round(Math.min(90, Math.max(40, (W * H) / 9000)));
     particles = Array.from({ length: count }, (_, i) => {
       const path = paths[Math.floor(seeded(i * 1.73) * paths.length)];
       const t = seeded(i * 2.91);
@@ -107,7 +96,7 @@
         by: y,
         vx: 0,
         vy: 0,
-        size: 0.7 + seeded(i * 4.23) * 1.6,
+        size: 1.1 + seeded(i * 4.23) * 1.7,
         phase: seeded(i * 5.19) * Math.PI * 2,
         color: seeded(i * 6.31) > 0.82 ? BLUE : LIME
       };
@@ -130,62 +119,15 @@
   });
   window.addEventListener('resize', resize);
 
-  function scrollAmount() {
-    const rect = canvas.getBoundingClientRect();
-    const vh = window.innerHeight || H;
-    return Math.max(0, Math.min(1, -rect.top / Math.max(1, vh * 0.7)));
-  }
-
-  function drawImageSurface(t) {
-    if (!image.naturalWidth) {
-      ctx.fillStyle = DARK;
-      ctx.fillRect(0, 0, W, H);
-      return;
-    }
-
-    pointer.x += (pointer.tx - pointer.x) * 0.09;
-    pointer.y += (pointer.ty - pointer.y) * 0.09;
-    const mx = pointer.active ? (pointer.x / W - 0.5) : 0;
-    const my = pointer.active ? (pointer.y / H - 0.5) : 0;
-    scrollEase += (scrollAmount() - scrollEase) * 0.08;
-
-    const zoom = 1 + scrollEase * 0.035 + (pointer.active ? Math.hypot(mx, my) * 0.012 : 0);
-    const dx = base.x - (base.w * (zoom - 1)) * 0.5 - mx * 11;
-    const dy = base.y - (base.h * (zoom - 1)) * 0.5 - my * 8 + scrollEase * 10;
-    const dw = base.w * zoom;
-    const dh = base.h * zoom;
-
-    ctx.fillStyle = DARK;
-    ctx.fillRect(0, 0, W, H);
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = 'high';
-    ctx.drawImage(image, dx, dy, dw, dh);
-
-    const glowX = pointer.active ? pointer.x : W * 0.5;
-    const glowY = pointer.active ? pointer.y : H * 0.52;
-    const radial = ctx.createRadialGradient(glowX, glowY, 0, glowX, glowY, Math.max(W, H) * 0.52);
-    radial.addColorStop(0, 'rgba(198,245,0,.10)');
-    radial.addColorStop(0.24, 'rgba(45,108,255,.045)');
-    radial.addColorStop(1, 'rgba(5,5,8,.34)');
-    ctx.fillStyle = radial;
-    ctx.fillRect(0, 0, W, H);
-
-    const centre = paths[0] ? paths[0].from : imagePoint(0.63, 0.43);
-    const core = ctx.createRadialGradient(centre.x, centre.y, 0, centre.x, centre.y, Math.max(W, H) * 0.22);
-    const breath = reduceMotion ? 0.4 : (0.38 + Math.sin(t * 0.0016) * 0.1);
-    core.addColorStop(0, `rgba(198,245,0,${breath})`);
-    core.addColorStop(0.25, 'rgba(198,245,0,.08)');
-    core.addColorStop(1, 'rgba(198,245,0,0)');
-    ctx.globalCompositeOperation = 'screen';
-    ctx.fillStyle = core;
-    ctx.fillRect(0, 0, W, H);
-    ctx.globalCompositeOperation = 'source-over';
+  function drawGlow(sprite, x, y, r) {
+    const d = r * 2;
+    ctx.drawImage(sprite, x - r, y - r, d, d);
   }
 
   function drawFlow(t) {
+    ctx.clearRect(0, 0, W, H);
+
     flow = (flow + 0.0045) % 1;
-    ctx.save();
-    ctx.globalCompositeOperation = 'screen';
 
     paths.forEach((path, i) => {
       const p = (flow + path.offset) % 1;
@@ -195,15 +137,14 @@
       ctx.beginPath();
       ctx.moveTo(path.from.x, path.from.y);
       ctx.lineTo(path.to.x, path.to.y);
-      ctx.strokeStyle = i % 3 === 1 ? 'rgba(45,108,255,.10)' : 'rgba(198,245,0,.12)';
+      ctx.strokeStyle = i % 3 === 1 ? 'rgba(45,108,255,.14)' : 'rgba(198,245,0,.16)';
       ctx.lineWidth = 0.8;
       ctx.stroke();
 
+      drawGlow(path.color === BLUE ? blueGlow : limeGlow, x, y, 9);
       ctx.beginPath();
       ctx.arc(x, y, 1.8 + Math.sin(t * 0.004 + i) * 0.45, 0, Math.PI * 2);
       ctx.fillStyle = path.color;
-      ctx.shadowColor = path.color;
-      ctx.shadowBlur = 12;
       ctx.fill();
     });
 
@@ -212,7 +153,7 @@
       const driftX = Math.cos(t * 0.0008 + p.phase) * 8;
       const driftY = Math.sin(t * 0.0007 + p.phase) * 6;
       let tx = p.bx + driftX;
-      let ty = p.by + driftY + scrollEase * 18;
+      let ty = p.by + driftY;
 
       if (pointer.active && !reduceMotion) {
         const dx = pointer.x - p.x;
@@ -237,17 +178,17 @@
       p.y += p.vy;
     });
 
-    for (let i = 0; i < particles.length; i += 1) {
-      const p = particles[i];
+    particles.forEach((p) => {
+      drawGlow(p.color === BLUE ? blueGlow : limeGlow, p.x, p.y, p.size * 3.5);
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = p.color === BLUE ? 'rgba(45,108,255,.62)' : 'rgba(198,245,0,.64)';
-      ctx.shadowColor = p.color;
-      ctx.shadowBlur = p.size * 3.5;
+      ctx.fillStyle = p.color === BLUE ? 'rgba(45,108,255,.7)' : 'rgba(198,245,0,.72)';
       ctx.fill();
-    }
+    });
 
-    const centre = paths[0] ? paths[0].from : { x: W * 0.5, y: H * 0.52 };
+    const centre = paths[0] ? paths[0].from : { x: W * 0.5, y: H * 0.5 };
+    const breath = reduceMotion ? 0.4 : (0.7 + Math.sin(t * 0.0016) * 0.3);
+    drawGlow(coreGlow, centre.x, centre.y, 90 * breath);
     ctx.beginPath();
     ctx.arc(centre.x, centre.y, 34 + Math.sin(t * 0.0016) * 4, 0, Math.PI * 2);
     ctx.strokeStyle = 'rgba(246,244,239,.28)';
@@ -256,31 +197,46 @@
     ctx.beginPath();
     ctx.arc(centre.x, centre.y, 5, 0, Math.PI * 2);
     ctx.fillStyle = WHITE;
-    ctx.shadowColor = LIME;
-    ctx.shadowBlur = 18;
     ctx.fill();
-
-    ctx.restore();
   }
 
   function draw(now) {
-    const t = now || 0;
-    drawImageSurface(t);
-    if (!reduceMotion) drawFlow(t);
-    if (!reduceMotion) requestAnimationFrame(draw);
+    pointer.x += (pointer.tx - pointer.x) * 0.09;
+    pointer.y += (pointer.ty - pointer.y) * 0.09;
+    drawFlow(now || 0);
+    if (visible && !reduceMotion) raf = requestAnimationFrame(draw);
   }
 
   function start() {
-    if (started) return;
-    started = true;
-    computeCover();
-    buildScene();
-    requestAnimationFrame(draw);
+    if (raf || reduceMotion) return;
+    raf = requestAnimationFrame(draw);
   }
 
-  image.addEventListener('load', start);
+  function stop() {
+    if (raf) cancelAnimationFrame(raf);
+    raf = null;
+  }
 
   resize();
-  if (image.complete) start();
-  else drawImageSurface(0);
+
+  if (reduceMotion) {
+    drawFlow(0);
+  } else if ('IntersectionObserver' in window && section) {
+    const observer = new IntersectionObserver((entries) => {
+      visible = entries[0].isIntersecting;
+      if (visible) start(); else stop();
+    }, { threshold: 0.05 });
+    observer.observe(section);
+    if (document.visibilityState !== 'hidden') start();
+  } else {
+    start();
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stop();
+    } else if (visible) {
+      start();
+    }
+  });
 })();
