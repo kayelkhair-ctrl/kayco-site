@@ -70,7 +70,7 @@ function todayHuman() {
 /* ---------- The prompt sent to Claude ---------- */
 function buildPrompt(topic, type) {
   const kind = type === 'blog' ? 'blog article' : 'evergreen information page';
-  return `You are the senior content strategist at Kay & Co., a UK-based SEO and GEO (Generative Engine Optimisation) consultancy. Kay & Co. helps UK businesses rank on Google and get cited by AI answer engines such as ChatGPT, Perplexity, and Google Gemini.
+  return `You are the senior content strategist at Kay & Co., a UK-based SEO and GEO (Generative Engine Optimisation) consultancy. Kay & Co. helps UK businesses rank in Google and Bing, then get cited across AI answer engines and search surfaces such as ChatGPT, Perplexity, Gemini, Claude, Copilot, Google AI Overviews, AI Mode and Grok/X Search.
 
 Write an expert-level, citation-friendly ${kind} on this topic:
 "${topic}"

@@ -1,6 +1,6 @@
 <svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">AI search console</title>
-  <desc id="desc">A polished AI search console showing a search term moving through retrieval, reasoning, and citation layers.</desc>
+  <desc id="desc">A polished AI search console showing high-volume questions moving through retrieval, reasoning, and citation layers.</desc>
   <defs>
     <filter id="shadow" x="-20%" y="-25%" width="140%" height="150%" color-interpolation-filters="sRGB">
       <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0A0A0A" flood-opacity=".12"/>
@@ -20,7 +20,7 @@
     <rect x="86" y="86" width="728" height="332" rx="24" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
     <rect x="118" y="118" width="664" height="60" rx="17" fill="#F6F4EF" stroke="#171717" stroke-width="1.7"/>
     <circle cx="151" cy="148" r="9" fill="#C6F500" stroke="#171717" stroke-width="2"/>
-    <text x="176" y="155" fill="#54545B" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">generative engine optimisation</text>
+    <text x="176" y="155" fill="#54545B" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">high-volume questions</text>
   </g>
 
   <path d="M250 270H328M546 270H624" stroke="#171717" stroke-width="4" stroke-linecap="round"/>

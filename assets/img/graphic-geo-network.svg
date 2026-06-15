@@ -1,6 +1,6 @@
 <svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">GEO citation network</title>
-  <desc id="desc">A GEO citation network showing a brand entity connected to AI answer engines and citation signals.</desc>
+  <title id="title">GEO search ecosystem</title>
+  <desc id="desc">A GEO visibility map showing a brand entity connected to Google, Bing, ChatGPT, Perplexity, Gemini, Claude, Copilot, and Grok X Search.</desc>
   <defs>
     <filter id="shadow" x="-20%" y="-25%" width="140%" height="150%" color-interpolation-filters="sRGB">
       <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0A0A0A" flood-opacity=".12"/>
@@ -16,59 +16,90 @@
     <circle cx="768" cy="424" r="4.8" fill="#F6F4EF" stroke="#D9D6CE"/>
   </g>
 
-  <path d="M450 232C450 176 408 136 348 136H288" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
-  <path d="M500 252C544 206 604 150 672 150H726" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
-  <path d="M506 300C562 342 620 384 690 384H742" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
-  <path d="M398 304C354 350 294 386 224 386H174" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
-  <path d="M450 330V438" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
-
-  <g filter="url(#shadow)">
-    <rect x="114" y="100" width="174" height="72" rx="36" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
-    <circle cx="150" cy="136" r="23" fill="#EAF9A7"/>
-    <text x="196" y="144" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">ChatGPT</text>
+  <g stroke="#171717" stroke-width="3.6" stroke-linecap="round" opacity=".94">
+    <path d="M450 258C410 178 326 112 222 112"/>
+    <path d="M450 258C450 178 450 108 450 82"/>
+    <path d="M450 258C496 176 586 112 688 112"/>
+    <path d="M450 258C366 244 284 232 190 232"/>
+    <path d="M450 258C536 244 618 232 710 232"/>
+    <path d="M450 258C406 330 322 394 222 394"/>
+    <path d="M450 258C450 338 450 400 450 426"/>
+    <path d="M450 258C496 332 586 394 688 394"/>
   </g>
 
-  <g filter="url(#shadow)">
-    <rect x="614" y="114" width="174" height="72" rx="36" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
-    <circle cx="650" cy="150" r="23" fill="#EAF9A7"/>
-    <text x="696" y="158" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">Gemini</text>
+  <g filter="url(#shadow)" font-family="Inter, Arial, sans-serif">
+    <g>
+      <rect x="134" y="76" width="176" height="72" rx="36" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
+      <circle cx="170" cy="112" r="22" fill="#EAF9A7"/>
+      <text x="222" y="120" fill="#171717" font-size="21" font-weight="850" text-anchor="middle">Google</text>
+    </g>
+    <g>
+      <rect x="374" y="46" width="152" height="72" rx="36" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
+      <circle cx="410" cy="82" r="22" fill="#EAF9A7"/>
+      <text x="474" y="90" fill="#171717" font-size="21" font-weight="850" text-anchor="middle">Bing</text>
+    </g>
+    <g>
+      <rect x="610" y="76" width="178" height="72" rx="36" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
+      <circle cx="646" cy="112" r="22" fill="#EAF9A7"/>
+      <text x="704" y="120" fill="#171717" font-size="21" font-weight="850" text-anchor="middle">ChatGPT</text>
+    </g>
+
+    <g>
+      <rect x="86" y="196" width="204" height="72" rx="36" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
+      <circle cx="124" cy="232" r="22" fill="#EAF9A7"/>
+      <text x="196" y="240" fill="#171717" font-size="21" font-weight="850" text-anchor="middle">Perplexity</text>
+    </g>
+    <g>
+      <rect x="610" y="196" width="206" height="72" rx="36" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
+      <circle cx="648" cy="232" r="22" fill="#EAF9A7"/>
+      <text x="724" y="240" fill="#171717" font-size="21" font-weight="850" text-anchor="middle">Copilot</text>
+    </g>
+
+    <g>
+      <rect x="132" y="358" width="180" height="72" rx="36" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
+      <circle cx="170" cy="394" r="22" fill="#EAF9A7"/>
+      <text x="228" y="402" fill="#171717" font-size="21" font-weight="850" text-anchor="middle">Gemini</text>
+    </g>
+    <g>
+      <rect x="374" y="390" width="152" height="72" rx="36" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
+      <circle cx="410" cy="426" r="22" fill="#EAF9A7"/>
+      <text x="474" y="434" fill="#171717" font-size="21" font-weight="850" text-anchor="middle">Claude</text>
+    </g>
+    <g>
+      <rect x="610" y="358" width="178" height="72" rx="36" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
+      <circle cx="646" cy="394" r="22" fill="#EAF9A7"/>
+      <text x="704" y="402" fill="#171717" font-size="21" font-weight="850" text-anchor="middle">Grok / X</text>
+    </g>
   </g>
 
-  <g filter="url(#shadow)">
-    <rect x="610" y="348" width="206" height="72" rx="36" fill="#C6F500" stroke="#171717" stroke-width="2"/>
-    <circle cx="648" cy="384" r="23" fill="#171717"/>
-    <path d="M638 396V386M648 396V374M658 396V366" stroke="#C6F500" stroke-width="5" stroke-linecap="round"/>
-    <text x="692" y="392" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">AI overview</text>
-  </g>
-
-  <g filter="url(#shadow)">
-    <rect x="86" y="350" width="190" height="72" rx="36" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
-    <circle cx="124" cy="386" r="23" fill="#EAF9A7"/>
-    <text x="170" y="394" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">Perplexity</text>
-  </g>
-
-  <g filter="url(#shadow)">
-    <rect x="362" y="438" width="176" height="56" rx="28" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
-    <text x="450" y="472" fill="#54545B" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800" text-anchor="middle">schema + citations</text>
-  </g>
-
-  <g filter="url(#shadow)">
-    <circle cx="450" cy="274" r="72" fill="#C6F500" stroke="#171717" stroke-width="3"/>
-    <circle cx="450" cy="274" r="42" fill="#171717"/>
-    <text x="450" y="267" fill="#C6F500" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="900" text-anchor="middle">BRAND</text>
-    <text x="450" y="289" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="900" text-anchor="middle">ENTITY</text>
+  <g filter="url(#shadow)" font-family="Inter, Arial, sans-serif">
+    <circle cx="450" cy="258" r="78" fill="#C6F500" stroke="#171717" stroke-width="3"/>
+    <circle cx="450" cy="258" r="46" fill="#171717"/>
+    <text x="450" y="250" fill="#C6F500" font-size="16" font-weight="900" text-anchor="middle">BRAND</text>
+    <text x="450" y="273" fill="#FFFFFF" font-size="16" font-weight="900" text-anchor="middle">ENTITY</text>
   </g>
 
   <g>
-    <circle cx="288" cy="136" r="9" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
-    <circle cx="288" cy="136" r="5" fill="#C6F500"/>
-    <circle cx="614" cy="150" r="9" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
-    <circle cx="614" cy="150" r="5" fill="#C6F500"/>
-    <circle cx="610" cy="384" r="9" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
-    <circle cx="610" cy="384" r="5" fill="#C6F500"/>
-    <circle cx="276" cy="386" r="9" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
-    <circle cx="276" cy="386" r="5" fill="#C6F500"/>
-    <circle cx="450" cy="438" r="9" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
-    <circle cx="450" cy="438" r="5" fill="#C6F500"/>
+    <circle cx="310" cy="112" r="8.5" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
+    <circle cx="310" cy="112" r="4.5" fill="#C6F500"/>
+    <circle cx="450" cy="118" r="8.5" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
+    <circle cx="450" cy="118" r="4.5" fill="#C6F500"/>
+    <circle cx="610" cy="112" r="8.5" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
+    <circle cx="610" cy="112" r="4.5" fill="#C6F500"/>
+    <circle cx="290" cy="232" r="8.5" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
+    <circle cx="290" cy="232" r="4.5" fill="#C6F500"/>
+    <circle cx="610" cy="232" r="8.5" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
+    <circle cx="610" cy="232" r="4.5" fill="#C6F500"/>
+    <circle cx="312" cy="394" r="8.5" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
+    <circle cx="312" cy="394" r="4.5" fill="#C6F500"/>
+    <circle cx="450" cy="390" r="8.5" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
+    <circle cx="450" cy="390" r="4.5" fill="#C6F500"/>
+    <circle cx="610" cy="394" r="8.5" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
+    <circle cx="610" cy="394" r="4.5" fill="#C6F500"/>
+  </g>
+
+  <g filter="url(#shadow)" font-family="Inter, Arial, sans-serif">
+    <rect x="318" y="468" width="264" height="34" rx="17" fill="#FFFFFF" stroke="#171717" stroke-width="1.7"/>
+    <text x="450" y="491" fill="#54545B" font-size="14" font-weight="850" text-anchor="middle">schema + answers + citations</text>
   </g>
 </svg>

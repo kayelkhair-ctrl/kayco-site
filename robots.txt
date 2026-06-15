@@ -4,6 +4,16 @@
 User-agent: *
 Allow: /
 
+# Explicitly welcome major search crawlers (SEO)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: BingPreview
+Allow: /
+
 # Explicitly welcome AI answer-engine crawlers (GEO)
 User-agent: GPTBot
 Allow: /
@@ -24,6 +34,9 @@ User-agent: Applebot-Extended
 Allow: /
 
 User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
 Allow: /
 
 Sitemap: https://kayco.net/sitemap.xml
