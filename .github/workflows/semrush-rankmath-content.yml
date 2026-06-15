@@ -1,0 +1,43 @@
+name: Semrush Rank Math Content
+
+on:
+  workflow_dispatch:
+    inputs:
+      keyword:
+        description: Optional primary keyword override
+        required: false
+      topic:
+        description: Optional topic override
+        required: false
+  schedule:
+    - cron: "0 8 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Generate audited content
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ -n "${{ github.event.inputs.keyword }}" ] || [ -n "${{ github.event.inputs.topic }}" ]; then
+            node content-automation.js --keyword="${{ github.event.inputs.keyword }}" --topic="${{ github.event.inputs.topic }}"
+          else
+            node content-automation.js
+          fi
+      - name: Commit generated content
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "kayco-content-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add .
+            git commit -m "Generate Semrush Rank Math content"
+            git push
+          fi

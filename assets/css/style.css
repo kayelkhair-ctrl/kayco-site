@@ -130,7 +130,16 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 .hero .btn-ghost { color: #F6F4EF; border-color: rgba(246,244,239,.34); }
 .hero .btn-ghost:hover { border-color: #F6F4EF; }
 .hero__viz { position: absolute; inset: 0; z-index: 1; overflow: hidden; background: #050508; }
+.hero__bg { position: absolute; inset: -3%; z-index: 0; background: #050508 url('/assets/img/home-hero-ai-search-premium.jpg') center / cover no-repeat; will-change: transform; animation: heroDrift 28s ease-in-out infinite alternate; }
 #net-canvas { position:absolute; inset:0; width: 100%; height: 100%; display: block; z-index:1; cursor: crosshair; }
+
+@keyframes heroDrift {
+  0% { transform: scale(1) translate3d(0, 0, 0); }
+  100% { transform: scale(1.06) translate3d(-1.2%, -1%, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__bg { animation: none; }
+}
 .hero__scroll { position: absolute; bottom: 1.6rem; left: 50%; transform: translateX(-50%); z-index: 3; font-size: .68rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(246,244,239,.72); display: flex; flex-direction: column; align-items: center; gap: .6rem; }
 .hero__scroll .mouse { width: 20px; height: 32px; border: 1.5px solid rgba(246,244,239,.42); border-radius: 12px; position: relative; }
 .hero__scroll .mouse::after { content:""; position:absolute; top:6px; left:50%; transform:translateX(-50%); width:3px; height:6px; border-radius:3px; background: var(--lime); animation: scrollwheel 1.6s infinite; }
@@ -291,6 +300,12 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 .article__body a:hover { box-shadow: inset 0 -.9em 0 var(--lime); }
 .article__body blockquote { border-left: 4px solid var(--lime); padding: .4rem 0 .4rem 1.4rem; margin: 1.8rem 0; color: var(--ink); font-family: var(--display); font-size: clamp(1.5rem, 2.4vw, 2.1rem); font-weight: 700; line-height: 1.12; max-width: 28ch; text-transform: uppercase; }
 .article__body strong { color: var(--ink); }
+.toc { margin: 2rem 0 2.5rem; padding: 1.25rem 1.4rem; border: 1px solid var(--line); background: var(--paper); }
+.toc h2 { margin: 0 0 .8rem; font-size: 1rem; letter-spacing: 0; }
+.toc ol { margin-bottom: 0; columns: 2; column-gap: 2rem; }
+.article-media { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem; margin: 2.5rem 0 1rem; }
+.article-media img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border: 1px solid var(--line); background: var(--paper); }
+@media (max-width: 640px) { .toc ol { columns: 1; } .article-media { grid-template-columns: 1fr; } }
 
 /* ============================================================
    CONTACT FORM

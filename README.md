@@ -112,6 +112,37 @@ The pipeline:
 
 Generated pages include optimised titles, meta descriptions, canonical tags, Open Graph tags, JSON-LD, FAQ schema, Speakable schema, and a clean H1/H2 structure.
 
+## Semrush And Rank Math Automation
+
+Semrush keyword opportunities are stored in `data/semrush-keywords.json`. The first pull checked `kayco.net` in the UK organic database, found no current ranking keyword rows, then used Semrush keyword discovery around Kay & Co.'s SEO, GEO, and AI-search themes.
+
+Run the automated content queue:
+
+```bash
+npm run content:auto
+```
+
+Or force a specific keyword and topic:
+
+```bash
+npm run content:auto -- --keyword="generative engine optimisation" --topic="Generative engine optimisation for UK businesses"
+```
+
+The automation:
+
+1. Picks the best unused Semrush keyword opportunity.
+2. Generates a blog page with the primary focus keyword passed into the prompt.
+3. Applies Rank Math-style requirements: focus keyword in title, meta description, slug, H1, first paragraph, H2, image alt text, plus long-form copy, table of contents, internal links, external links, short paragraphs, FAQ schema, and at least four media items.
+4. Runs `rankmath-audit.js` and stores the result in `data/content-automation-state.json`.
+
+Audit any generated page manually:
+
+```bash
+npm run rankmath:audit -- --file=blog/example.html --keyword="focus keyword"
+```
+
+GitHub Actions workflow `.github/workflows/semrush-rankmath-content.yml` runs the queue every day at 08:00 GMT/UTC and can also be triggered manually. Add `ANTHROPIC_API_KEY` as a repository secret before enabling it.
+
 ## Publishing
 
 `deploy.sh` stages, commits, and pushes to `main`:

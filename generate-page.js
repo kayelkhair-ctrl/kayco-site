@@ -37,6 +37,9 @@ function parseArgs(argv) {
 const args = parseArgs(process.argv);
 const type = (args.type || 'blog').toLowerCase();
 const topic = args.topic;
+const primaryKeyword = (args['primary-keyword'] || args.keyword || '').trim();
+const secondaryKeywords = (args['secondary-keywords'] || '').split(',').map((k) => k.trim()).filter(Boolean);
+const rankMathMode = Boolean(args.rankmath || primaryKeyword);
 
 if (!topic) {
   console.error('Error, Missing --topic. Example:\n  node generate-page.js --type=blog --topic="What is GEO?"');
@@ -70,10 +73,28 @@ function todayHuman() {
 /* ---------- The prompt sent to Claude ---------- */
 function buildPrompt(topic, type) {
   const kind = type === 'blog' ? 'blog article' : 'evergreen information page';
+  const keywordBlock = primaryKeyword ? `
+RANK MATH FOCUS KEYWORDS:
+- Primary focus keyword: "${primaryKeyword}"
+- Secondary focus keywords: ${secondaryKeywords.length ? secondaryKeywords.map((k) => `"${k}"`).join(', ') : '"Kay & Co.", "UK SEO and GEO consultancy"'}
+
+RANK MATH 100/100 REQUIREMENTS:
+- Put the exact primary focus keyword in the SEO title, preferably in the first half.
+- Put the exact primary focus keyword in the meta description.
+- Put the exact primary focus keyword in the slug.
+- Put the exact primary focus keyword in the H1/title and first paragraph.
+- Use the exact primary focus keyword in at least one H2.
+- Write 2,500 to 3,200 words.
+- Keep keyword density natural but deliberate, around 1.0% to 1.8%.
+- Include at least 6 H2 sections, 3 to 5 FAQs, several internal links, and at least one external authority link.
+- Keep every paragraph under 120 words.
+- Use a title with a clear positive, practical, guide, framework, checklist, or benefit-driven angle.
+` : '';
   return `You are the senior content strategist at Kay & Co., a UK-based SEO and GEO (Generative Engine Optimisation) consultancy. Kay & Co. helps UK businesses rank in Google and Bing, then get cited across AI answer engines and search surfaces such as ChatGPT, Perplexity, Gemini, Claude, Copilot, Google AI Overviews, AI Mode and Grok/X Search.
 
 Write an expert-level, citation-friendly ${kind} on this topic:
 "${topic}"
+${keywordBlock}
 
 CRITICAL, respond with ONLY a single valid JSON object (no markdown fences, no commentary) matching exactly this shape:
 {
@@ -97,9 +118,11 @@ CONTENT REQUIREMENTS:
 - Do not use emojis.
 - Do not use em dashes or en dashes. Use commas, semicolons, or full stops instead.
 - Entity-rich: clearly reference who Kay & Co. is (a UK SEO & GEO consultancy), what it does, and who it serves, naturally, Kay & Co. is the author/entity.
-- Use a clean H2 structure (5-7 sections). Each "html" value must be valid HTML using only the allowed tags above.
+- Use a clean H2 structure (6-8 sections). Each "html" value must be valid HTML using only the allowed tags above.
 - Include exactly 3 to 5 FAQ entries with genuinely useful answers.
 - Optimise for both traditional search and generative engines (mention GEO/AI answer engines where relevant).
+- Include internal links to relevant Kay & Co. pages using absolute-path links such as /services/seo, /services/geo-optimization, /info/ai-seo, /info/llm-seo, /info/entity-seo, /info/answer-engine-optimization, and /contact.
+- Include one relevant external authority link where it genuinely supports the article.
 - Do NOT include <h1>, <html>, <head>, <script>, or style attributes, only the inner content tags listed.
 - Return strictly valid JSON. Escape any double quotes inside string values.`;
 }
@@ -187,9 +210,17 @@ function buildPage(data, { type, slug }) {
   const schemaType = type === 'blog' ? 'BlogPosting' : 'Article';
   const graphic = graphicForTopic(`${data.title || ''} ${data.tag || ''} ${topic || ''}`);
 
-  const sectionsHTML = (data.sections || []).map((s) =>
-    `        <h2 class="reveal">${esc(s.heading)}</h2>\n        <div class="reveal">${s.html}</div>`
+  const sections = data.sections || [];
+  const sectionsHTML = sections.map((s, i) =>
+    `        <h2 class="reveal" id="${slugify(s.heading || `section-${i + 1}`)}">${esc(s.heading)}</h2>\n        <div class="reveal">${s.html}</div>`
   ).join('\n');
+
+  const tocHTML = sections.length ? `        <nav class="toc reveal" aria-label="Table of contents">
+          <h2>Table of contents</h2>
+          <ol>
+${sections.map((s, i) => `            <li><a href="#${slugify(s.heading || `section-${i + 1}`)}">${esc(s.heading)}</a></li>`).join('\n')}
+          </ol>
+        </nav>` : '';
 
   const faqItems = (data.faqs || []).map((f) =>
     `            <div class="faq__item reveal"><button class="faq__q" aria-expanded="false">${esc(f.q)}<span class="ico">+</span></button><div class="faq__a"><p>${esc(f.a)}</p></div></div>`
@@ -218,6 +249,14 @@ function buildPage(data, { type, slug }) {
     speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.article__header', '.article__body'] },
     url
   };
+  const media = [
+    graphic,
+    '/assets/img/graphic-seo-system.svg',
+    '/assets/img/graphic-geo-network.svg',
+    '/assets/img/graphic-content-architecture.svg'
+  ];
+  const imageAlt = primaryKeyword || data.title || 'Kay & Co. SEO and GEO strategy';
+
   return `<!DOCTYPE html>
 <html lang="en-GB">
 <head>
@@ -269,13 +308,18 @@ ${NAV(type === 'blog' ? 'blog' : '')}
     </header>
 
     <div class="article-visual reveal" aria-hidden="true">
-      <img src="${graphic}" alt="" loading="eager" />
+      <img src="${graphic}" alt="${escAttr(imageAlt)}" loading="eager" />
     </div>
 
     <div class="container">
       <div class="article article__body">
         <div class="reveal">${data.intro || ''}</div>
+${tocHTML}
 ${sectionsHTML}
+
+        <section class="article-media reveal" aria-label="Supporting visuals">
+          ${media.map((src, i) => `<img src="${src}" alt="${escAttr(i === 0 ? imageAlt : `${imageAlt} supporting visual ${i + 1}`)}" loading="lazy" />`).join('\n          ')}
+        </section>
 
         <section data-speakable style="margin-top:3rem">
           <h2 class="reveal">Frequently asked questions</h2>
