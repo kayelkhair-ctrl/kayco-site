@@ -1,23 +1,70 @@
 <svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">AI search console</title>
-  <desc id="desc">A stylised AI search console with query routing, citations, and visibility metrics.</desc>
-  <rect width="900" height="520" rx="20" fill="#F4F4EF"/>
-  <rect x="1" y="1" width="898" height="518" rx="19" fill="none" stroke="#E5E5DF" stroke-width="2"/>
-  <rect x="78" y="76" width="744" height="368" rx="20" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2"/>
-  <rect x="110" y="112" width="680" height="58" rx="15" fill="#F4F4EF" stroke="#0A0A0A" stroke-width="1.5"/>
-  <circle cx="142" cy="141" r="8" fill="#C6F500" stroke="#0A0A0A" stroke-width="1.5"/>
-  <text x="166" y="148" fill="#54545b" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600">query: best UK GEO agency</text>
-  <rect x="110" y="204" width="210" height="178" rx="18" fill="#FFFFFF" stroke="#E0E0D9" stroke-width="2"/>
-  <rect x="346" y="204" width="210" height="178" rx="18" fill="#FFFFFF" stroke="#E0E0D9" stroke-width="2"/>
-  <rect x="582" y="204" width="208" height="178" rx="18" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2"/>
-  <path d="M146 256h138M146 288h116M146 320h86" stroke="#D4D4CC" stroke-width="8" stroke-linecap="round"/>
-  <path d="M382 256h138M382 288h90M382 320h126" stroke="#D4D4CC" stroke-width="8" stroke-linecap="round"/>
-  <path d="M618 256h136M618 288h104M618 320h62" stroke="#0A0A0A" stroke-width="8" stroke-linecap="round"/>
-  <text x="146" y="235" fill="#0A0A0A" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800">retrieve</text>
-  <text x="382" y="235" fill="#0A0A0A" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800">reason</text>
-  <text x="618" y="235" fill="#0A0A0A" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800">cite</text>
-  <rect x="606" y="196" width="184" height="16" rx="8" fill="#C6F500"/>
-  <path d="M322 292h22M558 292h22" stroke="#9a9aa0" stroke-width="3" stroke-linecap="round"/>
-  <circle cx="333" cy="292" r="5" fill="#0A0A0A"/>
-  <circle cx="569" cy="292" r="5" fill="#C6F500" stroke="#0A0A0A" stroke-width="1.5"/>
+  <desc id="desc">A polished AI search console showing a query moving through retrieval, reasoning, and citation layers.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-25%" width="140%" height="150%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0A0A0A" flood-opacity=".12"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="520" rx="26" fill="#F6F4EF"/>
+  <rect x="1" y="1" width="898" height="518" rx="25" stroke="#D9D6CE" stroke-width="1.4"/>
+  <g opacity=".78">
+    <path d="M82 70H818M82 188H818M82 306H818M82 424H818" stroke="#D9D6CE" stroke-width="1" stroke-dasharray="3 5"/>
+    <path d="M138 52V456M348 52V456M558 52V456M768 52V456" stroke="#D9D6CE" stroke-width="1" stroke-dasharray="3 5"/>
+    <circle cx="138" cy="188" r="4.8" fill="#F6F4EF" stroke="#D9D6CE"/>
+    <circle cx="768" cy="306" r="4.8" fill="#F6F4EF" stroke="#D9D6CE"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="86" y="86" width="728" height="332" rx="24" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
+    <rect x="118" y="118" width="664" height="60" rx="17" fill="#F6F4EF" stroke="#171717" stroke-width="1.7"/>
+    <circle cx="151" cy="148" r="9" fill="#C6F500" stroke="#171717" stroke-width="2"/>
+    <text x="176" y="155" fill="#54545B" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">query: best UK GEO agency</text>
+  </g>
+
+  <path d="M250 270H328M546 270H624" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="328" cy="270" r="9" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
+  <circle cx="328" cy="270" r="5" fill="#C6F500"/>
+  <circle cx="624" cy="270" r="9" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
+  <circle cx="624" cy="270" r="5" fill="#C6F500"/>
+
+  <g filter="url(#shadow)">
+    <rect x="118" y="218" width="202" height="118" rx="18" fill="#FFFFFF" stroke="#D9D6CE" stroke-width="1.5"/>
+    <circle cx="158" cy="258" r="23" fill="#EAF9A7"/>
+    <path d="M146 258H170M158 246V270M149 249L167 267M167 249L149 267" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="188" y="266" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800">retrieve</text>
+    <path d="M146 304H276M146 320H232" stroke="#D4D4CC" stroke-width="7" stroke-linecap="round"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="350" y="218" width="202" height="118" rx="18" fill="#FFFFFF" stroke="#D9D6CE" stroke-width="1.5"/>
+    <circle cx="390" cy="258" r="23" fill="#EAF9A7"/>
+    <circle cx="390" cy="258" r="12" stroke="#171717" stroke-width="2.7"/>
+    <circle cx="390" cy="258" r="4" fill="#171717"/>
+    <path d="M390 232V242M390 274V284M364 258H374M406 258H416" stroke="#171717" stroke-width="2.7" stroke-linecap="round"/>
+    <text x="420" y="266" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800">reason</text>
+    <path d="M378 304H508M378 320H478" stroke="#D4D4CC" stroke-width="7" stroke-linecap="round"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="582" y="206" width="200" height="142" rx="18" fill="#C6F500" stroke="#171717" stroke-width="2"/>
+    <circle cx="624" cy="258" r="25" fill="#171717"/>
+    <path d="M613 272V263M624 272V251M635 272V241" stroke="#C6F500" stroke-width="6" stroke-linecap="round"/>
+    <path d="M664 232V284" stroke="#99BE00" stroke-width="1.4"/>
+    <text x="684" y="267" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800">cite</text>
+    <path d="M618 318H748" stroke="#171717" stroke-opacity=".28" stroke-width="7" stroke-linecap="round"/>
+    <path d="M618 318H708" stroke="#171717" stroke-width="7" stroke-linecap="round"/>
+  </g>
+
+  <g>
+    <path d="M116 458H684" stroke="#171717" stroke-width="5" stroke-linecap="round"/>
+    <path d="M684 458H784" stroke="#C6F500" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="154" cy="474" r="4" fill="#F6F4EF" stroke="#171717" stroke-width="2"/>
+    <circle cx="450" cy="474" r="4" fill="#F6F4EF" stroke="#171717" stroke-width="2"/>
+    <circle cx="724" cy="474" r="4" fill="#F6F4EF" stroke="#C6F500" stroke-width="2"/>
+    <text x="147" y="490" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700">01</text>
+    <text x="443" y="490" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700">02</text>
+    <text x="717" y="490" fill="#A8CC00" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700">03</text>
+  </g>
 </svg>

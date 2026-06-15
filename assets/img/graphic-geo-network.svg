@@ -1,29 +1,74 @@
 <svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">GEO citation network</title>
-  <desc id="desc">A minimal citation network showing AI answer engines connected to a trusted brand entity.</desc>
-  <rect width="900" height="520" rx="20" fill="#F4F4EF"/>
-  <rect x="1" y="1" width="898" height="518" rx="19" fill="none" stroke="#E5E5DF" stroke-width="2"/>
-  <g stroke-width="2.5" stroke-linecap="round" stroke="#0A0A0A">
-    <path d="M450 174 220 118"/>
-    <path d="M526 218 722 134"/>
-    <path d="M534 298 720 398"/>
-    <path d="M374 303 178 392"/>
-    <path d="M450 346 450 448"/>
+  <desc id="desc">A GEO citation network showing a brand entity connected to AI answer engines and citation signals.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-25%" width="140%" height="150%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0A0A0A" flood-opacity=".12"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="520" rx="26" fill="#F6F4EF"/>
+  <rect x="1" y="1" width="898" height="518" rx="25" stroke="#D9D6CE" stroke-width="1.4"/>
+  <g opacity=".78">
+    <path d="M82 70H818M82 188H818M82 306H818M82 424H818" stroke="#D9D6CE" stroke-width="1" stroke-dasharray="3 5"/>
+    <path d="M138 52V456M348 52V456M558 52V456M768 52V456" stroke="#D9D6CE" stroke-width="1" stroke-dasharray="3 5"/>
+    <circle cx="138" cy="188" r="4.8" fill="#F6F4EF" stroke="#D9D6CE"/>
+    <circle cx="768" cy="424" r="4.8" fill="#F6F4EF" stroke="#D9D6CE"/>
   </g>
-  <circle cx="450" cy="260" r="66" fill="#C6F500" stroke="#0A0A0A" stroke-width="3"/>
-  <text x="450" y="267" fill="#0A0A0A" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="800">ENTITY</text>
-  <g fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2">
-    <rect x="136" y="82" width="170" height="72" rx="36"/>
-    <rect x="636" y="98" width="170" height="72" rx="36"/>
-    <rect x="636" y="362" width="170" height="72" rx="36"/>
-    <rect x="94" y="356" width="170" height="72" rx="36"/>
-    <rect x="365" y="438" width="170" height="56" rx="28"/>
+
+  <path d="M450 232C450 176 408 136 348 136H288" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+  <path d="M500 252C544 206 604 150 672 150H726" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+  <path d="M506 300C562 342 620 384 690 384H742" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+  <path d="M398 304C354 350 294 386 224 386H174" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+  <path d="M450 330V438" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+
+  <g filter="url(#shadow)">
+    <rect x="114" y="100" width="174" height="72" rx="36" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
+    <circle cx="150" cy="136" r="23" fill="#EAF9A7"/>
+    <text x="196" y="144" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">ChatGPT</text>
   </g>
-  <g fill="#0A0A0A" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700" text-anchor="middle">
-    <text x="221" y="124">ChatGPT</text>
-    <text x="721" y="140">Gemini</text>
-    <text x="721" y="404">AI Overview</text>
-    <text x="179" y="398">Perplexity</text>
+
+  <g filter="url(#shadow)">
+    <rect x="614" y="114" width="174" height="72" rx="36" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
+    <circle cx="650" cy="150" r="23" fill="#EAF9A7"/>
+    <text x="696" y="158" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">Gemini</text>
   </g>
-  <text x="450" y="471" fill="#54545b" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle">schema + citations</text>
+
+  <g filter="url(#shadow)">
+    <rect x="610" y="348" width="206" height="72" rx="36" fill="#C6F500" stroke="#171717" stroke-width="2"/>
+    <circle cx="648" cy="384" r="23" fill="#171717"/>
+    <path d="M638 396V386M648 396V374M658 396V366" stroke="#C6F500" stroke-width="5" stroke-linecap="round"/>
+    <text x="692" y="392" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">AI overview</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="86" y="350" width="190" height="72" rx="36" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
+    <circle cx="124" cy="386" r="23" fill="#EAF9A7"/>
+    <text x="170" y="394" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">Perplexity</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="362" y="438" width="176" height="56" rx="28" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
+    <text x="450" y="472" fill="#54545B" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800" text-anchor="middle">schema + citations</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <circle cx="450" cy="274" r="72" fill="#C6F500" stroke="#171717" stroke-width="3"/>
+    <circle cx="450" cy="274" r="42" fill="#171717"/>
+    <text x="450" y="267" fill="#C6F500" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="900" text-anchor="middle">BRAND</text>
+    <text x="450" y="289" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="900" text-anchor="middle">ENTITY</text>
+  </g>
+
+  <g>
+    <circle cx="288" cy="136" r="9" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
+    <circle cx="288" cy="136" r="5" fill="#C6F500"/>
+    <circle cx="614" cy="150" r="9" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
+    <circle cx="614" cy="150" r="5" fill="#C6F500"/>
+    <circle cx="610" cy="384" r="9" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
+    <circle cx="610" cy="384" r="5" fill="#C6F500"/>
+    <circle cx="276" cy="386" r="9" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
+    <circle cx="276" cy="386" r="5" fill="#C6F500"/>
+    <circle cx="450" cy="438" r="9" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
+    <circle cx="450" cy="438" r="5" fill="#C6F500"/>
+  </g>
 </svg>
