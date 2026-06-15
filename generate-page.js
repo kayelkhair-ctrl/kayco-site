@@ -144,12 +144,12 @@ const NAV = (active) => `  <header class="nav">
     <nav aria-label="Primary">
       <ul class="nav__links" id="menu">
         <li><a href="/">Home</a></li>
-        <li><a href="/services/seo.html"${active==='seo'?' class="active"':''}>SEO</a></li>
-        <li><a href="/services/geo-optimization.html"${active==='geo'?' class="active"':''}>GEO</a></li>
+        <li><a href="/services/seo"${active==='seo'?' class="active"':''}>SEO</a></li>
+        <li><a href="/services/geo-optimization"${active==='geo'?' class="active"':''}>GEO</a></li>
         <li><a href="/blog/"${active==='blog'?' class="active"':''}>Blog</a></li>
-        <li><a href="/about.html">About</a></li>
-        <li><a href="/contact.html">Contact</a></li>
-        <li><a href="/contact.html" class="btn btn-primary nav__cta">Get found <span class="arrow">&rarr;</span></a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/contact" class="btn btn-primary nav__cta">Get found <span class="arrow">&rarr;</span></a></li>
       </ul>
     </nav>
     <button class="nav__burger" aria-label="Toggle menu" aria-controls="menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -159,10 +159,10 @@ const FOOTER = `  <footer class="footer">
     <div class="container">
       <div class="footer__grid">
         <div class="footer__brand"><a class="nav__logo" href="/"><span class="logo-mark" aria-hidden="true"><img src="/assets/img/kayco-logo-mark.svg" alt="" /></span><span class="logo-wordmark">Kay&nbsp;&amp;&nbsp;Co.</span></a><p>UK SEO &amp; GEO optimisation consultancy. We make brands impossible to ignore, in search and in AI.</p></div>
-        <div><h4>Services</h4><ul><li><a href="/services/seo.html">SEO Strategy</a></li><li><a href="/services/geo-optimization.html">GEO Optimisation</a></li><li><a href="/blog/">Content Strategy</a></li></ul></div>
-        <div><h4>Resources</h4><ul><li><a href="/info/ai-seo.html">AI SEO</a></li><li><a href="/info/answer-engine-optimization.html">Answer Engine Optimisation</a></li><li><a href="/info/google-ai-overviews.html">Google AI Overviews</a></li><li><a href="/info/llm-seo.html">LLM SEO</a></li><li><a href="/info/ai-visibility.html">AI Visibility</a></li></ul></div>
-        <div><h4>Company</h4><ul><li><a href="/about.html">About</a></li><li><a href="/blog/">Blog</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
-        <div><h4>Get in touch</h4><ul><li><a href="mailto:hello@kayco.net">hello@kayco.net</a></li><li><a href="/contact.html">Book an audit</a></li><li><span style="color:var(--grey-dim)">United Kingdom</span></li></ul></div>
+        <div><h4>Services</h4><ul><li><a href="/services/seo">SEO Strategy</a></li><li><a href="/services/geo-optimization">GEO Optimisation</a></li><li><a href="/blog/">Content Strategy</a></li></ul></div>
+        <div><h4>Resources</h4><ul><li><a href="/info/ai-seo">AI SEO</a></li><li><a href="/info/answer-engine-optimization">Answer Engine Optimisation</a></li><li><a href="/info/google-ai-overviews">Google AI Overviews</a></li><li><a href="/info/llm-seo">LLM SEO</a></li><li><a href="/info/ai-visibility">AI Visibility</a></li></ul></div>
+        <div><h4>Company</h4><ul><li><a href="/about">About</a></li><li><a href="/blog/">Blog</a></li><li><a href="/contact">Contact</a></li></ul></div>
+        <div><h4>Get in touch</h4><ul><li><a href="mailto:hello@kayco.net">hello@kayco.net</a></li><li><a href="/contact">Book an audit</a></li><li><span style="color:var(--grey-dim)">United Kingdom</span></li></ul></div>
       </div>
       <div class="footer__bottom">
         <p>&copy; <span data-year>2026</span> Kay &amp; Co. All rights reserved. UK SEO &amp; GEO consultancy.</p>
@@ -178,7 +178,7 @@ const SCRIPTS = `  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gs
 /* ---------- Build full HTML page from model JSON ---------- */
 function buildPage(data, { type, slug }) {
   const dir = type === 'blog' ? 'blog' : 'info';
-  const url = `${SITE}/${dir}/${slug}.html`;
+  const url = `${SITE}/${dir}/${slug}`;
   const title = esc(data.title);
   const desc = escAttr(data.metaDescription);
   const tag = esc(data.tag || (type === 'blog' ? 'Article' : 'Guide'));
@@ -292,7 +292,7 @@ ${faqItems}
       <div class="cta reveal">
         <h2>Ready to be <span class="gradient-text">found everywhere?</span></h2>
         <p>Kay &amp; Co. gets UK brands ranked on Google and cited by AI. Start with a visibility audit.</p>
-        <div class="cta__actions"><a href="/contact.html" class="btn btn-primary">Book a visibility audit <span class="arrow">&rarr;</span></a><a href="/services/geo-optimization.html" class="btn btn-ghost">Explore GEO</a></div>
+        <div class="cta__actions"><a href="/contact" class="btn btn-primary">Book a visibility audit <span class="arrow">&rarr;</span></a><a href="/services/geo-optimization" class="btn btn-ghost">Explore GEO</a></div>
       </div>
     </div>
   </section>
@@ -326,12 +326,12 @@ function updateBlogIndex(data, slug) {
   if (!html.includes(marker)) { console.warn('! POSTS:START marker not found in blog/index.html, skipping.'); return; }
 
   const card = `        <article class="post reveal" data-reveal-group="posts">
-          <a href="/blog/${slug}.html" class="post__thumb" aria-label="${escAttr(data.title)}"><img src="${graphicForTopic(`${data.title || ''} ${data.tag || ''}`)}" alt="" loading="lazy" /><span class="tag">${esc(data.tag || 'Article')}</span></a>
+          <a href="/blog/${slug}" class="post__thumb" aria-label="${escAttr(data.title)}"><img src="${graphicForTopic(`${data.title || ''} ${data.tag || ''}`)}" alt="" loading="lazy" /><span class="tag">${esc(data.tag || 'Article')}</span></a>
           <div class="post__body">
             <div class="post__meta">Kay &amp; Co.  /  ${todayHuman()}</div>
-            <h3><a href="/blog/${slug}.html">${esc(data.title)}</a></h3>
+            <h3><a href="/blog/${slug}">${esc(data.title)}</a></h3>
             <p>${esc(data.metaDescription)}</p>
-            <a class="card__link" href="/blog/${slug}.html">Read article <span class="arrow">&rarr;</span></a>
+            <a class="card__link" href="/blog/${slug}">Read article <span class="arrow">&rarr;</span></a>
           </div>
         </article>`;
 
@@ -377,7 +377,7 @@ function updateSitemap(url) {
   console.log(` Wrote ${dir}/${slug}.html`);
 
   if (type === 'blog') updateBlogIndex(data, slug);
-  updateSitemap(`${SITE}/${dir}/${slug}.html`);
+  updateSitemap(`${SITE}/${dir}/${slug}`);
 
   console.log(`\nDone. Review the page, then run ./deploy.sh to publish.\n`);
 })().catch((err) => {

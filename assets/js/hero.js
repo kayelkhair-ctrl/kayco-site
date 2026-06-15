@@ -11,7 +11,7 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const image = new Image();
   image.decoding = 'async';
-  image.src = canvas.dataset.image || '/assets/img/home-hero-ai-search-premium.png';
+  image.src = canvas.dataset.image || '/assets/img/home-hero-ai-search-premium.jpg';
 
   const LIME = '#C6F500';
   const BLUE = '#2D6CFF';
@@ -44,7 +44,7 @@
 
   function resize() {
     const rect = canvas.getBoundingClientRect();
-    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    DPR = Math.min(window.devicePixelRatio || 1, 1.5);
     W = Math.max(1, rect.width);
     H = Math.max(1, rect.height);
     canvas.width = Math.round(W * DPR);
