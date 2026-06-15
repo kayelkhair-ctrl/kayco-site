@@ -11,7 +11,7 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const image = new Image();
   image.decoding = 'async';
-  image.src = canvas.dataset.image || '/assets/img/home-hero-ai-search.jpg';
+  image.src = canvas.dataset.image || '/assets/img/home-hero-ai-search-premium.png';
 
   const LIME = '#C6F500';
   const BLUE = '#2D6CFF';
@@ -58,7 +58,7 @@
 
   function computeCover() {
     if (!image.naturalWidth) return;
-    const scale = Math.max(W / image.naturalWidth, H / image.naturalHeight) * 1.08;
+    const scale = Math.max(W / image.naturalWidth, H / image.naturalHeight) * 1.025;
     base.w = image.naturalWidth * scale;
     base.h = image.naturalHeight * scale;
     base.x = (W - base.w) * 0.5;
@@ -74,16 +74,16 @@
   }
 
   function buildScene() {
-    const centre = imagePoint(0.5, 0.44);
+    const centre = imagePoint(0.63, 0.43);
     const nodes = [
       centre,
-      imagePoint(0.39, 0.16),
-      imagePoint(0.58, 0.16),
-      imagePoint(0.19, 0.38),
-      imagePoint(0.84, 0.38),
-      imagePoint(0.32, 0.78),
-      imagePoint(0.50, 0.80),
-      imagePoint(0.74, 0.78)
+      imagePoint(0.43, 0.18),
+      imagePoint(0.72, 0.16),
+      imagePoint(0.35, 0.56),
+      imagePoint(0.96, 0.39),
+      imagePoint(0.66, 0.82),
+      imagePoint(0.90, 0.70),
+      imagePoint(0.32, 0.38)
     ];
 
     paths = nodes.slice(1).map((n, i) => ({
@@ -93,7 +93,7 @@
       color: i % 3 === 1 ? BLUE : LIME
     }));
 
-    const count = Math.round(Math.min(360, Math.max(180, (W * H) / 2400)));
+    const count = Math.round(Math.min(240, Math.max(120, (W * H) / 3600)));
     particles = Array.from({ length: count }, (_, i) => {
       const path = paths[Math.floor(seeded(i * 1.73) * paths.length)];
       const t = seeded(i * 2.91);
@@ -149,38 +149,37 @@
     const my = pointer.active ? (pointer.y / H - 0.5) : 0;
     scrollEase += (scrollAmount() - scrollEase) * 0.08;
 
-    const zoom = 1 + scrollEase * 0.06 + (pointer.active ? Math.hypot(mx, my) * 0.025 : 0);
-    const dx = base.x - (base.w * (zoom - 1)) * 0.5 - mx * 18;
-    const dy = base.y - (base.h * (zoom - 1)) * 0.5 - my * 14 + scrollEase * 18;
+    const zoom = 1 + scrollEase * 0.035 + (pointer.active ? Math.hypot(mx, my) * 0.012 : 0);
+    const dx = base.x - (base.w * (zoom - 1)) * 0.5 - mx * 11;
+    const dy = base.y - (base.h * (zoom - 1)) * 0.5 - my * 8 + scrollEase * 10;
     const dw = base.w * zoom;
     const dh = base.h * zoom;
 
     ctx.fillStyle = DARK;
     ctx.fillRect(0, 0, W, H);
-
-    const slices = reduceMotion ? 1 : 46;
-    const sliceH = H / slices;
-    for (let i = 0; i < slices; i += 1) {
-      const sy = i * sliceH;
-      const wave = reduceMotion ? 0 : Math.sin(t * 0.0012 + i * 0.55) * 2.8;
-      const cursorWave = pointer.active ? Math.sin(i * 0.38 + pointer.y * 0.018) * mx * 7 : 0;
-      const scrollWave = Math.sin(i * 0.42 + scrollEase * 4) * scrollEase * 3;
-      ctx.save();
-      ctx.beginPath();
-      ctx.rect(0, sy, W, sliceH + 1);
-      ctx.clip();
-      ctx.drawImage(image, dx + wave + cursorWave + scrollWave, dy, dw, dh);
-      ctx.restore();
-    }
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(image, dx, dy, dw, dh);
 
     const glowX = pointer.active ? pointer.x : W * 0.5;
     const glowY = pointer.active ? pointer.y : H * 0.52;
     const radial = ctx.createRadialGradient(glowX, glowY, 0, glowX, glowY, Math.max(W, H) * 0.52);
-    radial.addColorStop(0, 'rgba(198,245,0,.22)');
-    radial.addColorStop(0.25, 'rgba(45,108,255,.08)');
-    radial.addColorStop(1, 'rgba(5,5,8,.58)');
+    radial.addColorStop(0, 'rgba(198,245,0,.10)');
+    radial.addColorStop(0.24, 'rgba(45,108,255,.045)');
+    radial.addColorStop(1, 'rgba(5,5,8,.34)');
     ctx.fillStyle = radial;
     ctx.fillRect(0, 0, W, H);
+
+    const centre = paths[0] ? paths[0].from : imagePoint(0.63, 0.43);
+    const core = ctx.createRadialGradient(centre.x, centre.y, 0, centre.x, centre.y, Math.max(W, H) * 0.22);
+    const breath = reduceMotion ? 0.4 : (0.38 + Math.sin(t * 0.0016) * 0.1);
+    core.addColorStop(0, `rgba(198,245,0,${breath})`);
+    core.addColorStop(0.25, 'rgba(198,245,0,.08)');
+    core.addColorStop(1, 'rgba(198,245,0,0)');
+    ctx.globalCompositeOperation = 'screen';
+    ctx.fillStyle = core;
+    ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'source-over';
   }
 
   function drawFlow(t) {
@@ -196,15 +195,15 @@
       ctx.beginPath();
       ctx.moveTo(path.from.x, path.from.y);
       ctx.lineTo(path.to.x, path.to.y);
-      ctx.strokeStyle = i % 3 === 1 ? 'rgba(45,108,255,.15)' : 'rgba(198,245,0,.17)';
-      ctx.lineWidth = 1;
+      ctx.strokeStyle = i % 3 === 1 ? 'rgba(45,108,255,.10)' : 'rgba(198,245,0,.12)';
+      ctx.lineWidth = 0.8;
       ctx.stroke();
 
       ctx.beginPath();
-      ctx.arc(x, y, 2.4 + Math.sin(t * 0.005 + i) * 0.8, 0, Math.PI * 2);
+      ctx.arc(x, y, 1.8 + Math.sin(t * 0.004 + i) * 0.45, 0, Math.PI * 2);
       ctx.fillStyle = path.color;
       ctx.shadowColor = path.color;
-      ctx.shadowBlur = 18;
+      ctx.shadowBlur = 12;
       ctx.fill();
     });
 
@@ -213,18 +212,18 @@
       const driftX = Math.cos(t * 0.0008 + p.phase) * 8;
       const driftY = Math.sin(t * 0.0007 + p.phase) * 6;
       let tx = p.bx + driftX;
-      let ty = p.by + driftY + scrollEase * 34;
+      let ty = p.by + driftY + scrollEase * 18;
 
       if (pointer.active && !reduceMotion) {
         const dx = pointer.x - p.x;
         const dy = pointer.y - p.y;
         const dist = Math.max(1, Math.hypot(dx, dy));
-        const pull = Math.max(0, 1 - dist / 190);
-        tx += dx * pull * 0.2;
-        ty += dy * pull * 0.2;
+        const pull = Math.max(0, 1 - dist / 220);
+        tx += dx * pull * 0.12;
+        ty += dy * pull * 0.12;
 
         if (clickWave > 0.01) {
-          const repel = Math.max(0, 1 - dist / 250) * clickWave * 11;
+          const repel = Math.max(0, 1 - dist / 260) * clickWave * 6;
           p.vx -= (dx / dist) * repel;
           p.vy -= (dy / dist) * repel;
         }
@@ -242,23 +241,23 @@
       const p = particles[i];
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = p.color === BLUE ? 'rgba(45,108,255,.78)' : 'rgba(198,245,0,.82)';
+      ctx.fillStyle = p.color === BLUE ? 'rgba(45,108,255,.62)' : 'rgba(198,245,0,.64)';
       ctx.shadowColor = p.color;
-      ctx.shadowBlur = p.size * 5;
+      ctx.shadowBlur = p.size * 3.5;
       ctx.fill();
     }
 
     const centre = paths[0] ? paths[0].from : { x: W * 0.5, y: H * 0.52 };
     ctx.beginPath();
-    ctx.arc(centre.x, centre.y, 24 + Math.sin(t * 0.002) * 3, 0, Math.PI * 2);
-    ctx.strokeStyle = 'rgba(246,244,239,.5)';
+    ctx.arc(centre.x, centre.y, 34 + Math.sin(t * 0.0016) * 4, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(246,244,239,.28)';
     ctx.lineWidth = 1;
     ctx.stroke();
     ctx.beginPath();
-    ctx.arc(centre.x, centre.y, 7, 0, Math.PI * 2);
+    ctx.arc(centre.x, centre.y, 5, 0, Math.PI * 2);
     ctx.fillStyle = WHITE;
     ctx.shadowColor = LIME;
-    ctx.shadowBlur = 24;
+    ctx.shadowBlur = 18;
     ctx.fill();
 
     ctx.restore();
