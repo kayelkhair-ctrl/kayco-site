@@ -185,6 +185,7 @@ function buildPage(data, { type, slug }) {
   const reading = esc(data.readingTime || '5 min read');
   const ogType = type === 'blog' ? 'article' : 'website';
   const schemaType = type === 'blog' ? 'BlogPosting' : 'Article';
+  const graphic = graphicForTopic(`${data.title || ''} ${data.tag || ''} ${topic || ''}`);
 
   const sectionsHTML = (data.sections || []).map((s) =>
     `        <h2 class="reveal">${esc(s.heading)}</h2>\n        <div class="reveal">${s.html}</div>`
@@ -205,6 +206,7 @@ function buildPage(data, { type, slug }) {
   const articleSchema = {
     '@context': 'https://schema.org', '@type': schemaType,
     headline: data.title, description: data.metaDescription,
+    image: `${SITE}${graphic}`,
     datePublished: todayISO(), dateModified: todayISO(), inLanguage: 'en-GB',
     mainEntityOfPage: url,
     author: { '@type': 'Organization', name: 'Kay & Co.', url: `${SITE}/` },
@@ -216,8 +218,6 @@ function buildPage(data, { type, slug }) {
     speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.article__header', '.article__body'] },
     url
   };
-  const graphic = graphicForTopic(`${data.title || ''} ${data.tag || ''} ${topic || ''}`);
-
   return `<!DOCTYPE html>
 <html lang="en-GB">
 <head>
@@ -237,7 +237,7 @@ function buildPage(data, { type, slug }) {
   <meta property="og:description" content="${desc}" />
   <meta property="og:url" content="${url}" />
   <meta property="og:locale" content="en_GB" />
-  <meta property="og:image" content="${SITE}/assets/og/kayco-og.svg" />
+  <meta property="og:image" content="${SITE}${graphic}" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -307,10 +307,14 @@ ${SCRIPTS}
 
 function graphicForTopic(text) {
   const haystack = String(text).toLowerCase();
-  if (/(content|cluster|architecture|pillar|agency|strategy)/.test(haystack)) return '/assets/img/graphic-content-architecture.svg';
-  if (/(perplexity|overview|future|visibility|ai search|console|gemini)/.test(haystack)) return '/assets/img/graphic-ai-search-console.svg';
-  if (/(geo|chatgpt|llm|generative|citation|answer engine)/.test(haystack)) return '/assets/img/graphic-geo-network.svg';
-  return '/assets/img/graphic-seo-system.svg';
+  if (/(chatgpt|citation|cited|cite)/.test(haystack)) return '/assets/img/blog/chatgpt-citations.jpg';
+  if (/perplexity/.test(haystack)) return '/assets/img/blog/perplexity-ai-search.jpg';
+  if (/(agency|choose|selection|vendor|consultancy)/.test(haystack)) return '/assets/img/blog/geo-agency-selection.jpg';
+  if (/(marketing|campaign|brand visibility|demand)/.test(haystack)) return '/assets/img/blog/geo-marketing-uk.jpg';
+  if (/(seo vs geo|geo vs seo|compare|comparison|versus)/.test(haystack)) return '/assets/img/blog/seo-vs-geo.jpg';
+  if (/(what is geo|geo meaning|generative engine optimisation|generative engine optimization|llm|answer engine)/.test(haystack)) return '/assets/img/blog/what-is-geo.jpg';
+  if (/(future|ai search|overview|visibility|gemini|claude|copilot|grok|zero-click|voice)/.test(haystack)) return '/assets/img/blog/future-seo-ai-search.jpg';
+  return '/assets/img/blog/future-seo-ai-search.jpg';
 }
 
 /* ---------- Insert a card into /blog/index.html ---------- */
