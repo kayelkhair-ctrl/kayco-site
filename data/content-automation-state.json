@@ -1,8 +1,17 @@
 {
   "usedKeywords": [
-    "seo agency"
+    "seo agency",
+    "seo services"
   ],
   "runs": [
+    {
+      "date": "2026-06-15T00:00:00.000Z",
+      "keyword": "seo services",
+      "topic": "SEO services for UK businesses, what should be included",
+      "file": "blog/seo-services-uk-what-should-be-included.html",
+      "image": "assets/img/blog/seo-vs-geo.jpg",
+      "rankMathScore": 100
+    },
     {
       "date": "2026-06-15T10:39:34.770Z",
       "keyword": "seo agency",
