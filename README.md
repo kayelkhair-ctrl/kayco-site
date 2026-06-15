@@ -1,6 +1,6 @@
 # Kay & Co., kayco.net
 
-Static website for **Kay & Co.**, a UK SEO and GEO (Generative Engine Optimisation) consultancy. The site is built with vanilla HTML, CSS, and JavaScript, with Three.js and GSAP loaded from CDNs.
+Static website for **Kay & Co.**, a UK SEO and GEO (Generative Engine Optimisation) consultancy. The site is built with vanilla HTML, CSS, and JavaScript. The homepage hero uses a Canvas 2D network-graph animation (no library); GSAP (loaded from a CDN) drives the scroll animations. Design: light, bold, editorial — Barlow Condensed display type over Inter body, with orange used sparingly for emphasis.
 
 ## Project Structure
 

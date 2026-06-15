@@ -1,297 +1,172 @@
 /* ============================================================
-   Kay & Co. — Hero particle field (Three.js)
-   Advanced GPU particle system:
-   - Custom GLSL shader: per-particle twinkle + depth-based glow
-   - Organic flow-field drift layered over a structured lattice
-   - Cursor gravity well (attract) + click shockwave (repel)
-   - Constellation lines that fade with distance and on scroll
-   - Floating 3D "Kay & Co." wordmark, parallax camera
-   Loads only on pages that include <canvas id="hero-canvas">.
+   Kay & Co. — Hero network graph (Canvas 2D)
+   A clean data-visualisation: a central "Your Brand" node linked
+   to Google, ChatGPT, Perplexity, and Gemini. Orange pulses travel
+   out to each engine in sequence, suggesting citations being made.
+   Light background, dark nodes, orange pulse lines.
+   Loads only where <canvas id="net-canvas"> exists.
    ============================================================ */
 (function () {
-  const canvas = document.getElementById('hero-canvas');
-  if (!canvas || typeof THREE === 'undefined') return;
-
+  const canvas = document.getElementById('net-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isMobile = window.innerWidth < 768;
 
-  const PAL = {
-    blue:   new THREE.Color('#2D6CFF'),
-    blueLt: new THREE.Color('#7aa0ff'),
-    orange: new THREE.Color('#FF5C1A'),
-    white:  new THREE.Color('#cdd6ff')
-  };
-  const COUNT = isMobile ? 1600 : 3000;
-  const SPREAD_X = 110, SPREAD_Y = 70, SPREAD_Z = 70;
+  const INK = '#0A0A0A';
+  const ORANGE = '#FF5C1A';
+  const LINE = '#D8D8D1';
+  const MUTED = '#9a9aa0';
 
-  const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2('#050508', 0.0072);
+  // Engine nodes positioned by angle around the centre (unit circle coords)
+  const engines = [
+    { label: 'Google',     ax: Math.cos(-Math.PI * 0.75), ay: Math.sin(-Math.PI * 0.75) },
+    { label: 'ChatGPT',    ax: Math.cos(-Math.PI * 0.25), ay: Math.sin(-Math.PI * 0.25) },
+    { label: 'Perplexity', ax: Math.cos(Math.PI * 0.25),  ay: Math.sin(Math.PI * 0.25) },
+    { label: 'Gemini',     ax: Math.cos(Math.PI * 0.75),  ay: Math.sin(Math.PI * 0.75) }
+  ];
 
-  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.set(0, 0, 64);
+  let W = 0, H = 0, DPR = 1, cx = 0, cy = 0, R = 0;
+  function layout() {
+    const rect = canvas.getBoundingClientRect();
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = rect.width; H = rect.height;
+    canvas.width = Math.round(W * DPR);
+    canvas.height = Math.round(H * DPR);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    cx = W / 2; cy = H / 2;
+    R = Math.min(W, H) * 0.34;
+    engines.forEach((e) => { e.x = cx + e.ax * R; e.y = cy + e.ay * R; e.glow = 0; });
+  }
+  layout();
+  window.addEventListener('resize', layout);
 
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  const PR = Math.min(window.devicePixelRatio || 1, 2);
-  renderer.setPixelRatio(PR);
+  // Pulse scheduling: one engine lights up at a time, in sequence
+  let active = -1;
+  let pulseStart = 0;
+  const PULSE_MS = 900;   // travel time
+  const GAP_MS = 380;     // pause between pulses
+  let phaseStart = performance.now();
 
-  // ---- Particle buffers ----
-  const positions = new Float32Array(COUNT * 3);
-  const home      = new Float32Array(COUNT * 3);
-  const velocity  = new Float32Array(COUNT * 3);
-  const aColor    = new Float32Array(COUNT * 3);
-  const aScale    = new Float32Array(COUNT);
-  const aSeed     = new Float32Array(COUNT);
-
-  const c = new THREE.Color();
-  for (let i = 0; i < COUNT; i++) {
-    const i3 = i * 3;
-    // Distribute in a slightly disc-biased volume for depth
-    const x = (Math.random() - 0.5) * SPREAD_X * 2;
-    const y = (Math.random() - 0.5) * SPREAD_Y * 2;
-    const z = (Math.random() - 0.5) * SPREAD_Z * 2;
-    positions[i3] = home[i3] = x;
-    positions[i3 + 1] = home[i3 + 1] = y;
-    positions[i3 + 2] = home[i3 + 2] = z;
-
-    const t = Math.random();
-    if (t > 0.9) c.copy(PAL.orange);
-    else if (t > 0.62) c.copy(PAL.blue);
-    else if (t > 0.4) c.copy(PAL.blueLt);
-    else c.copy(PAL.white);
-    aColor[i3] = c.r; aColor[i3 + 1] = c.g; aColor[i3 + 2] = c.b;
-
-    aScale[i] = Math.pow(Math.random(), 2.2) * 2.4 + 0.5; // mostly small, few large
-    aSeed[i] = Math.random();
+  function roundRectPath(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
   }
 
-  const geo = new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  geo.setAttribute('aColor', new THREE.BufferAttribute(aColor, 3));
-  geo.setAttribute('aScale', new THREE.BufferAttribute(aScale, 1));
-  geo.setAttribute('aSeed', new THREE.BufferAttribute(aSeed, 1));
+  function drawNode(x, y, label, opts) {
+    opts = opts || {};
+    ctx.font = `700 ${opts.big ? 15 : 13}px Inter, system-ui, sans-serif`;
+    const padX = opts.big ? 18 : 14, padY = opts.big ? 12 : 10;
+    const tw = ctx.measureText(label).width;
+    const w = tw + padX * 2, h = (opts.big ? 18 : 15) + padY * 2;
+    const rx = x - w / 2, ry = y - h / 2;
 
-  const uniforms = {
-    uTime:    { value: 0 },
-    uSize:    { value: isMobile ? 34 : 46 },
-    uPixel:   { value: PR },
-    uOpacity: { value: 1 }
-  };
-
-  const mat = new THREE.ShaderMaterial({
-    uniforms,
-    transparent: true,
-    depthWrite: false,
-    blending: THREE.AdditiveBlending,
-    vertexShader: `
-      uniform float uTime;
-      uniform float uSize;
-      uniform float uPixel;
-      attribute vec3 aColor;
-      attribute float aScale;
-      attribute float aSeed;
-      varying vec3 vColor;
-      varying float vTw;
-      void main() {
-        vColor = aColor;
-        vec4 mv = modelViewMatrix * vec4(position, 1.0);
-        float tw = 0.55 + 0.45 * sin(uTime * 1.6 + aSeed * 6.2831853);
-        vTw = tw;
-        gl_PointSize = uSize * aScale * (0.6 + 0.4 * tw) * uPixel * (1.0 / -mv.z);
-        gl_Position = projectionMatrix * mv;
-      }
-    `,
-    fragmentShader: `
-      precision mediump float;
-      uniform float uOpacity;
-      varying vec3 vColor;
-      varying float vTw;
-      void main() {
-        vec2 uv = gl_PointCoord - 0.5;
-        float d = length(uv);
-        if (d > 0.5) discard;
-        float core = smoothstep(0.5, 0.0, d);
-        float glow = pow(core, 2.2);
-        float alpha = glow * (0.5 + 0.5 * vTw) * uOpacity;
-        // hot core -> coloured halo
-        vec3 col = mix(vColor, vec3(1.0), pow(core, 6.0) * 0.6);
-        gl_FragColor = vec4(col, alpha);
-      }
-    `
-  });
-
-  const points = new THREE.Points(geo, mat);
-  scene.add(points);
-
-  // ---- Constellation lines (nearest-neighbour subset) ----
-  const LINE_SAMPLE = isMobile ? 260 : 520;
-  const MAX_SEG = LINE_SAMPLE * 6;
-  const linePositions = new Float32Array(MAX_SEG * 2 * 3);
-  const lineColors = new Float32Array(MAX_SEG * 2 * 3);
-  const lineGeo = new THREE.BufferGeometry();
-  lineGeo.setAttribute('position', new THREE.BufferAttribute(linePositions, 3).setUsage(THREE.DynamicDrawUsage));
-  lineGeo.setAttribute('color', new THREE.BufferAttribute(lineColors, 3).setUsage(THREE.DynamicDrawUsage));
-  const lineMat = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending });
-  const lines = new THREE.LineSegments(lineGeo, lineMat);
-  scene.add(lines);
-  const LINK_DIST = 11, LINK_DIST_SQ = LINK_DIST * LINK_DIST;
-
-  // ---- 3D floating wordmark ----
-  let textMesh = null;
-  if (typeof THREE.FontLoader !== 'undefined') {
-    try {
-      new THREE.FontLoader().load(
-        'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/fonts/helvetiker_bold.typeface.json',
-        function (font) {
-          const tGeo = new THREE.TextGeometry('Kay & Co.', {
-            font: font, size: 10, height: 2, curveSegments: 10,
-            bevelEnabled: true, bevelThickness: 0.5, bevelSize: 0.35, bevelSegments: 4
-          });
-          tGeo.center();
-          const tMat = new THREE.MeshBasicMaterial({ color: 0x21356f, transparent: true, opacity: 0.14, wireframe: false });
-          textMesh = new THREE.Mesh(tGeo, tMat);
-          textMesh.position.set(0, 4, -14);
-          scene.add(textMesh);
-        },
-        undefined, function () {}
-      );
-    } catch (e) {}
-  }
-
-  // ---- Interaction state ----
-  const pointer = new THREE.Vector3(9999, 9999, 0);
-  const mouseNDC = new THREE.Vector2(0, 0);
-  const targetMouse = new THREE.Vector2(0, 0);
-  let shock = 0;          // click shockwave 0..1
-  let scrollDisperse = 0;
-  const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
-  const ray = new THREE.Raycaster();
-
-  function setPointer(x, y) {
-    targetMouse.x = (x / window.innerWidth) * 2 - 1;
-    targetMouse.y = -(y / window.innerHeight) * 2 + 1;
-  }
-  window.addEventListener('pointermove', (e) => setPointer(e.clientX, e.clientY), { passive: true });
-  window.addEventListener('pointerdown', () => { shock = 1; });
-  window.addEventListener('scroll', () => {
-    scrollDisperse = Math.min(1, window.scrollY / window.innerHeight);
-  }, { passive: true });
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-
-  // ---- Loop ----
-  const clock = new THREE.Clock();
-  const RETURN = 0.013, DAMP = 0.88, FLOW = 0.9;
-  let frame = 0;
-
-  function animate() {
-    requestAnimationFrame(animate);
-    const dt = Math.min(clock.getDelta(), 0.05);
-    const t = clock.elapsedTime;
-    frame++;
-    uniforms.uTime.value = t;
-
-    mouseNDC.x += (targetMouse.x - mouseNDC.x) * 0.07;
-    mouseNDC.y += (targetMouse.y - mouseNDC.y) * 0.07;
-    ray.setFromCamera(mouseNDC, camera);
-    ray.ray.intersectPlane(plane, pointer);
-    shock *= 0.9;
-
-    const pos = geo.attributes.position.array;
-    if (!reduceMotion) {
-      const disperse = scrollDisperse * scrollDisperse;
-      const step = dt * 60;
-      for (let i = 0; i < COUNT; i++) {
-        const i3 = i * 3;
-        const px = pos[i3], py = pos[i3 + 1], pz = pos[i3 + 2];
-
-        // Organic flow field (cheap pseudo-curl)
-        const fx = Math.sin(py * 0.03 + t * 0.25) + Math.cos(pz * 0.025 - t * 0.2);
-        const fy = Math.sin(pz * 0.03 - t * 0.22) + Math.cos(px * 0.025 + t * 0.18);
-        const fz = Math.sin(px * 0.03 + t * 0.2)  + Math.cos(py * 0.025 - t * 0.24);
-        velocity[i3]     += fx * 0.0016 * FLOW * step;
-        velocity[i3 + 1] += fy * 0.0016 * FLOW * step;
-        velocity[i3 + 2] += fz * 0.0016 * FLOW * step;
-
-        // Cursor gravity well / shockwave
-        const dx = pointer.x - px, dy = pointer.y - py, dz = pointer.z - pz;
-        const dSq = dx * dx + dy * dy + dz * dz + 0.001;
-        if (dSq < 1200) {
-          const dist = Math.sqrt(dSq);
-          const pull = (9.5 / dSq);
-          const sign = shock > 0.04 ? -(shock * 11) : 1;
-          velocity[i3]     += (dx / dist) * pull * sign * step * 0.016;
-          velocity[i3 + 1] += (dy / dist) * pull * sign * step * 0.016;
-          velocity[i3 + 2] += (dz / dist) * pull * sign * step * 0.016;
-        }
-
-        // Spring back to lattice home
-        velocity[i3]     += (home[i3] - px) * RETURN;
-        velocity[i3 + 1] += (home[i3 + 1] - py) * RETURN;
-        velocity[i3 + 2] += (home[i3 + 2] - pz) * RETURN;
-
-        // Scroll dispersion (blow outward)
-        if (disperse > 0.001) {
-          velocity[i3]     += px * 0.005 * disperse;
-          velocity[i3 + 1] += py * 0.005 * disperse;
-          velocity[i3 + 2] += (pz - 40) * 0.005 * disperse;
-        }
-
-        velocity[i3] *= DAMP; velocity[i3 + 1] *= DAMP; velocity[i3 + 2] *= DAMP;
-        pos[i3] += velocity[i3]; pos[i3 + 1] += velocity[i3 + 1]; pos[i3 + 2] += velocity[i3 + 2];
-      }
-      geo.attributes.position.needsUpdate = true;
+    // glow ring on pulse arrival
+    if (opts.glow > 0.01) {
+      ctx.save();
+      ctx.shadowColor = ORANGE;
+      ctx.shadowBlur = 26 * opts.glow;
+      roundRectPath(rx, ry, w, h, h / 2);
+      ctx.fillStyle = ORANGE;
+      ctx.globalAlpha = 0.0;
+      ctx.fill();
+      ctx.restore();
+      // orange outline flash
+      roundRectPath(rx, ry, w, h, h / 2);
+      ctx.strokeStyle = ORANGE;
+      ctx.globalAlpha = opts.glow;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
     }
 
-    // Constellation lines on a subset, every other frame
-    if (frame % 2 === 0) {
-      let v = 0, cIdx = 0;
-      for (let a = 0; a < LINE_SAMPLE && v < linePositions.length - 6; a++) {
-        const ai = a * 3;
-        for (let b = a + 1; b < LINE_SAMPLE && v < linePositions.length - 6; b++) {
-          const bi = b * 3;
-          const dx = pos[ai] - pos[bi], dy = pos[ai + 1] - pos[bi + 1], dz = pos[ai + 2] - pos[bi + 2];
-          const dSq = dx * dx + dy * dy + dz * dz;
-          if (dSq < LINK_DIST_SQ) {
-            const fade = (1 - dSq / LINK_DIST_SQ) * 0.6;
-            linePositions[v] = pos[ai]; linePositions[v + 1] = pos[ai + 1]; linePositions[v + 2] = pos[ai + 2];
-            linePositions[v + 3] = pos[bi]; linePositions[v + 4] = pos[bi + 1]; linePositions[v + 5] = pos[bi + 2];
-            v += 6;
-            // colour fades with distance toward blue
-            lineColors[cIdx] = 0.18 * fade * 5; lineColors[cIdx + 1] = 0.42 * fade * 5; lineColors[cIdx + 2] = fade * 5;
-            lineColors[cIdx + 3] = 0.18 * fade * 5; lineColors[cIdx + 4] = 0.42 * fade * 5; lineColors[cIdx + 5] = fade * 5;
-            cIdx += 6;
-          }
-        }
-      }
-      lineGeo.setDrawRange(0, v / 3);
-      lineGeo.attributes.position.needsUpdate = true;
-      lineGeo.attributes.color.needsUpdate = true;
-    }
+    roundRectPath(rx, ry, w, h, h / 2);
+    ctx.fillStyle = opts.filled ? INK : '#FFFFFF';
+    ctx.fill();
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = opts.filled ? INK : LINE;
+    ctx.stroke();
 
-    // Global motion + scroll fade
-    const fade = 1 - scrollDisperse;
-    points.rotation.y += 0.0003 + mouseNDC.x * 0.00015;
-    points.rotation.x = mouseNDC.y * 0.04;
-    lines.rotation.copy(points.rotation);
-    uniforms.uOpacity.value = Math.max(0, fade * 1.0);
-    lineMat.opacity = 0.5 * fade;
-
-    if (textMesh) {
-      textMesh.position.y = 4 + Math.sin(t * 0.6) * 1.4;
-      textMesh.rotation.y = mouseNDC.x * 0.18;
-      textMesh.rotation.x = mouseNDC.y * 0.06;
-      textMesh.material.opacity = 0.14 * fade;
-    }
-
-    camera.position.x += (mouseNDC.x * 7 - camera.position.x) * 0.025;
-    camera.position.y += (mouseNDC.y * 5 - camera.position.y) * 0.025;
-    camera.lookAt(0, 0, 0);
-
-    renderer.render(scene, camera);
+    ctx.fillStyle = opts.filled ? '#FFFFFF' : INK;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(label, x, y + 1);
+    return { w, h };
   }
-  animate();
+
+  function draw(now) {
+    ctx.clearRect(0, 0, W, H);
+
+    // Sequence state machine
+    const elapsed = now - phaseStart;
+    if (active === -1) {
+      if (elapsed > GAP_MS) { active = 0; pulseStart = now; phaseStart = now; }
+    } else {
+      const t = (now - pulseStart) / PULSE_MS;
+      if (t >= 1) {
+        engines[active].glow = 1;
+        if (elapsed > PULSE_MS + GAP_MS) { active = (active + 1) % engines.length; pulseStart = now; phaseStart = now; }
+      }
+    }
+
+    // base connecting lines
+    engines.forEach((e) => {
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(e.x, e.y);
+      ctx.strokeStyle = LINE;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    });
+
+    // active pulse line + travelling dot
+    if (active >= 0 && !reduceMotion) {
+      const e = engines[active];
+      const t = Math.min(1, (now - pulseStart) / PULSE_MS);
+      const ease = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+      // highlighted portion of the line
+      const hx = cx + (e.x - cx) * ease;
+      const hy = cy + (e.y - cy) * ease;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(hx, hy);
+      ctx.strokeStyle = ORANGE;
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+      // travelling dot with glow
+      ctx.save();
+      ctx.shadowColor = ORANGE; ctx.shadowBlur = 14;
+      ctx.beginPath();
+      ctx.arc(hx, hy, 4.5, 0, Math.PI * 2);
+      ctx.fillStyle = ORANGE; ctx.fill();
+      ctx.restore();
+    }
+
+    // decay glows
+    engines.forEach((e) => { e.glow *= 0.94; });
+
+    // draw engine nodes
+    engines.forEach((e) => drawNode(e.x, e.y, e.label, { glow: e.glow }));
+
+    // centre node
+    drawNode(cx, cy, 'Your Brand', { filled: true, big: true });
+
+    requestAnimationFrame(draw);
+  }
+
+  if (reduceMotion) {
+    // static render
+    layout();
+    ctx.clearRect(0, 0, W, H);
+    engines.forEach((e) => { ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(e.x, e.y); ctx.strokeStyle = LINE; ctx.lineWidth = 1.5; ctx.stroke(); });
+    engines.forEach((e) => drawNode(e.x, e.y, e.label, { glow: 0 }));
+    drawNode(cx, cy, 'Your Brand', { filled: true, big: true });
+  } else {
+    // wait a tick so layout/fonts are ready
+    requestAnimationFrame(draw);
+  }
 })();
