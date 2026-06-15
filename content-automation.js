@@ -55,6 +55,22 @@ function pickKeyword(queue, state, args) {
     })[0];
 }
 
+function generateImage(item, args) {
+  if (args['skip-image']) return null;
+  if (!process.env.OPENAI_API_KEY) {
+    throw new Error('OPENAI_API_KEY is missing. Add it as a GitHub Actions repository secret so gpt-image-2 can create a fresh blog image.');
+  }
+  const image = spawnSync(process.execPath, [
+    'generate-blog-image.js',
+    `--topic=${args.topic || item.topic}`,
+    `--keyword=${item.primaryKeyword}`
+  ], { cwd: ROOT, encoding: 'utf8', env: process.env });
+  process.stdout.write(image.stdout || '');
+  process.stderr.write(image.stderr || '');
+  if (image.status !== 0) process.exit(image.status || 1);
+  return JSON.parse(image.stdout);
+}
+
 function main() {
   const args = parseArgs(process.argv);
   const keywordData = readJSON(KEYWORDS_FILE, { keywords: [] });
@@ -70,6 +86,7 @@ function main() {
     'Kay & Co.',
     'UK SEO and GEO consultancy'
   ].filter(Boolean).join(','));
+  const generatedImage = generateImage(item, args);
 
   const generateArgs = [
     'generate-page.js',
@@ -77,6 +94,7 @@ function main() {
     `--topic=${args.topic || item.topic}`,
     `--primary-keyword=${item.primaryKeyword}`,
     `--secondary-keywords=${secondary}`,
+    ...(generatedImage ? [`--image=${generatedImage.path}`, `--image-alt=${item.primaryKeyword}`] : []),
     '--rankmath'
   ];
 
@@ -109,6 +127,7 @@ function main() {
       keyword: item.primaryKeyword,
       topic: args.topic || item.topic,
       file: path.relative(ROOT, outFile).replace(/\\/g, '/'),
+      image: generatedImage ? generatedImage.file : null,
       rankMathScore: result.score
     },
     ...(state.runs || [])

@@ -40,6 +40,8 @@ const topic = args.topic;
 const primaryKeyword = (args['primary-keyword'] || args.keyword || '').trim();
 const secondaryKeywords = (args['secondary-keywords'] || '').split(',').map((k) => k.trim()).filter(Boolean);
 const rankMathMode = Boolean(args.rankmath || primaryKeyword);
+const customImage = (args.image || '').trim();
+const customImageAlt = (args['image-alt'] || '').trim();
 
 if (!topic) {
   console.error('Error, Missing --topic. Example:\n  node generate-page.js --type=blog --topic="What is GEO?"');
@@ -208,7 +210,8 @@ function buildPage(data, { type, slug }) {
   const reading = esc(data.readingTime || '5 min read');
   const ogType = type === 'blog' ? 'article' : 'website';
   const schemaType = type === 'blog' ? 'BlogPosting' : 'Article';
-  const graphic = graphicForTopic(`${data.title || ''} ${data.tag || ''} ${topic || ''}`);
+  const graphic = customImage || data.image || graphicForTopic(`${data.title || ''} ${data.tag || ''} ${topic || ''}`);
+  data.image = graphic;
 
   const sections = data.sections || [];
   const sectionsHTML = sections.map((s, i) =>
@@ -255,7 +258,7 @@ ${sections.map((s, i) => `            <li><a href="#${slugify(s.heading || `sect
     '/assets/img/graphic-geo-network.svg',
     '/assets/img/graphic-content-architecture.svg'
   ];
-  const imageAlt = primaryKeyword || data.title || 'Kay & Co. SEO and GEO strategy';
+  const imageAlt = customImageAlt || primaryKeyword || data.title || 'Kay & Co. SEO and GEO strategy';
 
   return `<!DOCTYPE html>
 <html lang="en-GB">
@@ -370,7 +373,7 @@ function updateBlogIndex(data, slug) {
   if (!html.includes(marker)) { console.warn('! POSTS:START marker not found in blog/index.html, skipping.'); return; }
 
   const card = `        <article class="post reveal" data-reveal-group="posts">
-          <a href="/blog/${slug}" class="post__thumb" aria-label="${escAttr(data.title)}"><img src="${graphicForTopic(`${data.title || ''} ${data.tag || ''}`)}" alt="" loading="lazy" /><span class="tag">${esc(data.tag || 'Article')}</span></a>
+          <a href="/blog/${slug}" class="post__thumb" aria-label="${escAttr(data.title)}"><img src="${data.image || graphicForTopic(`${data.title || ''} ${data.tag || ''}`)}" alt="" loading="lazy" /><span class="tag">${esc(data.tag || 'Article')}</span></a>
           <div class="post__body">
             <div class="post__meta">Kay &amp; Co.  /  ${todayHuman()}</div>
             <h3><a href="/blog/${slug}">${esc(data.title)}</a></h3>

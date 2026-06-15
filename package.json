@@ -7,6 +7,7 @@
     "blog": "node generate-page.js --type=blog",
     "info": "node generate-page.js --type=info",
     "content:auto": "node content-automation.js",
+    "image:blog": "node generate-blog-image.js",
     "rankmath:audit": "node rankmath-audit.js",
     "serve": "npx --yes serve ."
   },

@@ -29,6 +29,7 @@ jobs:
       - name: Generate audited content
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           if [ -n "${{ github.event.inputs.keyword }}" ] || [ -n "${{ github.event.inputs.topic }}" ]; then
             node content-automation.js --keyword="${{ github.event.inputs.keyword }}" --topic="${{ github.event.inputs.topic }}"

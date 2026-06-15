@@ -141,7 +141,7 @@ Audit any generated page manually:
 npm run rankmath:audit -- --file=blog/example.html --keyword="focus keyword"
 ```
 
-GitHub Actions workflow `.github/workflows/semrush-rankmath-content.yml` runs the queue every day at 08:00 GMT/UTC and can also be triggered manually. Add `ANTHROPIC_API_KEY` as a repository secret before enabling it.
+GitHub Actions workflow `.github/workflows/semrush-rankmath-content.yml` runs the queue every day at 08:00 GMT/UTC and can also be triggered manually. Add `ANTHROPIC_API_KEY` and `OPENAI_API_KEY` as repository secrets before enabling it. The OpenAI key is used only for the fresh `gpt-image-2` blog image, while the Anthropic key writes the article.
 
 ## Publishing
 
