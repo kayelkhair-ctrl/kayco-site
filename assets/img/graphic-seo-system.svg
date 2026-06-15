@@ -1,21 +1,76 @@
 <svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">SEO system diagram</title>
-  <desc id="desc">A minimal technical SEO diagram showing crawl paths, ranking layers, and search signals.</desc>
-  <rect width="900" height="520" rx="20" fill="#F4F4EF"/>
-  <rect x="1" y="1" width="898" height="518" rx="19" fill="none" stroke="#E5E5DF" stroke-width="2"/>
-  <path d="M90 115h720M90 210h720M90 305h720M90 400h720" stroke="#EAEAE3" stroke-width="2"/>
-  <path d="M180 70v380M330 70v380M480 70v380M630 70v380M780 70v380" stroke="#EAEAE3" stroke-width="2"/>
-  <path d="M280 122c66 0 18 138 78 138M542 260c58 0 20 124 78 124" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
-  <rect x="96" y="86" width="184" height="72" rx="16" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2"/>
-  <rect x="358" y="224" width="184" height="72" rx="16" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2"/>
-  <rect x="620" y="348" width="184" height="72" rx="16" fill="#C6F500" stroke="#0A0A0A" stroke-width="2"/>
-  <circle cx="188" cy="122" r="11" fill="#0A0A0A"/>
-  <circle cx="450" cy="260" r="11" fill="#0A0A0A"/>
-  <circle cx="712" cy="384" r="11" fill="#0A0A0A"/>
-  <text x="214" y="130" fill="#0A0A0A" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">crawl</text>
-  <text x="476" y="268" fill="#0A0A0A" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">intent</text>
-  <text x="738" y="392" fill="#0A0A0A" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">rank</text>
-  <path d="M113 455h674" stroke="#DEDED7" stroke-width="10" stroke-linecap="round"/>
-  <path d="M113 455h448" stroke="#0A0A0A" stroke-width="10" stroke-linecap="round"/>
-  <path d="M564 455h122" stroke="#C6F500" stroke-width="10" stroke-linecap="round"/>
+  <title id="title">SEO flow chart</title>
+  <desc id="desc">A technical SEO flow chart showing crawl, intent, and rank connected as a search optimisation process.</desc>
+  <defs>
+    <filter id="softShadow" x="-20%" y="-25%" width="140%" height="150%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0A0A0A" flood-opacity=".12"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="520" rx="26" fill="#F6F4EF"/>
+  <rect x="1" y="1" width="898" height="518" rx="25" stroke="#D9D6CE" stroke-width="1.4"/>
+
+  <g opacity=".8">
+    <path d="M78 72H822M78 188H822M78 304H822M78 420H822" stroke="#D9D6CE" stroke-width="1" stroke-dasharray="3 5"/>
+    <path d="M124 52V456M350 52V456M584 52V456M760 52V456" stroke="#D9D6CE" stroke-width="1" stroke-dasharray="3 5"/>
+    <circle cx="124" cy="188" r="4.8" fill="#F6F4EF" stroke="#D9D6CE"/>
+    <circle cx="760" cy="188" r="4.8" fill="#F6F4EF" stroke="#D9D6CE"/>
+    <circle cx="760" cy="448" r="4.8" fill="#F6F4EF" stroke="#D9D6CE"/>
+  </g>
+
+  <path d="M318 146H380C410 146 426 162 426 192V230" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+  <path d="M596 270H640C669 270 684 285 684 314V352" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+
+  <g filter="url(#softShadow)">
+    <rect x="78" y="86" width="240" height="104" rx="18" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
+    <circle cx="124" cy="138" r="30" fill="#EAF9A7"/>
+    <path d="M124 120V156M106 138H142M111 125L137 151M137 125L111 151" stroke="#171717" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="124" cy="138" r="9" fill="#171717"/>
+    <path d="M165 112V164" stroke="#D9D6CE" stroke-width="1.4"/>
+    <text x="184" y="152" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="37" font-weight="800" letter-spacing="-.7">crawl</text>
+  </g>
+
+  <g>
+    <circle cx="318" cy="146" r="9" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
+    <circle cx="318" cy="146" r="5" fill="#C6F500"/>
+  </g>
+
+  <g filter="url(#softShadow)">
+    <rect x="346" y="230" width="250" height="104" rx="18" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
+    <circle cx="392" cy="282" r="30" fill="#EAF9A7"/>
+    <circle cx="392" cy="282" r="17" stroke="#171717" stroke-width="3"/>
+    <circle cx="392" cy="282" r="5" fill="#171717"/>
+    <path d="M392 250V263M392 301V314M360 282H373M411 282H424" stroke="#171717" stroke-width="3" stroke-linecap="round"/>
+    <path d="M433 256V308" stroke="#D9D6CE" stroke-width="1.4"/>
+    <text x="452" y="296" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="37" font-weight="800" letter-spacing="-.7">intent</text>
+  </g>
+
+  <g>
+    <circle cx="596" cy="270" r="9" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
+    <circle cx="596" cy="270" r="5" fill="#C6F500"/>
+  </g>
+
+  <g filter="url(#softShadow)">
+    <rect x="610" y="352" width="236" height="104" rx="18" fill="#C6F500" stroke="#171717" stroke-width="2"/>
+    <circle cx="656" cy="404" r="30" fill="#171717"/>
+    <path d="M644 418V408M656 418V397M668 418V386" stroke="#C6F500" stroke-width="7" stroke-linecap="round"/>
+    <path d="M697 378V430" stroke="#99BE00" stroke-width="1.4"/>
+    <text x="718" y="419" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="37" font-weight="800" letter-spacing="-.7">rank</text>
+  </g>
+
+  <g>
+    <circle cx="610" cy="404" r="9" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
+    <circle cx="610" cy="404" r="5" fill="#C6F500"/>
+  </g>
+
+  <g>
+    <path d="M96 488H718" stroke="#171717" stroke-width="5" stroke-linecap="round"/>
+    <path d="M718 488H812" stroke="#C6F500" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="118" cy="503" r="4" fill="#F6F4EF" stroke="#171717" stroke-width="2"/>
+    <circle cx="454" cy="503" r="4" fill="#F6F4EF" stroke="#171717" stroke-width="2"/>
+    <circle cx="696" cy="503" r="4" fill="#F6F4EF" stroke="#C6F500" stroke-width="2"/>
+    <text x="112" y="517" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600">01</text>
+    <text x="448" y="517" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600">02</text>
+    <text x="690" y="517" fill="#A8CC00" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600">03</text>
+  </g>
 </svg>
