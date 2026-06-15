@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">SEO services system graphic</title>
+  <desc id="desc">A minimal abstract SEO services workflow showing crawl, content, authority and reporting connected into a search visibility system.</desc>
+  <rect width="1400" height="900" fill="#050508"/>
+  <g opacity=".18" stroke="#F0F0F0" stroke-width="1">
+    <path d="M120 180H1280M120 360H1280M120 540H1280M120 720H1280"/>
+    <path d="M220 90V810M500 90V810M780 90V810M1060 90V810"/>
+  </g>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M254 301H432C476 301 492 331 492 360V431C492 461 516 486 546 486H708" stroke="#C6F500" stroke-width="8"/>
+    <path d="M708 486H864C904 486 922 510 922 542V598C922 628 946 652 976 652H1134" stroke="#2D6CFF" stroke-width="8"/>
+    <path d="M431 588H610C648 588 668 565 668 529V486" stroke="#F6F4EF" stroke-width="4" opacity=".42"/>
+    <path d="M781 280V386C781 441 748 486 708 486" stroke="#FF5C1A" stroke-width="5"/>
+  </g>
+  <g>
+    <rect x="154" y="216" width="244" height="170" rx="34" fill="#F6F4EF"/>
+    <rect x="181" y="243" width="190" height="18" rx="9" fill="#050508" opacity=".88"/>
+    <rect x="181" y="283" width="136" height="12" rx="6" fill="#050508" opacity=".45"/>
+    <rect x="181" y="315" width="164" height="12" rx="6" fill="#050508" opacity=".28"/>
+    <circle cx="340" cy="327" r="27" fill="#C6F500"/>
+    <path d="M329 327h22M340 316v22" stroke="#050508" stroke-width="5" stroke-linecap="round"/>
+    <text x="181" y="355" fill="#050508" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing=".12em">CRAWL</text>
+  </g>
+  <g>
+    <rect x="572" y="386" width="272" height="200" rx="38" fill="#0E0E13" stroke="#F6F4EF" stroke-opacity=".55" stroke-width="2"/>
+    <circle cx="632" cy="446" r="22" fill="#C6F500"/>
+    <circle cx="632" cy="446" r="8" fill="#050508"/>
+    <path d="M686 428h98M686 462h118M686 496h78" stroke="#F6F4EF" stroke-width="10" stroke-linecap="round"/>
+    <path d="M618 528h178" stroke="#2D6CFF" stroke-width="8" stroke-linecap="round"/>
+    <text x="618" y="556" fill="#F6F4EF" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing=".12em">CONTENT</text>
+  </g>
+  <g>
+    <rect x="716" y="163" width="180" height="234" rx="28" fill="#F6F4EF"/>
+    <rect x="746" y="200" width="120" height="14" rx="7" fill="#050508" opacity=".85"/>
+    <rect x="746" y="236" width="92" height="10" rx="5" fill="#050508" opacity=".38"/>
+    <rect x="746" y="264" width="104" height="10" rx="5" fill="#050508" opacity=".38"/>
+    <rect x="746" y="292" width="78" height="10" rx="5" fill="#050508" opacity=".38"/>
+    <path d="M760 347h92" stroke="#FF5C1A" stroke-width="9" stroke-linecap="round"/>
+    <text x="746" y="374" fill="#050508" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" letter-spacing=".12em">INTENT</text>
+  </g>
+  <g>
+    <rect x="992" y="565" width="264" height="174" rx="36" fill="#C6F500"/>
+    <circle cx="1053" cy="626" r="34" fill="#050508"/>
+    <path d="M1040 638v-22M1053 638v-40M1066 638v-62" stroke="#C6F500" stroke-width="9" stroke-linecap="round"/>
+    <path d="M1114 609h93M1114 644h62" stroke="#050508" stroke-width="13" stroke-linecap="round"/>
+    <text x="1114" y="700" fill="#050508" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="900" letter-spacing=".08em">REPORT</text>
+  </g>
+  <g>
+    <rect x="292" y="520" width="206" height="136" rx="28" fill="#0E0E13" stroke="#F6F4EF" stroke-opacity=".42" stroke-width="2"/>
+    <path d="M331 590c24-34 57-34 81 0s57 34 81 0" stroke="#2D6CFF" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <text x="331" y="623" fill="#F6F4EF" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="800" letter-spacing=".1em">AUTHORITY</text>
+  </g>
+  <g fill="#C6F500">
+    <circle cx="492" cy="360" r="15"/>
+    <circle cx="708" cy="486" r="15"/>
+    <circle cx="922" cy="542" r="15"/>
+    <circle cx="1134" cy="652" r="15"/>
+  </g>
+  <g fill="#2D6CFF">
+    <circle cx="254" cy="301" r="7"/>
+    <circle cx="546" cy="486" r="7"/>
+    <circle cx="976" cy="652" r="7"/>
+  </g>
+  <text x="120" y="825" fill="#F6F4EF" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="900" letter-spacing=".14em">SEO SERVICES SYSTEM</text>
+  <text x="120" y="862" fill="#8A8A9A" font-family="Inter, Arial, sans-serif" font-size="22">Technical SEO, content, authority, GEO and reporting working as one visibility system.</text>
+</svg>
