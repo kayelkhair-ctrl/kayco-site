@@ -296,6 +296,7 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
    CONTACT FORM
    ============================================================ */
 .form { display: grid; gap: 1.2rem; }
+.form__trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
 @media (max-width: 600px){ .form .row { grid-template-columns: 1fr; } }
 .field label { display: block; font-size: .8rem; color: var(--grey); margin-bottom: .5rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
@@ -305,6 +306,7 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 .form__status { font-size: .95rem; padding: .8rem 0; }
 .form__status.ok { color: #1a7f37; }
 .form__status.err { color: #b00020; }
+.form button[disabled] { opacity: .65; cursor: wait; transform: none; }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem,5vw,4rem); align-items: start; }
 @media (max-width: 880px){ .contact-grid { grid-template-columns: 1fr; } }
 .contact-info { display: flex; flex-direction: column; gap: 1.4rem; margin-top: 1.8rem; }

@@ -48,6 +48,20 @@ python -m http.server 8000
 
 Then open `http://localhost:8000`.
 
+## Contact Form
+
+The contact page posts to `/api/contact`, which is handled by a Cloudflare Pages Function in `functions/api/contact.js`. Visitors submit the form in the browser and no email app is opened.
+
+Set these Cloudflare Pages environment variables before expecting live submissions to send:
+
+```text
+RESEND_API_KEY=re_...
+CONTACT_TO_EMAIL=hello@kayco.net
+CONTACT_FROM_EMAIL=Kay & Co. <hello@kayco.net>
+```
+
+`CONTACT_FROM_EMAIL` must use a sender or domain verified in Resend. Keep the Resend API key in Cloudflare only, never in the repo.
+
 ## Setting `ANTHROPIC_API_KEY`
 
 The content pipeline calls the Claude API and reads your key from the environment. Do not commit the key.

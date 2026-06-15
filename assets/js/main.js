@@ -138,26 +138,43 @@
     document.querySelectorAll('.reveal').forEach((el) => { el.style.opacity = 1; el.style.transform = 'none'; });
   }
 
-  /* ---------- Contact form (mailto handler) ---------- */
+  /* ---------- Contact form ---------- */
   const form = document.querySelector('[data-contact-form]');
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const status = form.querySelector('.form__status');
+      const submit = form.querySelector('button[type="submit"]');
       const data = new FormData(form);
       const name = (data.get('name') || '').toString().trim();
       const email = (data.get('email') || '').toString().trim();
       const message = (data.get('message') || '').toString().trim();
+      const company = (data.get('company') || '').toString().trim();
+      const service = (data.get('service') || '').toString().trim();
+      const website = (data.get('website') || '').toString().trim();
       const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
       if (!name || !emailOk || !message) {
         if (status) { status.className = 'form__status err'; status.textContent = 'Please add your name, a valid email, and a message.'; }
         return;
       }
-      const subject = encodeURIComponent(`New enquiry from ${name}, Kay & Co.`);
-      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nCompany: ${data.get('company') || ' - '}\nService: ${data.get('service') || ' - '}\n\n${message}`);
-      if (status) { status.className = 'form__status ok'; status.textContent = 'Thanks, opening your email client to send this securely.'; }
-      window.location.href = `mailto:hello@kayco.net?subject=${subject}&body=${body}`;
-      form.reset();
+      if (submit) { submit.disabled = true; submit.dataset.originalText = submit.textContent; submit.textContent = 'Sending...'; }
+      if (status) { status.className = 'form__status'; status.textContent = 'Sending your message...'; }
+      try {
+        const endpoint = form.getAttribute('action') || '/api/contact';
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ name, email, company, service, message, website })
+        });
+        const body = await res.json().catch(() => ({}));
+        if (!res.ok || !body.ok) throw new Error(body.error || 'The form could not be sent.');
+        if (status) { status.className = 'form__status ok'; status.textContent = 'Thanks, your message has been sent. We will reply within one business day.'; }
+        form.reset();
+      } catch (err) {
+        if (status) { status.className = 'form__status err'; status.textContent = err.message || 'Sorry, something went wrong. Please email hello@kayco.net.'; }
+      } finally {
+        if (submit) { submit.disabled = false; submit.innerHTML = 'Send message <span class="arrow">&rarr;</span>'; }
+      }
     });
   }
 
