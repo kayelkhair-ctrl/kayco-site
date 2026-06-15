@@ -1,4 +1,14 @@
 {
-  "usedKeywords": [],
-  "runs": []
+  "usedKeywords": [
+    "seo agency"
+  ],
+  "runs": [
+    {
+      "date": "2026-06-15T10:39:34.770Z",
+      "keyword": "seo agency",
+      "topic": "How to choose an SEO agency in the UK",
+      "file": "blog/index.html",
+      "rankMathScore": 17
+    }
+  ]
 }
