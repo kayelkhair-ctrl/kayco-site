@@ -58,24 +58,32 @@
 
   function computeCover() {
     if (!image.naturalWidth) return;
-    const scale = Math.max(W / image.naturalWidth, H / image.naturalHeight) * 1.055;
+    const scale = Math.max(W / image.naturalWidth, H / image.naturalHeight) * 1.08;
     base.w = image.naturalWidth * scale;
     base.h = image.naturalHeight * scale;
     base.x = (W - base.w) * 0.5;
     base.y = (H - base.h) * 0.5;
   }
 
+  function imagePoint(nx, ny) {
+    if (!image.naturalWidth) return { x: W * nx, y: H * ny };
+    return {
+      x: base.x + base.w * nx,
+      y: base.y + base.h * ny
+    };
+  }
+
   function buildScene() {
-    const cx = W * 0.5;
-    const cy = H * 0.52;
+    const centre = imagePoint(0.5, 0.44);
     const nodes = [
-      { x: cx, y: cy },
-      { x: W * 0.30, y: H * 0.22 },
-      { x: W * 0.68, y: H * 0.22 },
-      { x: W * 0.18, y: H * 0.46 },
-      { x: W * 0.83, y: H * 0.47 },
-      { x: W * 0.34, y: H * 0.77 },
-      { x: W * 0.66, y: H * 0.78 }
+      centre,
+      imagePoint(0.39, 0.16),
+      imagePoint(0.58, 0.16),
+      imagePoint(0.19, 0.38),
+      imagePoint(0.84, 0.38),
+      imagePoint(0.32, 0.78),
+      imagePoint(0.50, 0.80),
+      imagePoint(0.74, 0.78)
     ];
 
     paths = nodes.slice(1).map((n, i) => ({
@@ -267,6 +275,7 @@
     if (started) return;
     started = true;
     computeCover();
+    buildScene();
     requestAnimationFrame(draw);
   }
 
