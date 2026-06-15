@@ -28,7 +28,7 @@
   --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --display: 'Barlow Condensed', 'Inter', sans-serif;
 
-  --maxw: 1340px;
+  --maxw: clamp(1340px, 70vw, 1800px);
   --page-pad: clamp(1.25rem, 5vw, 5rem);
   --radius: 14px;
   --radius-sm: 10px;
@@ -130,16 +130,7 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 .hero .btn-ghost { color: #F6F4EF; border-color: rgba(246,244,239,.34); }
 .hero .btn-ghost:hover { border-color: #F6F4EF; }
 .hero__viz { position: absolute; inset: 0; z-index: 1; overflow: hidden; background: #050508; }
-.hero__bg { position: absolute; inset: -3%; z-index: 0; background: #050508 url('/assets/img/home-hero-ai-search-premium.jpg') center / cover no-repeat; will-change: transform; animation: heroDrift 28s ease-in-out infinite alternate; }
 #net-canvas { position:absolute; inset:0; width: 100%; height: 100%; display: block; z-index:1; cursor: crosshair; }
-
-@keyframes heroDrift {
-  0% { transform: scale(1) translate3d(0, 0, 0); }
-  100% { transform: scale(1.06) translate3d(-1.2%, -1%, 0); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero__bg { animation: none; }
-}
 .hero__scroll { position: absolute; bottom: 1.6rem; left: 50%; transform: translateX(-50%); z-index: 3; font-size: .68rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(246,244,239,.72); display: flex; flex-direction: column; align-items: center; gap: .6rem; }
 .hero__scroll .mouse { width: 20px; height: 32px; border: 1.5px solid rgba(246,244,239,.42); border-radius: 12px; position: relative; }
 .hero__scroll .mouse::after { content:""; position:absolute; top:6px; left:50%; transform:translateX(-50%); width:3px; height:6px; border-radius:3px; background: var(--lime); animation: scrollwheel 1.6s infinite; }
@@ -170,7 +161,7 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
    SERVICE ROWS
    ============================================================ */
 .grid-3 { display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--ink); margin-inline: calc(var(--page-pad) * -1); counter-reset: svc; }
-.card { position: relative; background: transparent; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding: clamp(2rem, 4.5vw, 4rem) var(--page-pad); display: grid; grid-template-columns: minmax(4rem, 7vw) minmax(14rem, 26vw) minmax(0, 1fr) auto; gap: clamp(1.2rem, 3.5vw, 3.5rem); align-items: center; transition: background .35s var(--ease); }
+.card { position: relative; background: transparent; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding: clamp(2rem, 4.5vw, 4rem) var(--page-pad); display: grid; grid-template-columns: minmax(4rem, 6rem) minmax(14rem, 32rem) minmax(20rem, 1fr) auto; gap: clamp(1.2rem, 3.5vw, 3.5rem); align-items: center; transition: background .35s var(--ease); }
 .card::before { content:""; position:absolute; left:0; top:-1px; bottom:-1px; width: 0; background: var(--lime); transition: width .3s var(--ease); }
 .card:hover::before { width: 6px; }
 .card:hover { background: var(--bg-soft); }
