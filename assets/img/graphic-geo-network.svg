@@ -1,18 +1,18 @@
 <svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">GEO citation network</title>
   <desc id="desc">A minimal citation network showing AI answer engines connected to a trusted brand entity.</desc>
-  <rect width="900" height="520" rx="20" fill="#F7F7F5"/>
-  <rect x="1" y="1" width="898" height="518" rx="19" fill="none" stroke="#E6E6E0" stroke-width="2"/>
-  <g stroke-width="2.5" stroke-linecap="round">
-    <path d="M450 174 220 118" stroke="#FF5C1A"/>
-    <path d="M526 218 722 134" stroke="#FF5C1A"/>
-    <path d="M534 298 720 398" stroke="#FF5C1A"/>
-    <path d="M374 303 178 392" stroke="#FF5C1A"/>
-    <path d="M450 346 450 448" stroke="#1A1AFF"/>
+  <rect width="900" height="520" rx="20" fill="#F4F4EF"/>
+  <rect x="1" y="1" width="898" height="518" rx="19" fill="none" stroke="#E5E5DF" stroke-width="2"/>
+  <g stroke-width="2.5" stroke-linecap="round" stroke="#0A0A0A">
+    <path d="M450 174 220 118"/>
+    <path d="M526 218 722 134"/>
+    <path d="M534 298 720 398"/>
+    <path d="M374 303 178 392"/>
+    <path d="M450 346 450 448"/>
   </g>
-  <circle cx="450" cy="260" r="64" fill="#0A0A0A"/>
-  <text x="450" y="267" fill="#FFFFFF" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="800">ENTITY</text>
-  <g fill="#FFFFFF" stroke="#E6E6E0" stroke-width="2">
+  <circle cx="450" cy="260" r="66" fill="#C6F500" stroke="#0A0A0A" stroke-width="3"/>
+  <text x="450" y="267" fill="#0A0A0A" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="800">ENTITY</text>
+  <g fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2">
     <rect x="136" y="82" width="170" height="72" rx="36"/>
     <rect x="636" y="98" width="170" height="72" rx="36"/>
     <rect x="636" y="362" width="170" height="72" rx="36"/>
@@ -25,5 +25,5 @@
     <text x="721" y="404">AI Overview</text>
     <text x="179" y="398">Perplexity</text>
   </g>
-  <text x="450" y="471" fill="#6a6a72" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle">schema + citations</text>
+  <text x="450" y="471" fill="#54545b" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle">schema + citations</text>
 </svg>

@@ -1,17 +1,17 @@
 <svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">Content architecture map</title>
   <desc id="desc">A minimal architecture diagram showing hub pages, supporting pages, and internal links.</desc>
-  <rect width="900" height="520" rx="20" fill="#F7F7F5"/>
-  <rect x="1" y="1" width="898" height="518" rx="19" fill="none" stroke="#E6E6E0" stroke-width="2"/>
-  <path d="M330 132l120 128M570 132 450 260M330 388l120-128M570 388 450 260" stroke="#FF5C1A" stroke-width="3" stroke-linecap="round"/>
-  <g fill="#FFFFFF" stroke="#E6E6E0" stroke-width="2">
+  <rect width="900" height="520" rx="20" fill="#F4F4EF"/>
+  <rect x="1" y="1" width="898" height="518" rx="19" fill="none" stroke="#E5E5DF" stroke-width="2"/>
+  <path d="M330 132l120 128M570 132 450 260M330 388l120-128M570 388 450 260" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
+  <g fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2">
     <rect x="220" y="92" width="156" height="80" rx="18"/>
     <rect x="524" y="92" width="156" height="80" rx="18"/>
     <rect x="220" y="348" width="156" height="80" rx="18"/>
     <rect x="524" y="348" width="156" height="80" rx="18"/>
   </g>
   <rect x="344" y="204" width="212" height="112" rx="24" fill="#0A0A0A"/>
-  <text x="450" y="254" fill="#FFFFFF" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">HUB</text>
+  <text x="450" y="252" fill="#C6F500" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">HUB</text>
   <text x="450" y="284" fill="#B8B8B2" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600">primary entity page</text>
   <g fill="#0A0A0A" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle">
     <text x="298" y="139">guide</text>
@@ -19,4 +19,5 @@
     <text x="298" y="395">proof</text>
     <text x="602" y="395">service</text>
   </g>
+  <circle cx="450" cy="260" r="8" fill="#C6F500"/>
 </svg>

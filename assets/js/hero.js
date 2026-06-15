@@ -13,7 +13,7 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const INK = '#0A0A0A';
-  const ORANGE = '#FF5C1A';
+  const ORANGE = '#C6F500'; /* electric lime accent */
   const LINE = '#D8D8D1';
   const MUTED = '#9a9aa0';
 
@@ -137,13 +137,16 @@
       ctx.strokeStyle = ORANGE;
       ctx.lineWidth = 2.5;
       ctx.stroke();
-      // travelling dot with glow
+      // travelling dot with glow + crisp ink ring (reads on white)
       ctx.save();
-      ctx.shadowColor = ORANGE; ctx.shadowBlur = 14;
+      ctx.shadowColor = ORANGE; ctx.shadowBlur = 16;
       ctx.beginPath();
-      ctx.arc(hx, hy, 4.5, 0, Math.PI * 2);
+      ctx.arc(hx, hy, 6, 0, Math.PI * 2);
       ctx.fillStyle = ORANGE; ctx.fill();
       ctx.restore();
+      ctx.beginPath();
+      ctx.arc(hx, hy, 6, 0, Math.PI * 2);
+      ctx.lineWidth = 1.5; ctx.strokeStyle = INK; ctx.stroke();
     }
 
     // decay glows
