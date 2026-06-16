@@ -35,6 +35,44 @@ function writeJSON(file, data) {
   fs.writeFileSync(file, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
 }
 
+function htmlFiles(type) {
+  const dir = path.join(ROOT, type === 'info' ? 'info' : 'blog');
+  return fs.readdirSync(dir)
+    .filter((name) => name.endsWith('.html'))
+    .map((name) => path.join(dir, name));
+}
+
+function pageText(file) {
+  return fs.readFileSync(file, 'utf8').toLowerCase();
+}
+
+function expectedSlugs(item) {
+  return new Set([
+    slugify(item.topic || ''),
+    slugify(item.primaryKeyword || ''),
+    slugify(String(item.topic || '').replace(/\bin the\b/gi, '')),
+    slugify(String(item.topic || '').replace(/\buk\b/gi, '')),
+    slugify(`${item.primaryKeyword || ''} uk`)
+  ].filter(Boolean));
+}
+
+function existingContentFile(item, type) {
+  const slugs = expectedSlugs(item);
+  for (const file of htmlFiles(type)) {
+    if (path.basename(file) === 'index.html') continue;
+    const slug = path.basename(file, '.html');
+    if (slugs.has(slug)) return file;
+  }
+  const keyword = String(item.primaryKeyword || '').toLowerCase();
+  if (!keyword) return null;
+  return htmlFiles(type).find((file) => {
+    if (path.basename(file) === 'index.html') return false;
+    const html = pageText(file);
+    return html.includes(`<link rel="canonical" href="https://kayco.net/${type === 'info' ? 'info' : 'blog'}/`) &&
+      html.includes(keyword);
+  }) || null;
+}
+
 function pickKeyword(queue, state, args) {
   if (args.keyword) {
     return queue.find((item) => item.primaryKeyword === args.keyword) || {
@@ -45,8 +83,10 @@ function pickKeyword(queue, state, args) {
     };
   }
   const used = new Set(state.usedKeywords || []);
-  const candidates = queue.filter((item) => !used.has(item.primaryKeyword));
-  return (candidates.length ? candidates : queue)
+  const type = args.type || 'blog';
+  const candidates = queue.filter((item) => !used.has(item.primaryKeyword) && !existingContentFile(item, type));
+  if (!candidates.length) return null;
+  return candidates
     .slice()
     .sort((a, b) => {
       const aScore = (a.searchVolume || 0) / Math.max(1, a.keywordDifficulty || 1);
@@ -87,10 +127,12 @@ function main() {
     'UK SEO and GEO consultancy'
   ].filter(Boolean).join(','));
   const generatedImage = generateImage(item, args);
+  const type = args.type || 'blog';
+  const beforeFiles = new Map(htmlFiles(type).map((file) => [file, fs.statSync(file).mtimeMs]));
 
   const generateArgs = [
     'generate-page.js',
-    `--type=${args.type || 'blog'}`,
+    `--type=${type}`,
     `--topic=${args.topic || item.topic}`,
     `--primary-keyword=${item.primaryKeyword}`,
     `--secondary-keywords=${secondary}`,
@@ -102,13 +144,12 @@ function main() {
   const generated = spawnSync(process.execPath, generateArgs, { cwd: ROOT, stdio: 'inherit', env: process.env });
   if (generated.status !== 0) process.exit(generated.status || 1);
 
-  const slug = slugify(args.slug || args.topic || item.topic || item.primaryKeyword);
-  const likelyFile = path.join(ROOT, args.type === 'info' ? 'info' : 'blog', `${slug}.html`);
-  const files = fs.readdirSync(path.join(ROOT, args.type === 'info' ? 'info' : 'blog'))
-    .filter((name) => name.endsWith('.html'))
-    .map((name) => path.join(ROOT, args.type === 'info' ? 'info' : 'blog', name))
+  const changedFiles = htmlFiles(type)
+    .filter((file) => path.basename(file) !== 'index.html')
+    .filter((file) => !beforeFiles.has(file) || fs.statSync(file).mtimeMs !== beforeFiles.get(file))
     .sort((a, b) => fs.statSync(b).mtimeMs - fs.statSync(a).mtimeMs);
-  const outFile = fs.existsSync(likelyFile) ? likelyFile : files[0];
+  const outFile = changedFiles[0] || existingContentFile(item, type);
+  if (!outFile) throw new Error(`Could not identify generated page for "${item.primaryKeyword}".`);
 
   const audit = spawnSync(process.execPath, [
     'rankmath-audit.js',
