@@ -14,7 +14,6 @@
 
   const LIME = '#1F6FEB';
   const BLUE = '#0B8FD3';
-  const WHITE = '#0B3A5B';
 
   let W = 1;
   let H = 1;
@@ -47,7 +46,6 @@
 
   const limeGlow = makeGlow('rgba(31,111,235,0.78)', 48);
   const blueGlow = makeGlow('rgba(11,143,211,0.72)', 48);
-  const coreGlow = makeGlow('rgba(31,111,235,0.24)', 260);
 
   function resize() {
     const rect = canvas.getBoundingClientRect();
@@ -186,18 +184,6 @@
       ctx.fill();
     });
 
-    const centre = paths[0] ? paths[0].from : { x: W * 0.5, y: H * 0.5 };
-    const breath = reduceMotion ? 0.4 : (0.7 + Math.sin(t * 0.0016) * 0.3);
-    drawGlow(coreGlow, centre.x, centre.y, 90 * breath);
-    ctx.beginPath();
-    ctx.arc(centre.x, centre.y, 34 + Math.sin(t * 0.0016) * 4, 0, Math.PI * 2);
-    ctx.strokeStyle = 'rgba(246,244,239,.28)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(centre.x, centre.y, 5, 0, Math.PI * 2);
-    ctx.fillStyle = WHITE;
-    ctx.fill();
   }
 
   function draw(now) {
