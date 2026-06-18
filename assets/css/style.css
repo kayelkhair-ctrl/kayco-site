@@ -124,7 +124,7 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 .hero__copy { max-width: min(900px, 92vw); }
 .hero__title { font-family: var(--display); font-weight: 900; text-transform: none; font-size: 6rem; line-height: 0.9; letter-spacing: 0; margin: 1.1rem 0 1.3rem; color: var(--ink); max-width: 15ch; text-shadow: none; }
 .hero__title-main, .hero__title-sub { display: block; }
-.hero__title-sub { margin-top: .68em; font-size: .36em; line-height: 1.12; color: var(--blue); font-family: var(--font); font-weight: 500; letter-spacing: 0; }
+.hero__title-sub { margin-top: 2.2em; font-size: .2em; line-height: 1.12; color: var(--blue); font-family: var(--font); font-weight: 500; letter-spacing: 0; }
 .hero .lead { max-width: 50ch; margin-bottom: 1.8rem; color: #334155; text-shadow: none; }
 .hero .eyebrow { color: var(--blue); }
 .hero__actions { display: flex; gap: .9rem; flex-wrap: wrap; }
