@@ -12,8 +12,8 @@
   const ctx = canvas.getContext('2d', { alpha: true });
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const LIME = '#1F6FEB';
-  const BLUE = '#0B8FD3';
+  const PRIMARY_BLUE = '#1F6FEB';
+  const ACCENT_BLUE = '#0B8FD3';
 
   let W = 1;
   let H = 1;
@@ -44,8 +44,8 @@
     return c;
   }
 
-  const limeGlow = makeGlow('rgba(31,111,235,0.78)', 48);
-  const blueGlow = makeGlow('rgba(11,143,211,0.72)', 48);
+  const primaryGlow = makeGlow('rgba(31,111,235,0.78)', 48);
+  const accentGlow = makeGlow('rgba(11,143,211,0.72)', 48);
 
   function resize() {
     const rect = canvas.getBoundingClientRect();
@@ -77,7 +77,7 @@
       from: nodes[0],
       to: n,
       offset: i / Math.max(1, nodes.length - 1),
-      color: i % 3 === 1 ? BLUE : LIME
+      color: i % 3 === 1 ? ACCENT_BLUE : PRIMARY_BLUE
     }));
 
     const count = Math.round(Math.min(90, Math.max(40, (W * H) / 9000)));
@@ -96,7 +96,7 @@
         vy: 0,
         size: 1.1 + seeded(i * 4.23) * 1.7,
         phase: seeded(i * 5.19) * Math.PI * 2,
-        color: seeded(i * 6.31) > 0.82 ? BLUE : LIME
+        color: seeded(i * 6.31) > 0.82 ? ACCENT_BLUE : PRIMARY_BLUE
       };
     });
   }
@@ -139,7 +139,7 @@
       ctx.lineWidth = 0.8;
       ctx.stroke();
 
-      drawGlow(path.color === BLUE ? blueGlow : limeGlow, x, y, 9);
+      drawGlow(path.color === ACCENT_BLUE ? accentGlow : primaryGlow, x, y, 9);
       ctx.beginPath();
       ctx.arc(x, y, 1.8 + Math.sin(t * 0.004 + i) * 0.45, 0, Math.PI * 2);
       ctx.fillStyle = path.color;
@@ -177,13 +177,12 @@
     });
 
     particles.forEach((p) => {
-      drawGlow(p.color === BLUE ? blueGlow : limeGlow, p.x, p.y, p.size * 3.5);
+      drawGlow(p.color === ACCENT_BLUE ? accentGlow : primaryGlow, p.x, p.y, p.size * 3.5);
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = p.color === BLUE ? 'rgba(11,143,211,.56)' : 'rgba(31,111,235,.58)';
+      ctx.fillStyle = p.color === ACCENT_BLUE ? 'rgba(11,143,211,.56)' : 'rgba(31,111,235,.58)';
       ctx.fill();
     });
-
   }
 
   function draw(now) {
