@@ -118,9 +118,9 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 /* ============================================================
    HERO (interactive canvas)
    ============================================================ */
-.hero { position: relative; padding: 0; display: flex; align-items: center; min-height: 78svh; background: #FFFFFF; overflow: hidden; }
+.hero { position: relative; padding: 0; display: flex; align-items: center; min-height: 58svh; background: #FFFFFF; overflow: hidden; }
 .hero::after { content:""; position:absolute; inset:0; z-index:2; pointer-events:none; background: linear-gradient(90deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.88) 40%, rgba(245,249,252,.54) 72%, rgba(255,255,255,.78) 100%), linear-gradient(180deg, rgba(255,255,255,.88) 0%, rgba(255,255,255,.24) 48%, rgba(245,249,252,.92) 100%); }
-.hero__grid { position: relative; z-index: 3; display: flex; align-items: center; width: 100%; min-height: 78svh; padding-top: clamp(4.2rem, 6vw, 5.5rem); padding-bottom: clamp(2.4rem, 4vw, 3.5rem); }
+.hero__grid { position: relative; z-index: 3; display: flex; align-items: center; width: 100%; min-height: 58svh; padding-top: clamp(4rem, 5vw, 5rem); padding-bottom: clamp(1.8rem, 3vw, 2.6rem); }
 .hero__copy { max-width: min(900px, 92vw); }
 .hero__title { font-family: var(--display); font-weight: 900; text-transform: none; font-size: 5.25rem; line-height: 0.9; letter-spacing: 0; margin: 1rem 0 1.2rem; color: var(--ink); max-width: 15ch; text-shadow: none; }
 .hero__title-main, .hero__title-sub { display: block; }
@@ -163,6 +163,8 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 .marquee__track .sep { width: 14px; height: 14px; border-radius: 50%; background: var(--lime); margin: 0 clamp(1.2rem, 3vw, 2.5rem); flex: 0 0 auto; }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .marquee__track { animation: none; } }
+
+#services { padding-top: clamp(2.2rem, 4vw, 3.5rem); }
 
 /* ============================================================
    REVEAL
