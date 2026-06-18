@@ -190,7 +190,7 @@ const FOOTER = `  <footer class="footer">
         <div><h4>Get in touch</h4><ul><li><a href="mailto:hello@kayco.net">hello@kayco.net</a></li><li><a href="/contact">Book an audit</a></li><li><span style="color:var(--grey-dim)">United Kingdom</span></li></ul></div>
       </div>
       <div class="footer__bottom">
-        <p>&copy; <span data-year>2026</span> Kay &amp; Co. All rights reserved. UK SEO &amp; GEO consultancy.</p>
+        <p>&copy; <span data-year>2026</span> Kay &amp; Co. All rights reserved. The Project Hero Ltd.</p>
         <a class="footer__email" href="mailto:hello@kayco.net">hello@kayco.net</a>
       </div>
     </div>
