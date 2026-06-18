@@ -108,11 +108,17 @@
     pointer.active = true;
   }
 
-  const pointerTarget = section || canvas;
-  pointerTarget.addEventListener('pointermove', setPointer);
-  pointerTarget.addEventListener('pointerenter', setPointer);
-  pointerTarget.addEventListener('pointerleave', () => { pointer.active = false; });
-  pointerTarget.addEventListener('pointerdown', (evt) => {
+  function isInsideHero(evt) {
+    const rect = (section || canvas).getBoundingClientRect();
+    return evt.clientX >= rect.left && evt.clientX <= rect.right && evt.clientY >= rect.top && evt.clientY <= rect.bottom;
+  }
+
+  window.addEventListener('pointermove', (evt) => {
+    if (isInsideHero(evt)) setPointer(evt);
+    else pointer.active = false;
+  }, { passive: true });
+  window.addEventListener('pointerdown', (evt) => {
+    if (!isInsideHero(evt)) return;
     setPointer(evt);
     clickWave = 1;
   });

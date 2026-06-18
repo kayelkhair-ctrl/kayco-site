@@ -152,10 +152,10 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 /* ============================================================
    MARQUEE (kinetic strip)
    ============================================================ */
-.marquee { border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 1.1rem 0; overflow: hidden; white-space: nowrap; background: var(--bg); }
+.marquee { border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); padding: .62rem 0; overflow: hidden; white-space: nowrap; background: var(--bg); }
 .marquee__track { display: inline-flex; align-items: center; animation: marquee 30s linear infinite; }
-.marquee__track span { font-family: var(--display); font-weight: 800; text-transform: uppercase; font-size: clamp(1.6rem, 3vw, 2.8rem); letter-spacing: -0.01em; color: var(--ink); display: inline-flex; align-items: center; }
-.marquee__track .sep { width: 14px; height: 14px; border-radius: 50%; background: var(--lime); margin: 0 clamp(1.2rem, 3vw, 2.5rem); flex: 0 0 auto; }
+.marquee__track span { font-family: var(--display); font-weight: 800; text-transform: uppercase; font-size: clamp(1.25rem, 2.2vw, 2rem); letter-spacing: 0; color: var(--ink); display: inline-flex; align-items: center; }
+.marquee__track .sep { width: 10px; height: 10px; border-radius: 50%; background: var(--lime); margin: 0 clamp(.9rem, 2vw, 1.8rem); flex: 0 0 auto; }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .marquee__track { animation: none; } }
 
