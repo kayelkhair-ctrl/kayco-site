@@ -102,16 +102,17 @@
   }
 
   function setPointer(evt) {
-    const rect = canvas.getBoundingClientRect();
+    const rect = (section || canvas).getBoundingClientRect();
     pointer.tx = evt.clientX - rect.left;
     pointer.ty = evt.clientY - rect.top;
     pointer.active = true;
   }
 
-  canvas.addEventListener('pointermove', setPointer);
-  canvas.addEventListener('pointerenter', setPointer);
-  canvas.addEventListener('pointerleave', () => { pointer.active = false; });
-  canvas.addEventListener('pointerdown', (evt) => {
+  const pointerTarget = section || canvas;
+  pointerTarget.addEventListener('pointermove', setPointer);
+  pointerTarget.addEventListener('pointerenter', setPointer);
+  pointerTarget.addEventListener('pointerleave', () => { pointer.active = false; });
+  pointerTarget.addEventListener('pointerdown', (evt) => {
     setPointer(evt);
     clickWave = 1;
   });
