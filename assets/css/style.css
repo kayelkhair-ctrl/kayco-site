@@ -116,11 +116,11 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 }
 
 /* ============================================================
-   HERO (full-screen interactive canvas)
+   HERO (interactive canvas)
    ============================================================ */
-.hero { position: relative; padding: 0; display: flex; align-items: center; min-height: 86svh; background: #FFFFFF; overflow: hidden; }
+.hero { position: relative; padding: 0; display: flex; align-items: center; min-height: 78svh; background: #FFFFFF; overflow: hidden; }
 .hero::after { content:""; position:absolute; inset:0; z-index:2; pointer-events:none; background: linear-gradient(90deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.88) 40%, rgba(245,249,252,.54) 72%, rgba(255,255,255,.78) 100%), linear-gradient(180deg, rgba(255,255,255,.88) 0%, rgba(255,255,255,.24) 48%, rgba(245,249,252,.92) 100%); }
-.hero__grid { position: relative; z-index: 3; display: flex; align-items: center; width: 100%; min-height: 86svh; padding-top: clamp(4.5rem, 7vw, 6rem); padding-bottom: clamp(3rem, 5vw, 4.5rem); }
+.hero__grid { position: relative; z-index: 3; display: flex; align-items: center; width: 100%; min-height: 78svh; padding-top: clamp(4.2rem, 6vw, 5.5rem); padding-bottom: clamp(2.4rem, 4vw, 3.5rem); }
 .hero__copy { max-width: min(900px, 92vw); }
 .hero__title { font-family: var(--display); font-weight: 900; text-transform: none; font-size: 5.25rem; line-height: 0.9; letter-spacing: 0; margin: 1rem 0 1.2rem; color: var(--ink); max-width: 15ch; text-shadow: none; }
 .hero__title-main, .hero__title-sub { display: block; }
@@ -140,8 +140,8 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 }
 @media (max-width: 760px) {
   .hero::after { background: linear-gradient(180deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,.82) 42%, rgba(245,249,252,.96) 100%); }
-  .hero { min-height: 88svh; }
-  .hero__grid { align-items: center; min-height: 88svh; padding-top: 5.4rem; padding-bottom: 2.6rem; }
+  .hero { min-height: 82svh; }
+  .hero__grid { align-items: center; min-height: 82svh; padding-top: 5.2rem; padding-bottom: 2.3rem; }
   .hero__title { font-size: 3.1rem; max-width: 11ch; }
   .hero__actions { gap: .7rem; }
   .hero__actions .btn { width: 100%; justify-content: center; }
