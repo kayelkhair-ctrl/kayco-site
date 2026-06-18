@@ -1,8 +1,8 @@
 /* ============================================================
    Kay & Co. hero canvas
-   Lightweight transparent overlay: lime/blue network graph
-   over the static CSS hero photo. No per-frame image redraw,
-   no shadowBlur — pre-rendered glow sprites instead.
+   Lightweight transparent overlay: clinical blue network graph
+   over the static CSS hero surface. No per-frame image redraw,
+   no shadowBlur; pre-rendered glow sprites instead.
    ============================================================ */
 (function () {
   const canvas = document.getElementById('net-canvas');
@@ -12,9 +12,9 @@
   const ctx = canvas.getContext('2d', { alpha: true });
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const LIME = '#C6F500';
-  const BLUE = '#2D6CFF';
-  const WHITE = '#F6F4EF';
+  const LIME = '#1F6FEB';
+  const BLUE = '#0B8FD3';
+  const WHITE = '#0B3A5B';
 
   let W = 1;
   let H = 1;
@@ -45,9 +45,9 @@
     return c;
   }
 
-  const limeGlow = makeGlow('rgba(198,245,0,0.95)', 48);
-  const blueGlow = makeGlow('rgba(45,108,255,0.95)', 48);
-  const coreGlow = makeGlow('rgba(198,245,0,0.55)', 260);
+  const limeGlow = makeGlow('rgba(31,111,235,0.78)', 48);
+  const blueGlow = makeGlow('rgba(11,143,211,0.72)', 48);
+  const coreGlow = makeGlow('rgba(31,111,235,0.24)', 260);
 
   function resize() {
     const rect = canvas.getBoundingClientRect();
@@ -137,7 +137,7 @@
       ctx.beginPath();
       ctx.moveTo(path.from.x, path.from.y);
       ctx.lineTo(path.to.x, path.to.y);
-      ctx.strokeStyle = i % 3 === 1 ? 'rgba(45,108,255,.14)' : 'rgba(198,245,0,.16)';
+      ctx.strokeStyle = i % 3 === 1 ? 'rgba(11,143,211,.16)' : 'rgba(31,111,235,.14)';
       ctx.lineWidth = 0.8;
       ctx.stroke();
 
@@ -182,7 +182,7 @@
       drawGlow(p.color === BLUE ? blueGlow : limeGlow, p.x, p.y, p.size * 3.5);
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = p.color === BLUE ? 'rgba(45,108,255,.7)' : 'rgba(198,245,0,.72)';
+      ctx.fillStyle = p.color === BLUE ? 'rgba(11,143,211,.56)' : 'rgba(31,111,235,.58)';
       ctx.fill();
     });
 
