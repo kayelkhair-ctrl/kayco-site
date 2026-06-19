@@ -149,7 +149,7 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
    GET FOUND ACROSS (engine logo lockups, inside the hero surface)
    ============================================================ */
 .found { position: relative; z-index: 3; background: transparent; }
-.found .container { display: flex; align-items: center; flex-wrap: wrap; gap: clamp(.85rem, 2vw, 1.4rem) clamp(1.2rem, 3vw, 2.4rem); padding-top: 0; padding-bottom: clamp(1.4rem, 2.6vw, 2.2rem); }
+.found .container { display: flex; align-items: center; flex-wrap: wrap; gap: clamp(.85rem, 2vw, 1.4rem) clamp(1.2rem, 3vw, 2.4rem); padding-top: 1rem; padding-bottom: clamp(1.4rem, 2.6vw, 2.2rem); }
 .found__label { flex: 0 0 auto; font-family: var(--font); font-size: .7rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: #7d858f; }
 .found__logos { display: flex; align-items: center; flex-wrap: wrap; gap: clamp(1.1rem, 2.6vw, 2rem); list-style: none; margin: 0; padding: 0; }
 .found__logos li { display: inline-flex; align-items: center; gap: .45rem; opacity: .55; transition: opacity .25s var(--ease); }
@@ -223,7 +223,11 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 .panel { position: relative; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-soft); padding: clamp(1.8rem, 4vw, 2.8rem); min-height: 300px; overflow: hidden; }
 .panel__chip { display:flex; align-items:center; gap:.8rem; padding:.85rem 0; border-bottom:1px solid var(--line); }
 .panel__chip:last-child { border-bottom: 0; }
-.panel__chip .logo { width: 36px; height: 36px; border-radius: 8px; display:grid; place-items:center; font-weight:800; font-size:.78rem; background: var(--ink); color: #fff; }
+.panel__chip .logo { width: 36px; height: 36px; border-radius: 8px; display:grid; place-items:center; font-weight:800; font-size:.78rem; background: #fff; color: var(--ink); border: 1px solid var(--line); }
+.panel__chip .logo img { width: 18px; height: 18px; object-fit: contain; opacity: .78; }
+.panel__chip .logo--duo { grid-template-columns: repeat(2, 1fr); gap: 2px; padding: 0 4px; }
+.panel__chip .logo--duo img { width: 13px; height: 13px; }
+.visibility-panel .panel__chip--last { border-bottom: 0; }
 .panel__chip .bar { flex:1; height: 10px; border-radius: 5px; background: var(--bg-elevated); overflow:hidden; position:relative; }
 .panel__chip .bar i { position:absolute; inset:0 auto 0 0; border-radius:5px; background: var(--accent); }
 .panel__chip .pct { font-size:.82rem; color: var(--ink); width: 50px; text-align:right; font-weight: 700; }
