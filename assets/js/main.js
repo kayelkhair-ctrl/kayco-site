@@ -21,12 +21,14 @@
     burger.addEventListener('click', () => {
       const open = links.classList.toggle('open');
       burger.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', String(open));
       document.body.style.overflow = open ? 'hidden' : '';
     });
     links.querySelectorAll('a').forEach((a) =>
       a.addEventListener('click', () => {
         links.classList.remove('open');
         burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
       })
     );
