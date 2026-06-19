@@ -117,9 +117,10 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 /* ============================================================
    HERO (interactive canvas)
    ============================================================ */
-.hero { position: relative; padding: 0; display: flex; align-items: center; min-height: 50svh; background: #FFFFFF; overflow: hidden; }
-.hero::after { content:""; position:absolute; inset:0; z-index:2; pointer-events:none; background: linear-gradient(90deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.88) 40%, rgba(245,249,252,.54) 72%, rgba(255,255,255,.78) 100%), linear-gradient(180deg, rgba(255,255,255,.88) 0%, rgba(255,255,255,.24) 48%, rgba(245,249,252,.92) 100%); }
-.hero__grid { position: relative; z-index: 3; display: flex; align-items: center; width: 100%; min-height: 50svh; padding-top: clamp(4rem, 5vw, 5rem); padding-bottom: clamp(1.8rem, 3vw, 2.6rem); }
+.hero-shell { position: relative; overflow: hidden; background: #fff; }
+.hero-shell::after { content:""; position:absolute; inset:0; z-index:2; pointer-events:none; background: linear-gradient(90deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.88) 40%, rgba(245,249,252,.54) 72%, rgba(255,255,255,.78) 100%), linear-gradient(180deg, rgba(255,255,255,.88) 0%, rgba(255,255,255,.24) 48%, rgba(245,249,252,.9) 100%); }
+.hero { position: relative; z-index: 3; padding: 0; display: flex; align-items: center; min-height: 50svh; background: transparent; overflow: visible; }
+.hero__grid { position: relative; display: flex; align-items: center; width: 100%; min-height: 50svh; padding-top: clamp(4rem, 5vw, 5rem); padding-bottom: clamp(1.8rem, 3vw, 2.6rem); }
 .hero__copy { max-width: min(900px, 92vw); }
 .hero__title { font-family: var(--display); font-weight: 900; text-transform: none; font-size: clamp(3rem, 6.6vw, 5.25rem); line-height: 0.9; letter-spacing: 0; margin: 1rem 0 1.2rem; color: var(--ink); max-width: 15ch; text-shadow: none; }
 .hero__title-main, .hero__title-sub { display: block; }
@@ -129,10 +130,10 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 .hero__actions { display: flex; gap: .9rem; flex-wrap: wrap; }
 .hero .btn-ghost { color: var(--blue); border-color: rgba(11,58,91,.24); background: rgba(255,255,255,.68); }
 .hero .btn-ghost:hover { border-color: var(--blue); }
-.hero__viz { position: absolute; inset: 0; z-index: 1; overflow: hidden; background: #FFFFFF; }
+.hero__viz { position: absolute; inset: 0; z-index: 1; overflow: hidden; background: #fff; }
 #net-canvas { position:absolute; inset:0; width: 100%; height: 100%; display: block; z-index:1; pointer-events: none; }
 @media (max-width: 760px) {
-  .hero::after { background: linear-gradient(180deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,.82) 42%, rgba(245,249,252,.96) 100%); }
+  .hero-shell::after { background: linear-gradient(180deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,.82) 42%, rgba(245,249,252,.96) 100%); }
   .hero { min-height: 82svh; }
   .hero__grid { align-items: center; min-height: 82svh; padding-top: 5.2rem; padding-bottom: 2.3rem; }
   .hero__title { max-width: 11ch; }
@@ -145,11 +146,11 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
   .hero .lead { font-size: 1rem; margin-bottom: 1.35rem; }
 }
 /* ============================================================
-   GET FOUND ACROSS (engine logo lockups, above the divider line)
+   GET FOUND ACROSS (engine logo lockups, inside the hero surface)
    ============================================================ */
-.found { background: var(--bg); }
-.found .container { display: flex; align-items: center; flex-wrap: wrap; gap: clamp(.9rem, 2.5vw, 1.8rem) clamp(1.3rem, 3.2vw, 2.6rem); padding-top: clamp(.4rem, 1.5vw, 1rem); padding-bottom: clamp(1.5rem, 3vw, 2.4rem); }
-.found__label { flex: 0 0 auto; font-family: var(--font); font-size: .7rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--grey-dim); }
+.found { position: relative; z-index: 3; background: transparent; }
+.found .container { display: flex; align-items: center; flex-wrap: wrap; gap: clamp(.85rem, 2vw, 1.4rem) clamp(1.2rem, 3vw, 2.4rem); padding-top: clamp(.25rem, 1vw, .7rem); padding-bottom: clamp(1.4rem, 2.6vw, 2.2rem); }
+.found__label { flex: 0 0 auto; font-family: var(--font); font-size: .7rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: #7d858f; }
 .found__logos { display: flex; align-items: center; flex-wrap: wrap; gap: clamp(1.1rem, 2.6vw, 2rem); list-style: none; margin: 0; padding: 0; }
 .found__logos li { display: inline-flex; align-items: center; gap: .45rem; opacity: .55; transition: opacity .25s var(--ease); }
 .found__logos li:hover { opacity: 1; }
@@ -160,10 +161,10 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 /* ============================================================
    STRIP (doctor-led ribbon, below the divider line — hugs its text)
    ============================================================ */
-.reach { padding: 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); background: var(--bg-soft); }
-.reach .container { padding-top: .45rem; padding-bottom: .85rem; }
+.reach { padding: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #fff; }
+.reach .container { padding-top: .75rem; padding-bottom: .75rem; }
 .reach__points { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem clamp(1.4rem, 3.2vw, 2.6rem); list-style: none; margin: 0; padding: 0; }
-.reach__points li { display: flex; align-items: center; gap: .45rem; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); }
+.reach__points li { display: flex; align-items: center; gap: .45rem; font-size: .72rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; color: var(--blue); }
 .reach__points li::before { content: ""; flex: 0 0 auto; width: 13px; height: 13px; border-radius: 50%; background: var(--accent); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/9px no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/9px no-repeat; }
 
 #services { padding-top: clamp(2.2rem, 4vw, 3.5rem); }

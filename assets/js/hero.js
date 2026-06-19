@@ -8,7 +8,7 @@
   const canvas = document.getElementById('net-canvas');
   if (!canvas) return;
 
-  const section = canvas.closest('.hero');
+  const section = canvas.closest('.hero-shell') || canvas.closest('.hero');
   const ctx = canvas.getContext('2d', { alpha: true });
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
