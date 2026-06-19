@@ -198,7 +198,7 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 /* ============================================================
    STATS
    ============================================================ */
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); margin-inline: calc(var(--page-pad) * -1); }
+.stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); margin-inline: calc(var(--page-pad) * -1); }
 @media (max-width: 740px) { .stats { grid-template-columns: 1fr; } }
 .stat { text-align: left; padding: clamp(2rem, 5vw, 4rem) clamp(1.2rem, 3vw, 2.5rem); border-right: 1px solid var(--line); position: relative; }
 .stat:last-child { border-right: 0; }
