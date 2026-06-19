@@ -18,20 +18,45 @@
   const burger = document.querySelector('.nav__burger');
   const links = document.querySelector('.nav__links');
   if (burger && links) {
-    burger.addEventListener('click', () => {
-      const open = links.classList.toggle('open');
+    let lockedScrollY = 0;
+    const setMenuOpen = (open) => {
+      links.classList.toggle('open', open);
       burger.classList.toggle('open', open);
+      if (nav) nav.classList.toggle('menu-open', open);
       burger.setAttribute('aria-expanded', String(open));
-      document.body.style.overflow = open ? 'hidden' : '';
+
+      if (open) {
+        lockedScrollY = window.scrollY || window.pageYOffset || 0;
+        document.documentElement.style.scrollBehavior = 'auto';
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${lockedScrollY}px`;
+        document.body.style.left = '0';
+        document.body.style.right = '0';
+        document.body.style.width = '100%';
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, lockedScrollY);
+        document.documentElement.style.scrollBehavior = '';
+      }
+    };
+
+    burger.addEventListener('click', () => {
+      setMenuOpen(!links.classList.contains('open'));
     });
     links.querySelectorAll('a').forEach((a) =>
       a.addEventListener('click', () => {
-        links.classList.remove('open');
-        burger.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
+        setMenuOpen(false);
       })
     );
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900 && links.classList.contains('open')) setMenuOpen(false);
+    });
   }
 
   /* ---------- FAQ accordion ---------- */

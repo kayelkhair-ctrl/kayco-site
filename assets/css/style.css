@@ -93,7 +93,7 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 .nav__links a:not(.btn)::after { content: ""; position: absolute; left: 0; bottom: -6px; height: 3px; width: 0; background: var(--accent); transition: width .3s var(--ease); }
 .nav__links a:not(.btn):hover::after, .nav__links a.active:not(.btn)::after { width: 100%; }
 .nav__cta { padding: .6rem 1.2rem; }
-.nav__burger { display: none; flex-direction: column; gap: 5px; background: none; border: 0; cursor: pointer; padding: 8px; z-index: 110; }
+.nav__burger { display: none; flex-direction: column; gap: 5px; background: none; border: 0; cursor: pointer; padding: 8px; z-index: 130; }
 .nav__burger span { width: 26px; height: 2px; background: var(--ink); transition: transform .35s var(--ease), opacity .25s; }
 .home-page .nav:not(.scrolled) .logo-wordmark,
 .home-page .nav:not(.scrolled) .nav__links a:not(.btn) { color: var(--ink); }
@@ -105,7 +105,9 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 .nav__burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 @media (max-width: 900px) {
   .nav__burger { display: flex; }
-  .nav__links { position: fixed; inset: 0; flex-direction: column; justify-content: center; gap: 2rem; background: rgba(255,255,255,.98); backdrop-filter: blur(16px); transform: translateX(100%); transition: transform .45s var(--ease); }
+  .nav.menu-open { inset: 0; align-items: flex-start; background: rgba(255,255,255,.98); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 0; }
+  .nav.menu-open .nav__burger { position: relative; z-index: 140; }
+  .nav__links { position: fixed; inset: 0; z-index: 120; min-height: 100vh; min-height: 100dvh; flex-direction: column; justify-content: center; gap: 2rem; background: rgba(255,255,255,.98); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); overflow-y: auto; overscroll-behavior: contain; transform: translateX(100%); transition: transform .45s var(--ease); }
   .nav__links.open { transform: translateX(0); }
   .nav__links a { font-size: 1.6rem; font-family: var(--display); font-weight: 800; text-transform: uppercase; }
   .nav__links a.btn-primary { font-family: var(--font); font-size: 1rem; }
