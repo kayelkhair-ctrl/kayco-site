@@ -247,26 +247,46 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
   display: grid;
   grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
   gap: 0;
-  border: 1px solid rgba(255,255,255,.16);
+  border: 1px solid rgba(255,255,255,.14);
   border-radius: var(--radius);
   overflow: hidden;
-  background: #0a0a0f;
+  background: linear-gradient(135deg, #08080d 0%, #111827 100%);
+  box-shadow: 0 26px 70px -48px rgba(0,0,0,.85);
 }
 .case-study-card__main { padding: clamp(2rem, 5vw, 4.5rem); border-right: 1px solid rgba(255,255,255,.12); }
-.case-study-card__main .tag-pill { margin-bottom: 1.4rem; }
-.case-study-card__main h3 { font-size: clamp(2.8rem, 6.2vw, 6rem); text-transform: uppercase; line-height: .86; margin-bottom: .8rem; }
+.case-study-card__brand { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: clamp(1.6rem, 3vw, 2.4rem); }
+.case-study-card__note { max-width: 26ch !important; margin: 0; color: #aeb4c0 !important; font-size: .74rem; font-weight: 800; letter-spacing: .13em; line-height: 1.35; text-transform: uppercase; }
+.case-study-card__main h3 { font-size: clamp(2.35rem, 5.4vw, 5rem); text-transform: uppercase; line-height: .9; margin-bottom: .75rem; }
 .case-study-card__main p { color: #c7c7cd; max-width: 58ch; }
 .case-study-card__subtitle { color: #fff !important; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: .8rem; margin-bottom: 1.2rem; }
 .case-study-card__main .cta__actions { margin-top: 2rem; }
 .case-study-card__proof { display: grid; grid-template-columns: 1fr; }
-.case-study-card__proof article { padding: clamp(1.6rem, 3.4vw, 3rem); border-bottom: 1px solid rgba(255,255,255,.12); }
+.case-study-card__proof article { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: .9rem 1rem; padding: clamp(1.6rem, 3.4vw, 3rem); border-bottom: 1px solid rgba(255,255,255,.12); }
 .case-study-card__proof article:last-child { border-bottom: 0; }
-.case-study-card__proof span { display: inline-block; color: #fff; font-size: .75rem; font-weight: 800; letter-spacing: .16em; box-shadow: inset 0 -.5em 0 var(--accent); margin-bottom: .9rem; }
+.case-study-card__proof span { display: inline-flex; width: 2.4rem; height: 2.4rem; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.18); border-radius: 50%; color: #fff; font-size: .72rem; font-weight: 800; letter-spacing: .06em; }
 .case-study-card__proof h4 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.45rem, 2.6vw, 2.2rem); margin-bottom: .6rem; }
+.case-study-card__proof h4,
+.case-study-card__proof p { grid-column: 2; }
 .case-study-card__proof p { color: #c7c7cd; max-width: 54ch; }
+.case-study-logo { display: inline-flex; align-items: center; justify-content: center; }
+.case-study-logo img { display: block; width: 100%; height: auto; object-fit: contain; }
+.case-study-logo--tile { width: min(160px, 48vw); padding: .75rem .9rem; border-radius: 8px; background: #fff; border: 1px solid rgba(255,255,255,.18); }
+.case-study-logo--hero { width: min(220px, 70vw); margin: 0 0 1.5rem; }
+.case-study-logo--panel { width: min(190px, 72%); margin: 0 0 1.5rem; padding: .95rem; border-radius: var(--radius-sm); background: #fff; border: 1px solid var(--line); }
 @media (max-width: 860px) {
   .case-study-card { grid-template-columns: 1fr; }
   .case-study-card__main { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.12); }
+}
+@media (max-width: 560px) {
+  .case-study-feature { padding-top: 4rem; padding-bottom: 4rem; }
+  .case-study-card { border-radius: 10px; }
+  .case-study-card__main { padding: 1.5rem; }
+  .case-study-card__brand { align-items: flex-start; gap: .9rem; }
+  .case-study-card__note { flex: 1 1 11rem; font-size: .68rem; }
+  .case-study-card__main h3 { font-size: 2.35rem; }
+  .case-study-card__main .btn { width: 100%; justify-content: center; }
+  .case-study-card__proof article { grid-template-columns: 2.4rem minmax(0, 1fr); padding: 1.35rem 1.5rem; }
+  .case-study-card__proof h4 { font-size: 1.4rem; }
 }
 
 /* ============================================================
