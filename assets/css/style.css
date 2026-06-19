@@ -233,6 +233,41 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 .panel__chip .pct { font-size:.82rem; color: var(--ink); width: 50px; text-align:right; font-weight: 700; }
 
 /* ============================================================
+   FEATURED CASE STUDY
+   ============================================================ */
+.case-study-feature { background: #050508; color: #fff; }
+.case-study-feature h2,
+.case-study-feature h3,
+.case-study-feature h4,
+.case-study-feature .eyebrow { color: #fff; }
+.case-study-feature .section-head p { color: #c7c7cd; }
+.case-study-card {
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+  gap: 0;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #0a0a0f;
+}
+.case-study-card__main { padding: clamp(2rem, 5vw, 4.5rem); border-right: 1px solid rgba(255,255,255,.12); }
+.case-study-card__main .tag-pill { margin-bottom: 1.4rem; }
+.case-study-card__main h3 { font-size: clamp(2.8rem, 6.2vw, 6rem); text-transform: uppercase; line-height: .86; margin-bottom: .8rem; }
+.case-study-card__main p { color: #c7c7cd; max-width: 58ch; }
+.case-study-card__subtitle { color: #fff !important; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: .8rem; margin-bottom: 1.2rem; }
+.case-study-card__main .cta__actions { margin-top: 2rem; }
+.case-study-card__proof { display: grid; grid-template-columns: 1fr; }
+.case-study-card__proof article { padding: clamp(1.6rem, 3.4vw, 3rem); border-bottom: 1px solid rgba(255,255,255,.12); }
+.case-study-card__proof article:last-child { border-bottom: 0; }
+.case-study-card__proof span { display: inline-block; color: #fff; font-size: .75rem; font-weight: 800; letter-spacing: .16em; box-shadow: inset 0 -.5em 0 var(--accent); margin-bottom: .9rem; }
+.case-study-card__proof h4 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.45rem, 2.6vw, 2.2rem); margin-bottom: .6rem; }
+.case-study-card__proof p { color: #c7c7cd; max-width: 54ch; }
+@media (max-width: 860px) {
+  .case-study-card { grid-template-columns: 1fr; }
+  .case-study-card__main { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.12); }
+}
+
+/* ============================================================
    STEPS
    ============================================================ */
 .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--ink); margin-inline: calc(var(--page-pad) * -1); }
