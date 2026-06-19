@@ -1,6 +1,6 @@
 <svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">SEO flow chart</title>
-  <desc id="desc">A technical SEO flow chart showing crawl, intent, and rank connected as a search optimisation process.</desc>
+  <title id="title">Healthcare SEO flow chart</title>
+  <desc id="desc">A healthcare SEO flow chart showing clinic pages, patient intent, and appointment visibility connected as one search optimisation process.</desc>
   <defs>
     <filter id="softShadow" x="-20%" y="-25%" width="140%" height="150%" color-interpolation-filters="sRGB">
       <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0A0A0A" flood-opacity=".12"/>
@@ -27,7 +27,8 @@
     <path d="M124 120V156M106 138H142M111 125L137 151M137 125L111 151" stroke="#171717" stroke-width="3" stroke-linecap="round"/>
     <circle cx="124" cy="138" r="9" fill="#171717"/>
     <path d="M165 112V164" stroke="#D9D6CE" stroke-width="1.4"/>
-    <text x="184" y="152" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="37" font-weight="800" letter-spacing="-.7">crawl</text>
+    <text x="184" y="132" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="850" letter-spacing="-.4">clinic</text>
+    <text x="184" y="160" fill="#54545B" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800">pages</text>
   </g>
 
   <g>
@@ -42,7 +43,8 @@
     <circle cx="392" cy="282" r="5" fill="#171717"/>
     <path d="M392 250V263M392 301V314M360 282H373M411 282H424" stroke="#171717" stroke-width="3" stroke-linecap="round"/>
     <path d="M433 256V308" stroke="#D9D6CE" stroke-width="1.4"/>
-    <text x="452" y="296" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="37" font-weight="800" letter-spacing="-.7">intent</text>
+    <text x="452" y="276" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="850" letter-spacing="-.4">patient</text>
+    <text x="452" y="304" fill="#54545B" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800">intent</text>
   </g>
 
   <g>
@@ -55,7 +57,8 @@
     <circle cx="656" cy="404" r="30" fill="#171717"/>
     <path d="M644 418V408M656 418V397M668 418V386" stroke="#C6F500" stroke-width="7" stroke-linecap="round"/>
     <path d="M697 378V430" stroke="#99BE00" stroke-width="1.4"/>
-    <text x="718" y="419" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="37" font-weight="800" letter-spacing="-.7">rank</text>
+    <text x="718" y="397" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="850" letter-spacing="-.4">booked</text>
+    <text x="718" y="424" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="850">consults</text>
   </g>
 
   <g>

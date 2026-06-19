@@ -1,6 +1,6 @@
 <svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">GEO search ecosystem</title>
-  <desc id="desc">A GEO visibility map showing a brand entity connected to Google, Bing, ChatGPT, Perplexity, Gemini, Claude, Copilot, and Grok X Search.</desc>
+  <title id="title">Healthcare GEO search ecosystem</title>
+  <desc id="desc">A healthcare GEO visibility map showing a clinic entity connected to Google, AI Overviews, ChatGPT, Perplexity, Gemini, Copilot, and local patient searches.</desc>
   <defs>
     <filter id="shadow" x="-20%" y="-25%" width="140%" height="150%" color-interpolation-filters="sRGB">
       <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0A0A0A" flood-opacity=".12"/>
@@ -36,7 +36,7 @@
     <g>
       <rect x="374" y="46" width="152" height="72" rx="36" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
       <circle cx="410" cy="82" r="22" fill="#EAF9A7"/>
-      <text x="474" y="90" fill="#171717" font-size="21" font-weight="850" text-anchor="middle">Bing</text>
+      <text x="474" y="90" fill="#171717" font-size="20" font-weight="850" text-anchor="middle">AI Overview</text>
     </g>
     <g>
       <rect x="610" y="76" width="178" height="72" rx="36" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
@@ -63,19 +63,19 @@
     <g>
       <rect x="374" y="390" width="152" height="72" rx="36" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
       <circle cx="410" cy="426" r="22" fill="#EAF9A7"/>
-      <text x="474" y="434" fill="#171717" font-size="21" font-weight="850" text-anchor="middle">Claude</text>
+      <text x="474" y="434" fill="#171717" font-size="19" font-weight="850" text-anchor="middle">Local Pack</text>
     </g>
     <g>
       <rect x="610" y="358" width="178" height="72" rx="36" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
       <circle cx="646" cy="394" r="22" fill="#EAF9A7"/>
-      <text x="704" y="402" fill="#171717" font-size="21" font-weight="850" text-anchor="middle">Grok / X</text>
+      <text x="704" y="402" fill="#171717" font-size="18" font-weight="850" text-anchor="middle">Care searches</text>
     </g>
   </g>
 
   <g filter="url(#shadow)" font-family="Inter, Arial, sans-serif">
     <circle cx="450" cy="258" r="78" fill="#C6F500" stroke="#171717" stroke-width="3"/>
     <circle cx="450" cy="258" r="46" fill="#171717"/>
-    <text x="450" y="250" fill="#C6F500" font-size="16" font-weight="900" text-anchor="middle">BRAND</text>
+    <text x="450" y="250" fill="#C6F500" font-size="16" font-weight="900" text-anchor="middle">CLINIC</text>
     <text x="450" y="273" fill="#FFFFFF" font-size="16" font-weight="900" text-anchor="middle">ENTITY</text>
   </g>
 
@@ -99,7 +99,7 @@
   </g>
 
   <g filter="url(#shadow)" font-family="Inter, Arial, sans-serif">
-    <rect x="318" y="468" width="264" height="34" rx="17" fill="#FFFFFF" stroke="#171717" stroke-width="1.7"/>
-    <text x="450" y="491" fill="#54545B" font-size="14" font-weight="850" text-anchor="middle">schema + answers + citations</text>
+    <rect x="284" y="468" width="332" height="34" rx="17" fill="#FFFFFF" stroke="#171717" stroke-width="1.7"/>
+    <text x="450" y="491" fill="#54545B" font-size="13" font-weight="850" text-anchor="middle">schema + services + clinician proof</text>
   </g>
 </svg>
