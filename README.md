@@ -108,7 +108,7 @@ The pipeline:
 2. Builds a complete HTML page using the same nav, footer, CSS, metadata, and schema.
 3. Saves blog pages to `/blog/<slug>.html` and evergreen pages to `/info/<slug>.html`.
 4. Adds blog cards to `/blog/index.html`.
-5. Adds the new URL to `sitemap.xml`.
+5. Regenerates `sitemap.xml` and `robots.txt`.
 
 Generated pages include optimised titles, meta descriptions, canonical tags, Open Graph tags, JSON-LD, FAQ schema, Speakable schema, and a clean H1/H2 structure.
 
@@ -160,6 +160,19 @@ git push origin main
 ```
 
 Cloudflare Pages rebuilds from `main`.
+
+## Sitemap And Indexing
+
+The sitemap is generated automatically from public, indexable HTML pages:
+
+```bash
+npm run sitemap
+npm run sitemap:check
+```
+
+After publishing new pages, deploy the site, check `https://www.kayco.net/sitemap.xml`, then submit the sitemap once in Google Search Console. For important new pages, use URL Inspection and click Request indexing.
+
+Google does not have a general instant-indexing API for normal blog or service pages. Do not use the Google Indexing API unless the page is eligible content such as `JobPosting` or livestream `BroadcastEvent` pages.
 
 ## SEO And GEO
 

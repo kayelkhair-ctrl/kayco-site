@@ -68,7 +68,7 @@ function existingContentFile(item, type) {
   return htmlFiles(type).find((file) => {
     if (path.basename(file) === 'index.html') return false;
     const html = pageText(file);
-    return html.includes(`<link rel="canonical" href="https://kayco.net/${type === 'info' ? 'info' : 'blog'}/`) &&
+    return html.includes(`<link rel="canonical" href="https://www.kayco.net/${type === 'info' ? 'info' : 'blog'}/`) &&
       html.includes(keyword);
   }) || null;
 }

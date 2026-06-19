@@ -8,6 +8,8 @@
     "info": "node generate-page.js --type=info",
     "content:auto": "node content-automation.js",
     "image:blog": "node generate-blog-image.js",
+    "sitemap": "node generate-sitemap.js",
+    "sitemap:check": "node generate-sitemap.js --check",
     "rankmath:audit": "node rankmath-audit.js",
     "serve": "npx --yes serve ."
   },

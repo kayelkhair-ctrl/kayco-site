@@ -5,7 +5,7 @@
    Generates an on-brand HTML page using the Claude API, then:
      * saves it to /blog/<slug>.html  or  /info/<slug>.html
      * inserts a card into /blog/index.html (blog only)
-     * adds the URL to sitemap.xml
+     * regenerates sitemap.xml and robots.txt
 
    Usage:
      node generate-page.js --type=blog --topic="What is GEO?"
@@ -17,9 +17,10 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 
 const ROOT = __dirname;
-const SITE = 'https://kayco.net';
+const SITE = 'https://www.kayco.net';
 const MODEL = 'claude-sonnet-4-6';
 const API_URL = 'https://api.anthropic.com/v1/messages';
 
@@ -387,18 +388,12 @@ function updateBlogIndex(data, slug) {
   console.log(' Added post card to blog/index.html');
 }
 
-/* ---------- Add URL to sitemap.xml ---------- */
-function updateSitemap(url) {
-  const file = path.join(ROOT, 'sitemap.xml');
-  const today = todayISO();
-  const entry = `  <url>\n    <loc>${url}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>`;
-
-  if (!fs.existsSync(file)) { console.warn('! sitemap.xml not found, skipping.'); return; }
-  let xml = fs.readFileSync(file, 'utf8');
-  if (xml.includes(`<loc>${url}</loc>`)) { console.log('* URL already in sitemap, skipped.'); return; }
-  xml = xml.replace('</urlset>', `${entry}\n</urlset>`);
-  fs.writeFileSync(file, xml, 'utf8');
-  console.log(' Added URL to sitemap.xml');
+/* ---------- Regenerate sitemap.xml and robots.txt ---------- */
+function regenerateSitemap() {
+  execFileSync(process.execPath, [path.join(ROOT, 'generate-sitemap.js')], {
+    cwd: ROOT,
+    stdio: 'inherit',
+  });
 }
 
 /* ---------- Main ---------- */
@@ -424,7 +419,7 @@ function updateSitemap(url) {
   console.log(` Wrote ${dir}/${slug}.html`);
 
   if (type === 'blog') updateBlogIndex(data, slug);
-  updateSitemap(`${SITE}/${dir}/${slug}`);
+  regenerateSitemap();
 
   console.log(`\nDone. Review the page, then run ./deploy.sh to publish.\n`);
 })().catch((err) => {
