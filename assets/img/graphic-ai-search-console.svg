@@ -1,73 +1,104 @@
 <svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Healthcare AI search console</title>
-  <desc id="desc">A polished healthcare AI search console showing patient questions moving through clinic fact retrieval, medical trust signals, and AI citation layers.</desc>
+  <title id="title">Healthcare SEO and AI visibility dashboard</title>
+  <desc id="desc">A healthcare search dashboard showing patient demand, clinic content, medical trust signals, and citations across Google and AI answer engines.</desc>
   <defs>
-    <filter id="shadow" x="-20%" y="-25%" width="140%" height="150%" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0A0A0A" flood-opacity=".12"/>
+    <linearGradient id="bg" x1="74" y1="40" x2="826" y2="480" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EAF2F8"/>
+    </linearGradient>
+    <linearGradient id="blueWash" x1="170" y1="78" x2="740" y2="428" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5F9FC"/>
+      <stop offset="1" stop-color="#DDECF7"/>
+    </linearGradient>
+    <filter id="softShadow" x="-16%" y="-18%" width="132%" height="136%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#0B3A5B" flood-opacity=".13"/>
     </filter>
+    <filter id="smallShadow" x="-24%" y="-28%" width="148%" height="156%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0B3A5B" flood-opacity=".12"/>
+    </filter>
+    <style>
+      .ui { font-family: Inter, Arial, sans-serif; }
+      .display { font-family: "Barlow Condensed", Inter, Arial, sans-serif; }
+      .ink { fill: #0A0A0A; }
+      .blue { fill: #1F6FEB; }
+      .deep { fill: #0B3A5B; }
+      .muted { fill: #54545B; }
+      .dim { fill: #7E93A7; }
+      .line { stroke: #C5D6E4; }
+      .strong { stroke: #0A0A0A; }
+    </style>
   </defs>
 
-  <rect width="900" height="520" rx="26" fill="#F6F4EF"/>
-  <rect x="1" y="1" width="898" height="518" rx="25" stroke="#D9D6CE" stroke-width="1.4"/>
-  <g opacity=".78">
-    <path d="M82 70H818M82 188H818M82 306H818M82 424H818" stroke="#D9D6CE" stroke-width="1" stroke-dasharray="3 5"/>
-    <path d="M138 52V456M348 52V456M558 52V456M768 52V456" stroke="#D9D6CE" stroke-width="1" stroke-dasharray="3 5"/>
-    <circle cx="138" cy="188" r="4.8" fill="#F6F4EF" stroke="#D9D6CE"/>
-    <circle cx="768" cy="306" r="4.8" fill="#F6F4EF" stroke="#D9D6CE"/>
+  <rect width="900" height="520" rx="28" fill="url(#bg)"/>
+  <rect x="1" y="1" width="898" height="518" rx="27" stroke="#C5D6E4" stroke-width="1.5"/>
+  <path d="M82 102H818M82 202H818M82 302H818M82 402H818M150 54V466M330 54V466M510 54V466M690 54V466" stroke="#DCE8F1" stroke-width="1" stroke-dasharray="4 8"/>
+
+  <g filter="url(#softShadow)">
+    <rect x="70" y="66" width="760" height="388" rx="28" fill="white" stroke="#C5D6E4" stroke-width="1.5"/>
+    <rect x="96" y="92" width="708" height="66" rx="20" fill="#F5F9FC" stroke="#C5D6E4" stroke-width="1.4"/>
+    <circle cx="130" cy="125" r="13" fill="#1F6FEB"/>
+    <path d="M126 125H134M130 121V129" stroke="white" stroke-width="2.6" stroke-linecap="round"/>
+    <text class="ui dim" x="160" y="121" font-size="15" font-weight="700">patient search intent</text>
+    <text class="ui ink" x="160" y="143" font-size="20" font-weight="800">best private clinic for back pain near me</text>
+    <g transform="translate(660 109)">
+      <rect width="116" height="32" rx="16" fill="#EAF2F8"/>
+      <circle cx="20" cy="16" r="7" fill="#1F6FEB"/>
+      <text class="ui deep" x="36" y="21" font-size="13" font-weight="800">live demand</text>
+    </g>
   </g>
 
-  <g filter="url(#shadow)">
-    <rect x="86" y="86" width="728" height="332" rx="24" fill="#FFFFFF" stroke="#171717" stroke-width="2"/>
-    <rect x="118" y="118" width="664" height="60" rx="17" fill="#F6F4EF" stroke="#171717" stroke-width="1.7"/>
-    <circle cx="151" cy="148" r="9" fill="#C6F500" stroke="#171717" stroke-width="2"/>
-    <text x="176" y="155" fill="#54545B" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">patients ask: best clinic near me</text>
+  <g filter="url(#smallShadow)">
+    <rect x="96" y="196" width="220" height="170" rx="22" fill="#F5F9FC" stroke="#C5D6E4" stroke-width="1.4"/>
+    <rect x="120" y="220" width="54" height="54" rx="16" fill="#1F6FEB"/>
+    <path d="M147 235V259M135 247H159" stroke="white" stroke-width="5" stroke-linecap="round"/>
+    <text class="display ink" x="194" y="242" font-size="30" font-weight="800" letter-spacing=".02em">CLINIC</text>
+    <text class="ui muted" x="194" y="266" font-size="14" font-weight="750">pages patients trust</text>
+    <g class="ui" font-size="13" font-weight="750">
+      <rect x="120" y="298" width="172" height="18" rx="9" fill="#EAF2F8"/>
+      <rect x="120" y="328" width="138" height="18" rx="9" fill="#EAF2F8"/>
+      <circle cx="130" cy="307" r="4" fill="#1F6FEB"/>
+      <circle cx="130" cy="337" r="4" fill="#1F6FEB"/>
+      <text class="deep" x="142" y="312">service pages</text>
+      <text class="deep" x="142" y="342">local proof</text>
+    </g>
   </g>
 
-  <path d="M250 270H328M546 270H624" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
-  <circle cx="328" cy="270" r="9" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
-  <circle cx="328" cy="270" r="5" fill="#C6F500"/>
-  <circle cx="624" cy="270" r="9" fill="#F6F4EF" stroke="#171717" stroke-width="3"/>
-  <circle cx="624" cy="270" r="5" fill="#C6F500"/>
-
-  <g filter="url(#shadow)">
-    <rect x="118" y="218" width="202" height="118" rx="18" fill="#FFFFFF" stroke="#D9D6CE" stroke-width="1.5"/>
-    <circle cx="158" cy="258" r="23" fill="#EAF9A7"/>
-    <path d="M146 258H170M158 246V270M149 249L167 267M167 249L149 267" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/>
-    <text x="188" y="253" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="850">clinic</text>
-    <text x="188" y="279" fill="#54545B" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800">facts</text>
-    <path d="M146 304H276M146 320H232" stroke="#D4D4CC" stroke-width="7" stroke-linecap="round"/>
+  <g filter="url(#smallShadow)">
+    <rect x="352" y="184" width="196" height="196" rx="26" fill="url(#blueWash)" stroke="#C5D6E4" stroke-width="1.4"/>
+    <circle cx="450" cy="250" r="42" fill="white" stroke="#C5D6E4" stroke-width="1.4"/>
+    <path d="M450 223V277M423 250H477" stroke="#1F6FEB" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="450" cy="250" r="18" stroke="#0B3A5B" stroke-width="3"/>
+    <text class="display ink" x="386" y="328" font-size="30" font-weight="800" letter-spacing=".02em">MEDICAL TRUST</text>
+    <text class="ui muted" x="391" y="352" font-size="14" font-weight="750">reviewed content, schema, EEAT</text>
   </g>
 
-  <g filter="url(#shadow)">
-    <rect x="350" y="218" width="202" height="118" rx="18" fill="#FFFFFF" stroke="#D9D6CE" stroke-width="1.5"/>
-    <circle cx="390" cy="258" r="23" fill="#EAF9A7"/>
-    <circle cx="390" cy="258" r="12" stroke="#171717" stroke-width="2.7"/>
-    <circle cx="390" cy="258" r="4" fill="#171717"/>
-    <path d="M390 232V242M390 274V284M364 258H374M406 258H416" stroke="#171717" stroke-width="2.7" stroke-linecap="round"/>
-    <text x="420" y="253" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="850">medical</text>
-    <text x="420" y="279" fill="#54545B" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800">trust</text>
-    <path d="M378 304H508M378 320H478" stroke="#D4D4CC" stroke-width="7" stroke-linecap="round"/>
+  <g filter="url(#smallShadow)">
+    <rect x="584" y="194" width="220" height="176" rx="24" fill="#0B3A5B" stroke="#0A0A0A" stroke-width="1.4"/>
+    <rect x="610" y="220" width="168" height="36" rx="18" fill="white" fill-opacity=".1"/>
+    <text class="ui" x="626" y="243" fill="white" font-size="14" font-weight="800">AI answer citation</text>
+    <text class="display" x="610" y="306" fill="white" font-size="42" font-weight="800" letter-spacing=".01em">FOUND</text>
+    <text class="ui" x="610" y="332" fill="#BFD8EC" font-size="15" font-weight="750">Google, ChatGPT, Gemini</text>
+    <g transform="translate(704 276)">
+      <circle cx="32" cy="32" r="32" fill="#1F6FEB"/>
+      <path d="M18 38V28M32 42V20M46 36V26" stroke="white" stroke-width="7" stroke-linecap="round"/>
+    </g>
   </g>
 
-  <g filter="url(#shadow)">
-    <rect x="582" y="206" width="200" height="142" rx="18" fill="#C6F500" stroke="#171717" stroke-width="2"/>
-    <circle cx="624" cy="258" r="25" fill="#171717"/>
-    <path d="M613 272V263M624 272V251M635 272V241" stroke="#C6F500" stroke-width="6" stroke-linecap="round"/>
-    <path d="M664 232V284" stroke="#99BE00" stroke-width="1.4"/>
-    <text x="684" y="253" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="27" font-weight="850">cite</text>
-    <text x="684" y="280" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="850">clinic</text>
-    <path d="M618 318H748" stroke="#171717" stroke-opacity=".28" stroke-width="7" stroke-linecap="round"/>
-    <path d="M618 318H708" stroke="#171717" stroke-width="7" stroke-linecap="round"/>
-  </g>
+  <path d="M316 280C334 280 334 282 352 282" stroke="#1F6FEB" stroke-width="4" stroke-linecap="round"/>
+  <path d="M548 282C566 282 566 282 584 282" stroke="#1F6FEB" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="334" cy="281" r="6" fill="white" stroke="#1F6FEB" stroke-width="3"/>
+  <circle cx="566" cy="282" r="6" fill="white" stroke="#1F6FEB" stroke-width="3"/>
 
-  <g>
-    <path d="M116 458H684" stroke="#171717" stroke-width="5" stroke-linecap="round"/>
-    <path d="M684 458H784" stroke="#C6F500" stroke-width="5" stroke-linecap="round"/>
-    <circle cx="154" cy="474" r="4" fill="#F6F4EF" stroke="#171717" stroke-width="2"/>
-    <circle cx="450" cy="474" r="4" fill="#F6F4EF" stroke="#171717" stroke-width="2"/>
-    <circle cx="724" cy="474" r="4" fill="#F6F4EF" stroke="#C6F500" stroke-width="2"/>
-    <text x="147" y="490" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700">01</text>
-    <text x="443" y="490" fill="#171717" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700">02</text>
-    <text x="717" y="490" fill="#A8CC00" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700">03</text>
+  <g class="ui" font-size="12" font-weight="800">
+    <rect x="112" y="404" width="126" height="32" rx="16" fill="#EAF2F8"/>
+    <rect x="248" y="404" width="116" height="32" rx="16" fill="#EAF2F8"/>
+    <rect x="374" y="404" width="142" height="32" rx="16" fill="#EAF2F8"/>
+    <rect x="526" y="404" width="122" height="32" rx="16" fill="#EAF2F8"/>
+    <rect x="658" y="404" width="122" height="32" rx="16" fill="#EAF2F8"/>
+    <text class="deep" x="134" y="425">Google SEO</text>
+    <text class="deep" x="270" y="425">ChatGPT</text>
+    <text class="deep" x="396" y="425">AI Overviews</text>
+    <text class="deep" x="548" y="425">Gemini</text>
+    <text class="deep" x="680" y="425">Perplexity</text>
   </g>
 </svg>
