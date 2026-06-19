@@ -145,20 +145,26 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
   .hero .lead { font-size: 1rem; margin-bottom: 1.35rem; }
 }
 /* ============================================================
-   REACH BAND (static divider: engine logos + differentiators)
+   GET FOUND ACROSS (engine logo lockups, above the divider line)
    ============================================================ */
-.reach { border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); background: var(--bg); }
-.reach .container { display: flex; flex-direction: column; gap: 1.1rem; padding-top: clamp(1.4rem, 3vw, 2rem); padding-bottom: clamp(1.4rem, 3vw, 2rem); }
-.reach__row { display: flex; align-items: center; gap: clamp(1.2rem, 4vw, 3rem); flex-wrap: wrap; }
-.reach__label { flex: 0 0 auto; font-family: var(--font); font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--grey-dim); }
-.reach__logos { display: flex; align-items: center; flex-wrap: wrap; gap: clamp(1.4rem, 3.5vw, 3rem); list-style: none; margin: 0; padding: 0; }
-.reach__logos li { display: inline-flex; }
-.reach__logos img { height: clamp(20px, 2.3vw, 26px); width: auto; opacity: .48; transition: opacity .25s var(--ease), transform .25s var(--ease); }
-.reach__logos li:hover img { opacity: 1; transform: translateY(-2px); }
-.reach__points { display: flex; flex-wrap: wrap; gap: clamp(.9rem, 2.5vw, 2rem); list-style: none; margin: 0; padding-top: 1.1rem; border-top: 1px solid var(--line); }
-.reach__points li { display: flex; align-items: center; gap: .5rem; font-size: .9rem; font-weight: 600; color: var(--ink); }
+.found { background: var(--bg); }
+.found .container { display: flex; align-items: center; flex-wrap: wrap; gap: clamp(1rem, 4vw, 2.6rem); padding-top: clamp(.6rem, 2vw, 1.2rem); padding-bottom: clamp(1.6rem, 3vw, 2.4rem); }
+.found__label { flex: 0 0 auto; font-family: var(--font); font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--grey-dim); }
+.found__logos { display: flex; align-items: center; flex-wrap: wrap; gap: clamp(1.2rem, 3vw, 2.4rem); list-style: none; margin: 0; padding: 0; }
+.found__logos li { display: inline-flex; align-items: center; gap: .5rem; opacity: .5; transition: opacity .25s var(--ease), transform .25s var(--ease); }
+.found__logos li:hover { opacity: 1; transform: translateY(-2px); }
+.found__logos img { height: 21px; width: 21px; flex: 0 0 auto; }
+.found__logos span { font-size: 1.02rem; font-weight: 700; color: var(--ink); letter-spacing: -.01em; white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .found__logos li { transition: none; } }
+
+/* ============================================================
+   STRIP (doctor-led differentiators, below the divider line)
+   ============================================================ */
+.reach { border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); background: var(--bg-soft); }
+.reach .container { padding-top: clamp(1.1rem, 2.2vw, 1.5rem); padding-bottom: clamp(1.1rem, 2.2vw, 1.5rem); }
+.reach__points { display: flex; flex-wrap: wrap; gap: clamp(1rem, 3vw, 2.6rem); list-style: none; margin: 0; padding: 0; }
+.reach__points li { display: flex; align-items: center; gap: .5rem; font-size: .92rem; font-weight: 600; color: var(--ink); }
 .reach__points li::before { content: ""; flex: 0 0 auto; width: 17px; height: 17px; border-radius: 50%; background: var(--accent); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/11px no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center/11px no-repeat; }
-@media (prefers-reduced-motion: reduce) { .reach__logos img { transition: none; } }
 
 #services { padding-top: clamp(2.2rem, 4vw, 3.5rem); }
 
