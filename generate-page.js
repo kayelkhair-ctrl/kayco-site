@@ -201,6 +201,11 @@ const SCRIPTS = `  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gs
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="/assets/js/main.js" defer></script>`;
 
+const FAVICONS = `  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/favicon-48x48.png" type="image/png" sizes="48x48" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />`;
+
 /* ---------- Build full HTML page from model JSON ---------- */
 function buildPage(data, { type, slug }) {
   const dir = type === 'blog' ? 'blog' : 'info';
@@ -266,7 +271,7 @@ ${sections.map((s, i) => `            <li><a href="#${slugify(s.heading || `sect
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+${FAVICONS}
 
   <title>${title} | Kay &amp; Co.</title>
   <meta name="description" content="${desc}" />
