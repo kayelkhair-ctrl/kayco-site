@@ -15,3 +15,6 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+
+# Local-only preview helper (not part of the deploy)
+_serve.cjs
