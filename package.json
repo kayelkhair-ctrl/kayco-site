@@ -4,13 +4,8 @@
   "private": true,
   "description": "Kay & Co., UK SEO & GEO optimisation consultancy website (kayco.net)",
   "scripts": {
-    "blog": "node generate-page.js --type=blog",
-    "info": "node generate-page.js --type=info",
-    "content:auto": "node content-automation.js",
-    "image:blog": "node generate-blog-image.js",
     "sitemap": "node generate-sitemap.js",
     "sitemap:check": "node generate-sitemap.js --check",
-    "rankmath:audit": "node rankmath-audit.js",
     "serve": "npx --yes serve ."
   },
   "engines": {
