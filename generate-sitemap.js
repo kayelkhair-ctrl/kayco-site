@@ -222,6 +222,7 @@ function renderRobots() {
 
 User-agent: *
 Allow: /
+Disallow: /cdn-cgi/
 
 Sitemap: ${SITE}/sitemap.xml
 `;

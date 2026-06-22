@@ -3,5 +3,6 @@
 
 User-agent: *
 Allow: /
+Disallow: /cdn-cgi/
 
 Sitemap: https://www.kayco.net/sitemap.xml
