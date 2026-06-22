@@ -244,16 +244,19 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 .cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--ink); border-left: 1px solid var(--line); margin-inline: calc(var(--page-pad) * -1); }
 @media (max-width: 880px) { .cap-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .cap-grid { grid-template-columns: 1fr; } }
-.cap { position: relative; display: block; padding: clamp(1.8rem, 3.2vw, 2.8rem) clamp(1.4rem, 3vw, 2.4rem); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background .3s var(--ease); }
+.cap { position: relative; display: block; padding: clamp(.85rem, 1.4vw, 1.15rem) clamp(.85rem, 1.4vw, 1.2rem); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background .3s var(--ease); }
 .cap::before { content: ""; position: absolute; left: 0; top: -1px; bottom: -1px; width: 0; background: var(--accent); transition: width .3s var(--ease); }
 .cap:hover { background: var(--bg-soft); }
 .cap:hover::before { width: 5px; }
-.cap__n { font-family: var(--font); font-size: .72rem; font-weight: 800; letter-spacing: .14em; color: var(--grey-dim); font-variant-numeric: tabular-nums; }
-.cap h3 { font-size: clamp(1.3rem, 1.9vw, 1.7rem); text-transform: uppercase; margin: .7rem 0 .55rem; }
-.cap p { font-size: .96rem; max-width: 38ch; }
-.cap__link { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1rem; font-size: .8rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.cap__n { font-family: var(--font); font-size: .68rem; font-weight: 800; letter-spacing: .14em; color: var(--grey-dim); font-variant-numeric: tabular-nums; }
+.cap h3 { font-size: clamp(1.15rem, 1.55vw, 1.4rem); text-transform: uppercase; margin: .35rem 0 .4rem; }
+.cap p { font-size: .9rem; line-height: 1.5; max-width: 40ch; }
+.cap__link { display: inline-flex; align-items: center; gap: .4rem; margin-top: .7rem; font-size: .76rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
 .cap__link .arrow { transition: transform .3s var(--ease); }
 .cap:hover .cap__link .arrow { transform: translateX(4px); }
+/* Compact rhythm for the capabilities band */
+#capabilities { padding: clamp(2.2rem, 4vw, 3.5rem) 0; }
+#capabilities .section-head { margin-bottom: clamp(1.1rem, 2vw, 1.8rem); }
 
 /* ============================================================
    CREDIBILITY / STANDARDS CHIPS
