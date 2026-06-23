@@ -16,7 +16,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = __dirname;
-const ASSET_VERSION = 'perf-cleanup-20260623';
+const ASSET_VERSION = 'mobile-perf-20260623';
 
 const SKIP_DIRS = new Set(['.git', '.github', 'assets', 'data', 'functions', 'node_modules']);
 
@@ -83,10 +83,10 @@ const FOOTER_MARKUP = `<footer class="footer">
         <div><h4>Services</h4><ul><li><a href="/healthcare-seo-services/">Healthcare SEO Services</a></li><li><a href="/medical-seo-services/">Medical SEO Services</a></li><li><a href="/ai-seo-for-healthcare/">AI SEO for Healthcare</a></li><li><a href="/services/geo-optimization">GEO Optimisation</a></li><li><a href="/services/">All services</a></li></ul></div>
         <div><h4>Resources</h4><ul><li><a href="/resources/">All resources</a></li><li><a href="/info/">Topics</a></li><li><a href="/resources/checklists/healthcare-seo-checklist/">Healthcare SEO Checklist</a></li><li><a href="/blog/">Blog</a></li></ul></div>
         <div><h4>Company</h4><ul><li><a href="/doctor-led/">Doctor-Led</a></li><li><a href="/case-studies/welcare/">Welcare Case Study</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li></ul></div>
-        <div><h4>Get in touch</h4><ul><li><a href="mailto:hello@kayco.net">hello@kayco.net</a></li><li><a href="/contact">Book a visibility audit</a></li><li><span style="color:var(--grey-dim)">United Kingdom</span></li></ul></div>
+        <div><h4>Get in touch</h4><ul><li><a href="/contact">Send an enquiry</a></li><li><a href="/contact">Book a visibility audit</a></li><li><span style="color:var(--grey-dim)">United Kingdom</span></li></ul></div>
       </div>
       <div class="footer__big" aria-hidden="true">Kay <span class="amp">&amp;</span> Co.</div>
-      <div class="footer__bottom"><p>&copy; <span data-year>2026</span> Kay &amp; Co. All rights reserved. The Project Hero Ltd.</p><a class="footer__email" href="mailto:hello@kayco.net">hello@kayco.net</a></div>
+      <div class="footer__bottom"><p>&copy; <span data-year>2026</span> Kay &amp; Co. All rights reserved. The Project Hero Ltd.</p><a class="footer__email" href="/contact">Contact Kay &amp; Co.</a></div>
     </div>
   </footer>`;
 
