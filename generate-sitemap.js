@@ -16,6 +16,10 @@ const TODAY = new Date().toISOString().slice(0, 10);
 
 const CORE_ROUTE_ORDER = [
   '/',
+  '/healthcare-seo-agency/',
+  '/healthcare-seo-consultant/',
+  '/medical-seo-specialists/',
+  '/healthcare-seo-company/',
   '/healthcare-seo-services/',
   '/seo-for-healthcare-providers/',
   '/medical-seo-services/',
@@ -90,6 +94,10 @@ function getCanonical(content) {
 function routePriority(route) {
   if (route === '/') return '1.0';
   if ([
+    '/healthcare-seo-agency/',
+    '/healthcare-seo-consultant/',
+    '/medical-seo-specialists/',
+    '/healthcare-seo-company/',
     '/healthcare-seo-services/',
     '/seo-for-healthcare-providers/',
     '/medical-seo-services/',
