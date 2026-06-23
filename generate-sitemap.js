@@ -16,15 +16,32 @@ const TODAY = new Date().toISOString().slice(0, 10);
 
 const CORE_ROUTE_ORDER = [
   '/',
+  '/services/',
   '/healthcare-seo-agency/',
   '/healthcare-seo-consultant/',
   '/medical-seo-specialists/',
   '/healthcare-seo-company/',
+  '/services/healthcare-seo-agency/',
+  '/services/healthcare-seo-consultant/',
+  '/services/medical-seo-specialists/',
+  '/services/healthcare-seo-company/',
   '/healthcare-seo-services/',
   '/seo-for-healthcare-providers/',
   '/medical-seo-services/',
   '/seo-for-care-homes/',
   '/ai-seo-for-healthcare/',
+  '/resources/',
+  '/resources/guides/what-is-healthcare-seo/',
+  '/resources/guides/what-is-medical-seo/',
+  '/resources/guides/healthcare-seo-vs-normal-seo/',
+  '/resources/guides/eeat-healthcare-seo/',
+  '/resources/guides/ymyl-healthcare-seo/',
+  '/resources/guides/medical-copywriter-vs-doctor-written-content/',
+  '/resources/guides/how-to-choose-a-healthcare-seo-agency/',
+  '/resources/checklists/healthcare-seo-checklist/',
+  '/resources/guides/ai-search-for-healthcare-websites/',
+  '/resources/guides/why-is-my-clinic-not-ranking-on-google/',
+  '/resources/guides/healthcare-seo-pricing/',
   '/case-studies/welcare/',
   '/about',
   '/contact',
@@ -98,6 +115,11 @@ function routePriority(route) {
     '/healthcare-seo-consultant/',
     '/medical-seo-specialists/',
     '/healthcare-seo-company/',
+    '/services/',
+    '/services/healthcare-seo-agency/',
+    '/services/healthcare-seo-consultant/',
+    '/services/medical-seo-specialists/',
+    '/services/healthcare-seo-company/',
     '/healthcare-seo-services/',
     '/seo-for-healthcare-providers/',
     '/medical-seo-services/',
@@ -106,6 +128,7 @@ function routePriority(route) {
     '/services/seo',
     '/services/geo-optimization',
   ].includes(route)) return '0.9';
+  if (route === '/resources/' || route.startsWith('/resources/')) return '0.8';
   if (route === '/blog/' || route === '/info/' || route.startsWith('/info/')) return '0.8';
   if (route.startsWith('/case-studies/')) return '0.8';
   if (route.startsWith('/blog/')) return '0.7';
@@ -114,7 +137,7 @@ function routePriority(route) {
 }
 
 function routeChangefreq(route) {
-  if (route === '/' || route === '/blog/' || route === '/info/') return 'weekly';
+  if (route === '/' || route === '/blog/' || route === '/info/' || route === '/resources/') return 'weekly';
   return 'monthly';
 }
 

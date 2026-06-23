@@ -509,6 +509,9 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 .page-hero h1 { max-width: 16ch; margin: 1.2rem 0; font-size: clamp(3rem, 8vw, 7rem); text-transform: uppercase; line-height: .95; }
 .page-hero h1:has(.gradient-text), .page-hero h1:has(.accent-blue) { line-height: 1.25; }
 .page-hero .lead { max-width: 62ch; }
+.breadcrumbs { display: flex; align-items: center; flex-wrap: wrap; gap: .45rem; margin-bottom: 1.2rem; color: var(--grey); font-size: .82rem; font-weight: 700; }
+.breadcrumbs a { color: var(--accent); box-shadow: inset 0 -.35em 0 var(--accent-soft); padding-inline: .08rem; }
+.breadcrumbs span:last-child { color: var(--ink); }
 
 /* ============================================================
    RESOURCES INDEX
