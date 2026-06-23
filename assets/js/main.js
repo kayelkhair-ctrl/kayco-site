@@ -1,13 +1,10 @@
 /* ============================================================
    Kay & Co. — Site interactions
-   Nav, mobile menu, GSAP scroll reveals, letter-split headline,
-   card wipe, stat counters, FAQ accordion, contact form.
+   Nav, mobile menu, native reveals, stat counters,
+   FAQ accordion, contact form.
    ============================================================ */
 (function () {
   'use strict';
-
-  const hasGSAP = typeof gsap !== 'undefined';
-  document.documentElement.classList.add(hasGSAP ? 'gsap-ready' : 'no-gsap');
 
   /* ---------- Navigation ---------- */
   const nav = document.querySelector('.nav');
@@ -111,42 +108,6 @@
     });
   });
 
-  /* ---------- Letter-split headlines ---------- */
-  function splitText(el) {
-    const text = el.textContent;
-    el.textContent = '';
-    const words = text.split(' ');
-    const chars = [];
-    words.forEach((word, wi) => {
-      const wspan = document.createElement('span');
-      wspan.className = 'word';
-      wspan.style.display = 'inline-block';
-      wspan.style.whiteSpace = 'nowrap';
-      for (const ch of word) {
-        const c = document.createElement('span');
-        c.className = 'char';
-        c.textContent = ch;
-        c.style.display = 'inline-block';
-        wspan.appendChild(c);
-        chars.push(c);
-      }
-      el.appendChild(wspan);
-      if (wi < words.length - 1) el.appendChild(document.createTextNode(' '));
-    });
-    return chars;
-  }
-
-  const splitTargets = document.querySelectorAll('[data-split]');
-  splitTargets.forEach((el) => {
-    const chars = splitText(el);
-    if (hasGSAP) {
-      gsap.set(chars, { yPercent: 110, opacity: 0 });
-      gsap.to(chars, {
-        yPercent: 0, opacity: 1, duration: 0.7, ease: 'power3.out', stagger: 0.022, delay: 0.15
-      });
-    }
-  });
-
   /* ---------- Stat counters ---------- */
   function animateCount(el) {
     const target = parseFloat(el.dataset.count);
@@ -172,36 +133,28 @@
     counters.forEach((c) => io.observe(c));
   }
 
-  /* ---------- GSAP scroll reveals ---------- */
-  if (hasGSAP && typeof ScrollTrigger !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Service cards / posts: clean upward wipe
-    document.querySelectorAll('.card, .post, .res-item').forEach((el) => {
-      gsap.set(el, { opacity: 1, clipPath: 'inset(100% 0% 0% 0%)' });
-      gsap.to(el, {
-        clipPath: 'inset(0% 0% 0% 0%)', duration: 0.9, ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 88%' }
+  /* ---------- Lightweight scroll reveals ---------- */
+  const revealEls = document.querySelectorAll('.reveal');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (revealEls.length && !reduceMotion && 'IntersectionObserver' in window) {
+    const groupCounts = new Map();
+    revealEls.forEach((el) => {
+      const group = el.dataset.revealGroup;
+      if (!group) return;
+      const index = groupCounts.get(group) || 0;
+      groupCounts.set(group, index + 1);
+      el.style.transitionDelay = `${Math.min(index * 70, 280)}ms`;
+    });
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
       });
-    });
-
-    // Generic reveals (fade + slide up), with optional stagger groups
-    const groups = new Map();
-    document.querySelectorAll('.reveal').forEach((el) => {
-      if (el.closest('.card, .post, .res-item')) { el.style.opacity = 1; el.style.transform = 'none'; return; }
-      const g = el.dataset.revealGroup;
-      if (g) {
-        if (!groups.has(g)) groups.set(g, []);
-        groups.get(g).push(el);
-      } else {
-        gsap.to(el, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
-      }
-    });
-    groups.forEach((els) => {
-      gsap.to(els, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.12, scrollTrigger: { trigger: els[0], start: 'top 85%' } });
-    });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
+    revealEls.forEach((el) => revealObserver.observe(el));
   } else {
-    document.querySelectorAll('.reveal').forEach((el) => { el.style.opacity = 1; el.style.transform = 'none'; });
+    revealEls.forEach((el) => el.classList.add('is-visible'));
   }
 
   /* ---------- Contact form ---------- */

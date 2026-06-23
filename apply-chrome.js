@@ -16,7 +16,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = __dirname;
-const ASSET_VERSION = 'resources-hub-20260623-fix1';
+const ASSET_VERSION = 'perf-cleanup-20260623';
 
 const SKIP_DIRS = new Set(['.git', '.github', 'assets', 'data', 'functions', 'node_modules']);
 
@@ -114,6 +114,8 @@ function applyChrome(html, route) {
   let out = html;
   out = out.replace(/<header class="nav">[\s\S]*?<\/header>/, navMarkup(route));
   out = out.replace(/<footer class="footer">[\s\S]*?<\/footer>/, FOOTER_MARKUP);
+  out = out.replace(/\s*<script src="https:\/\/cdn\.jsdelivr\.net\/npm\/gsap@[^"]*"><\/script>/g, '');
+  out = out.replace(/\s*<script src="https:\/\/cdn\.jsdelivr\.net\/npm\/gsap@[^"]*\/ScrollTrigger\.min\.js"><\/script>/g, '');
   out = out.replace(/\/assets\/css\/style\.css(?:\?v=[^"']*)?/g, `/assets/css/style.css?v=${ASSET_VERSION}`);
   out = out.replace(/\/assets\/js\/main\.js(?:\?v=[^"']*)?/g, `/assets/js/main.js?v=${ASSET_VERSION}`);
   return out;
