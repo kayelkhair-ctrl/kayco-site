@@ -5,6 +5,16 @@
    colour. No build step.
    ============================================================ */
 
+/* ---------- Self-hosted fonts (latin subset, woff2) ---------- */
+@font-face { font-family: 'Barlow Condensed'; font-style: normal; font-weight: 700; font-display: swap; src: url('/assets/fonts/barlow-condensed-latin-700.woff2') format('woff2'); }
+@font-face { font-family: 'Barlow Condensed'; font-style: normal; font-weight: 800; font-display: swap; src: url('/assets/fonts/barlow-condensed-latin-800.woff2') format('woff2'); }
+@font-face { font-family: 'Barlow Condensed'; font-style: normal; font-weight: 900; font-display: swap; src: url('/assets/fonts/barlow-condensed-latin-900.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url('/assets/fonts/inter-latin-400.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap; src: url('/assets/fonts/inter-latin-500.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url('/assets/fonts/inter-latin-600.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap; src: url('/assets/fonts/inter-latin-700.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 800; font-display: swap; src: url('/assets/fonts/inter-latin-800.woff2') format('woff2'); }
+
 :root {
   /* Palette */
   --bg:           #FFFFFF;
@@ -149,6 +159,12 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
   .nav__drop-toggle { margin-inline: auto; }
   .nav__dropdown { position: static; min-width: 0; width: 100%; margin-top: .75rem; padding: .4rem; display: none; transform: none; box-shadow: none; background: var(--bg-soft); border-color: var(--line); }
   .nav__dropdown--mini { display: grid; grid-template-columns: 1fr; }
+  /* The desktop reveal centres the panel with translate(-50%); on mobile it is
+     static and full-width, so keep it put in every state (no sideways shift). */
+  .nav__item--dropdown:hover .nav__dropdown,
+  .nav__item--dropdown:focus-within .nav__dropdown,
+  .nav__item.open .nav__dropdown,
+  .nav__dropdown.open { transform: none; }
   .nav__dropdown a { padding: .72rem .8rem; font-family: var(--font); font-size: .92rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; white-space: normal; }
   .home-page .nav:not(.scrolled) .nav__links.open a:not(.btn),
   .home-page .nav:not(.scrolled) .nav__links.open a:not(.btn).active,

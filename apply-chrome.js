@@ -16,7 +16,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = __dirname;
-const ASSET_VERSION = 'mobile-perf-20260623';
+const ASSET_VERSION = 'nav-menu-fix-20260623';
 
 const SKIP_DIRS = new Set(['.git', '.github', 'assets', 'data', 'functions', 'node_modules']);
 
@@ -90,6 +90,10 @@ const FOOTER_MARKUP = `<footer class="footer">
     </div>
   </footer>`;
 
+/* Self-hosted font preloads that replace the render-blocking Google Fonts block. */
+const FONT_PRELOADS = `<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/barlow-condensed-latin-800.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin-400.woff2" crossorigin />`;
+
 /* ---------- File walking + route ---------- */
 function walk(dir, files = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -115,7 +119,8 @@ function applyChrome(html, route) {
   out = out.replace(/<header class="nav">[\s\S]*?<\/header>/, navMarkup(route));
   out = out.replace(/<footer class="footer">[\s\S]*?<\/footer>/, FOOTER_MARKUP);
   out = out.replace(/\s*<script src="https:\/\/cdn\.jsdelivr\.net\/npm\/gsap@[^"]*"><\/script>/g, '');
-  out = out.replace(/\s*<script src="https:\/\/cdn\.jsdelivr\.net\/npm\/gsap@[^"]*\/ScrollTrigger\.min\.js"><\/script>/g, '');
+  // Swap the render-blocking Google Fonts block (2 preconnects + stylesheet) for self-hosted preloads.
+  out = out.replace(/<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com"[^>]*>\s*<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com"[^>]*>\s*<link href="https:\/\/fonts\.googleapis\.com\/css2[^>]*>/, FONT_PRELOADS);
   out = out.replace(/\/assets\/css\/style\.css(?:\?v=[^"']*)?/g, `/assets/css/style.css?v=${ASSET_VERSION}`);
   out = out.replace(/\/assets\/js\/main\.js(?:\?v=[^"']*)?/g, `/assets/js/main.js?v=${ASSET_VERSION}`);
   return out;

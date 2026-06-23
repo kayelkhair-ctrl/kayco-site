@@ -23,10 +23,9 @@
   <meta property="og:image" content="https://www.kayco.net/assets/og/kayco-og.svg" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/css/style.css?v=mobile-perf-20260623" />
+  <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/barlow-condensed-latin-800.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin-400.woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/css/style.css?v=nav-menu-fix-20260623" />
 </head>
 <body>
   <header class="nav">
@@ -54,7 +53,7 @@
   <section class="page-hero">
     <div class="container">
       <div class="case-study-logo case-study-logo--hero reveal">
-        <img src="/assets/img/case-studies/welcare-logo.png" alt="Welcare logo" width="512" height="284" loading="eager" />
+        <img src="/assets/img/case-studies/welcare-logo.png" alt="Welcare logo" width="512" height="284" fetchpriority="high" loading="eager" />
       </div>
       <p class="eyebrow reveal">Case Study  /  UK Care Sector</p>
       <h1 class="reveal">Welcare.org.uk SEO Case Study</h1>
@@ -133,6 +132,6 @@
       <div class="footer__bottom"><p>&copy; <span data-year>2026</span> Kay &amp; Co. All rights reserved. The Project Hero Ltd.</p><a class="footer__email" href="/contact">Contact Kay &amp; Co.</a></div>
     </div>
   </footer>
-  <script src="/assets/js/main.js?v=mobile-perf-20260623" defer></script>
+  <script src="/assets/js/main.js?v=nav-menu-fix-20260623" defer></script>
 </body>
 </html>
