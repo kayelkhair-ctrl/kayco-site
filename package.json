@@ -6,6 +6,10 @@
   "scripts": {
     "sitemap": "node generate-sitemap.js",
     "sitemap:check": "node generate-sitemap.js --check",
+    "resources": "node generate-resources.js",
+    "resources:check": "node generate-resources.js --check",
+    "chrome": "node apply-chrome.js",
+    "chrome:check": "node apply-chrome.js --check",
     "serve": "npx --yes serve ."
   },
   "engines": {

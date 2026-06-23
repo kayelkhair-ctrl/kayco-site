@@ -1,1 +1,7 @@
 https://kayco.net/* https://www.kayco.net/:splat 301
+
+# Consolidated duplicate service pages to their canonical top-level URLs
+/services/healthcare-seo-agency/ /healthcare-seo-agency/ 301
+/services/healthcare-seo-company/ /healthcare-seo-company/ 301
+/services/healthcare-seo-consultant/ /healthcare-seo-consultant/ 301
+/services/medical-seo-specialists/ /medical-seo-specialists/ 301

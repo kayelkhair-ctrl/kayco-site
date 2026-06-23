@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/css/style.css?v=corporate-20260622h" />
+  <link rel="stylesheet" href="/assets/css/style.css?v=resources-hub-20260623" />
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -62,11 +62,54 @@
 </head>
 <body>
   <header class="nav">
-    <a class="nav__logo" href="/" aria-label="Kay & Co. home"><span class="logo-mark" aria-hidden="true"><img src="/assets/img/kayco-logo-mark.svg" alt="" /></span><span class="logo-wordmark">Kay&nbsp;&amp;&nbsp;Co.</span></a>
+    <a class="nav__logo" href="/" aria-label="Kay & Co. home"><span class="logo-mark" aria-hidden="true"><img src="/assets/img/kayco-logo-mark.svg" alt="" width="32" height="32" /></span><span class="logo-wordmark">Kay&nbsp;&amp;&nbsp;Co.</span></a>
     <nav aria-label="Primary">
       <ul class="nav__links" id="menu">
         <li><a href="/services/">Services</a></li>
-        <li><a href="/resources/" class="active">Resources</a></li>
+        <li class="nav__item nav__item--dropdown">
+          <button class="nav__drop-toggle active" type="button" aria-expanded="false" aria-controls="resources-menu">Resources <span class="nav__chevron" aria-hidden="true">v</span></button>
+          <div class="nav__dropdown nav__resource-menu" id="resources-menu">
+            <div class="nav__resource-grid">
+              <div class="nav__resource-group">
+                <h3 class="nav__resource-heading">Guides</h3>
+                <div class="nav__resource-panel">
+                  <a class="nav__resource-link" href="/resources/guides/"><span>All Guides</span><small>Browse every healthcare SEO guide.</small></a>
+                  <a class="nav__resource-link" href="/resources/guides/what-is-healthcare-seo/"><span>What Is Healthcare SEO?</span><small>The main pillar guide for clinics and medical brands.</small></a>
+                  <a class="nav__resource-link" href="/resources/guides/what-is-medical-seo/"><span>What Is Medical SEO?</span><small>Plain-English medical SEO for healthcare websites.</small></a>
+                  <a class="nav__resource-link" href="/resources/guides/healthcare-seo-vs-normal-seo/"><span>Healthcare SEO vs Normal SEO</span><small>What makes medical search different.</small></a>
+                  <a class="nav__resource-link" href="/resources/guides/eeat-healthcare-seo/"><span>E-E-A-T in Healthcare SEO</span><small>Trust signals for healthcare websites.</small></a>
+                  <a class="nav__resource-link" href="/resources/guides/ymyl-healthcare-seo/"><span>YMYL Healthcare SEO</span><small>How to handle high-trust medical topics.</small></a>
+                  <a class="nav__resource-link" href="/resources/guides/medical-copywriter-vs-doctor-written-content/"><span>Medical Copywriter vs Doctor-Written Content</span><small>When doctor-led content matters.</small></a>
+                  <a class="nav__resource-link" href="/resources/guides/how-to-choose-a-healthcare-seo-agency/"><span>How to Choose a Healthcare SEO Agency</span><small>Questions to ask before hiring.</small></a>
+                  <a class="nav__resource-link" href="/resources/guides/ai-search-for-healthcare-websites/"><span>AI Search for Healthcare Websites</span><small>Prepare for Google AI answers and AI engines.</small></a>
+                  <a class="nav__resource-link" href="/resources/guides/why-is-my-clinic-not-ranking-on-google/"><span>Why Is My Clinic Not Ranking?</span><small>Common clinic visibility problems.</small></a>
+                  <a class="nav__resource-link" href="/resources/guides/healthcare-seo-pricing/"><span>Healthcare SEO Pricing</span><small>What affects healthcare SEO costs.</small></a>
+                </div>
+              </div>
+              <div class="nav__resource-group">
+                <h3 class="nav__resource-heading">Checklists</h3>
+                <div class="nav__resource-panel">
+                  <a class="nav__resource-link" href="/resources/checklists/"><span>All Checklists</span><small>Open every practical healthcare SEO checklist.</small></a>
+                  <a class="nav__resource-link" href="/resources/checklists/healthcare-seo-checklist/"><span>Healthcare SEO Checklist</span><small>Review indexing, service pages, trust, schema and local SEO.</small></a>
+                </div>
+              </div>
+              <div class="nav__resource-group">
+                <h3 class="nav__resource-heading">Topics & Blog</h3>
+                <div class="nav__resource-panel">
+                  <a class="nav__resource-link" href="/info/"><span>All Topics</span><small>Browse the healthcare SEO topic library.</small></a>
+                  <a class="nav__resource-link" href="/info/seo-for-doctors"><span>SEO for Doctors</span><small>Search visibility for doctors and clinics.</small></a>
+                  <a class="nav__resource-link" href="/info/healthcare-local-seo"><span>Healthcare Local SEO</span><small>Improve local discovery for healthcare providers.</small></a>
+                  <a class="nav__resource-link" href="/info/eeat-seo"><span>E-E-A-T SEO</span><small>Trust-building SEO for high-stakes topics.</small></a>
+                  <a class="nav__resource-link" href="/blog/"><span>All Blog Posts</span><small>Browse the Kay & Co. blog.</small></a>
+                  <a class="nav__resource-link" href="/blog/doctor-led-healthcare-seo-agency"><span>Doctor-Led Healthcare SEO Agency</span><small>Why doctor-led content changes healthcare SEO.</small></a>
+                  <a class="nav__resource-link" href="/blog/how-to-get-cited-by-chatgpt"><span>How to Get Cited by ChatGPT</span><small>Structure content for AI citations.</small></a>
+                  <a class="nav__resource-link" href="/blog/seo-vs-geo-what-uk-businesses-need-to-know"><span>SEO vs GEO</span><small>Compare Google SEO and AI search visibility.</small></a>
+                </div>
+              </div>
+            </div>
+            <a class="nav__resource-all" href="/resources/"><span>View all resources</span><small>Open the full Resources hub.</small></a>
+          </div>
+        </li>
         <li><a href="/about">About</a></li>
         <li><a href="/contact">Contact</a></li>
         <li><a href="/contact" class="btn btn-primary nav__cta">Book an Audit <span class="arrow">&rarr;</span></a></li>
@@ -82,29 +125,63 @@
       <p class="lead reveal">Explore Kay &amp; Co. healthcare SEO guides, checklists and AI search resources for clinics and medical brands.</p>
       <div class="hero__actions reveal" style="margin-top:2rem">
         <a href="/contact" class="btn btn-primary">Book a Healthcare SEO Audit <span class="arrow">&rarr;</span></a>
-        <a href="/services/healthcare-seo-agency/" class="btn btn-ghost">View Healthcare SEO Services</a>
+        <a href="/healthcare-seo-services/" class="btn btn-ghost">View Healthcare SEO Services</a>
       </div>
     </div>
   </section>
-  <section>
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow reveal">Guides and checklists</p>
-        <h2 class="reveal">Build the search foundation page by page.</h2>
-        <p class="reveal">These resources explain healthcare SEO, medical SEO, E-E-A-T, YMYL, AI search, pricing and practical clinic SEO checks.</p>
-      </div>
-      <div class="res-list">
-<a class="res-item reveal" href="/resources/guides/what-is-healthcare-seo/"><span class="res-kicker">Guide</span><h3>What Is Healthcare SEO?</h3><p>Read this resource and connect it with the relevant Kay & Co. service page.</p></a>
-<a class="res-item reveal" href="/resources/guides/what-is-medical-seo/"><span class="res-kicker">Guide</span><h3>What Is Medical SEO?</h3><p>Read this resource and connect it with the relevant Kay & Co. service page.</p></a>
-<a class="res-item reveal" href="/resources/guides/healthcare-seo-vs-normal-seo/"><span class="res-kicker">Comparison</span><h3>Healthcare SEO vs Normal SEO</h3><p>Read this resource and connect it with the relevant Kay & Co. service page.</p></a>
-<a class="res-item reveal" href="/resources/guides/eeat-healthcare-seo/"><span class="res-kicker">Trust guide</span><h3>E-E-A-T in Healthcare SEO</h3><p>Read this resource and connect it with the relevant Kay & Co. service page.</p></a>
-<a class="res-item reveal" href="/resources/guides/ymyl-healthcare-seo/"><span class="res-kicker">Trust guide</span><h3>YMYL Healthcare SEO</h3><p>Read this resource and connect it with the relevant Kay & Co. service page.</p></a>
-<a class="res-item reveal" href="/resources/guides/medical-copywriter-vs-doctor-written-content/"><span class="res-kicker">Content guide</span><h3>Medical Copywriter vs Doctor-Written Content</h3><p>Read this resource and connect it with the relevant Kay & Co. service page.</p></a>
-<a class="res-item reveal" href="/resources/guides/how-to-choose-a-healthcare-seo-agency/"><span class="res-kicker">Buyer guide</span><h3>How to Choose a Healthcare SEO Agency</h3><p>Read this resource and connect it with the relevant Kay & Co. service page.</p></a>
-<a class="res-item reveal" href="/resources/checklists/healthcare-seo-checklist/"><span class="res-kicker">Checklist</span><h3>Healthcare SEO Checklist</h3><p>Read this resource and connect it with the relevant Kay & Co. service page.</p></a>
-<a class="res-item reveal" href="/resources/guides/ai-search-for-healthcare-websites/"><span class="res-kicker">GEO guide</span><h3>AI Search for Healthcare Websites</h3><p>Read this resource and connect it with the relevant Kay & Co. service page.</p></a>
-<a class="res-item reveal" href="/resources/guides/why-is-my-clinic-not-ranking-on-google/"><span class="res-kicker">Troubleshooting</span><h3>Why Is My Clinic Not Ranking on Google?</h3><p>Read this resource and connect it with the relevant Kay & Co. service page.</p></a>
-<a class="res-item reveal" href="/resources/guides/healthcare-seo-pricing/"><span class="res-kicker">Pricing guide</span><h3>Healthcare SEO Pricing</h3><p>Read this resource and connect it with the relevant Kay & Co. service page.</p></a>
+  <section class="res-hub">
+    <div class="container res-hub__grid">
+      <aside class="res-filter" aria-label="Resource categories">
+        <span class="res-filter__label">Browse</span>
+        <a href="/resources/" class="res-filter__link is-active" aria-current="page">All</a>
+        <a href="/resources/guides/" class="res-filter__link">Guides</a>
+        <a href="/info/" class="res-filter__link">Topics</a>
+        <a href="/resources/checklists/" class="res-filter__link">Checklists</a>
+        <a href="/blog/" class="res-filter__link">Blog</a>
+      </aside>
+      <div class="res-feed">
+        <!-- RESFEED:START -->
+        <a class="res-item reveal" href="/resources/guides/ai-search-for-healthcare-websites/"><span class="res-kicker">Guide</span><span class="res-date">23 Jun 2026</span><h3>AI Search for Healthcare Websites</h3><p>Learn how AI search is changing healthcare SEO and how clinics can improve their chances of being cited in Google AI answers, ChatGPT and other AI engines.</p></a>
+        <a class="res-item reveal" href="/resources/guides/eeat-healthcare-seo/"><span class="res-kicker">Guide</span><span class="res-date">23 Jun 2026</span><h3>E-E-A-T in Healthcare SEO</h3><p>Learn how E-E-A-T affects healthcare SEO and what clinics can do to build stronger experience, expertise, authority and trust.</p></a>
+        <a class="res-item reveal" href="/resources/checklists/healthcare-seo-checklist/"><span class="res-kicker">Checklist</span><span class="res-date">23 Jun 2026</span><h3>Healthcare SEO Checklist</h3><p>Use this healthcare SEO checklist to review your clinic website, service pages, local SEO, content, technical SEO and trust signals.</p></a>
+        <a class="res-item reveal" href="/resources/guides/healthcare-seo-pricing/"><span class="res-kicker">Guide</span><span class="res-date">23 Jun 2026</span><h3>Healthcare SEO Pricing</h3><p>Learn what affects healthcare SEO pricing, what clinics are usually paying for and how to judge whether an SEO quote is realistic.</p></a>
+        <a class="res-item reveal" href="/resources/guides/healthcare-seo-vs-normal-seo/"><span class="res-kicker">Guide</span><span class="res-date">23 Jun 2026</span><h3>Healthcare SEO vs Normal SEO</h3><p>Healthcare SEO is different from normal SEO because medical websites need stronger trust, accuracy, local visibility and YMYL credibility.</p></a>
+        <a class="res-item reveal" href="/resources/guides/how-to-choose-a-healthcare-seo-agency/"><span class="res-kicker">Guide</span><span class="res-date">23 Jun 2026</span><h3>How to Choose a Healthcare SEO Agency</h3><p>Learn how to choose a healthcare SEO agency, what questions to ask and what clinics should check before signing an SEO contract.</p></a>
+        <a class="res-item reveal" href="/resources/guides/medical-copywriter-vs-doctor-written-content/"><span class="res-kicker">Guide</span><span class="res-date">23 Jun 2026</span><h3>Medical Copywriter vs Doctor-Written Content</h3><p>Compare medical copywriter content, medically reviewed content and doctor-written content for healthcare SEO, trust and patient search intent.</p></a>
+        <a class="res-item reveal" href="/resources/guides/what-is-healthcare-seo/"><span class="res-kicker">Guide</span><span class="res-date">23 Jun 2026</span><h3>What Is Healthcare SEO?</h3><p>Learn what healthcare SEO is, how it works and why clinics, care providers and medical brands need a specialist approach to search visibility.</p></a>
+        <a class="res-item reveal" href="/resources/guides/what-is-medical-seo/"><span class="res-kicker">Guide</span><span class="res-date">23 Jun 2026</span><h3>What Is Medical SEO?</h3><p>Medical SEO helps healthcare websites become easier to find, understand and trust on Google and AI search engines.</p></a>
+        <a class="res-item reveal" href="/resources/guides/why-is-my-clinic-not-ranking-on-google/"><span class="res-kicker">Guide</span><span class="res-date">23 Jun 2026</span><h3>Why Is My Clinic Not Ranking on Google?</h3><p>Is your clinic not ranking on Google? Learn the common SEO, Google Business Profile, content, technical and trust problems that stop healthcare websites...</p></a>
+        <a class="res-item reveal" href="/resources/guides/ymyl-healthcare-seo/"><span class="res-kicker">Guide</span><span class="res-date">23 Jun 2026</span><h3>YMYL Healthcare SEO</h3><p>YMYL healthcare websites need accurate, trustworthy and carefully structured content because they can affect people</p></a>
+        <a class="res-item reveal" href="/info/healthcare-local-seo"><span class="res-kicker">Topic</span><span class="res-date">22 Jun 2026</span><h3>Healthcare Local SEO: A Doctor-Led Guide</h3><p>Healthcare local SEO explained for clinics, care providers and medical brands. Build map pack visibility, trust signals and doctor-led local content.</p></a>
+        <a class="res-item reveal" href="/info/seo-for-doctors"><span class="res-kicker">Topic</span><span class="res-date">22 Jun 2026</span><h3>SEO for Doctors: A Doctor-Led Guide</h3><p>SEO for doctors explained by a doctor-led healthcare SEO team. Learn how clinicians can build safe content, local visibility, E-E-A-T and AI citations.</p></a>
+        <a class="res-item reveal" href="/blog/doctor-led-healthcare-seo-agency"><span class="res-kicker">Blog</span><span class="res-date">22 Jun 2026</span><h3>Why a doctor-led healthcare SEO agency matters</h3><p>Why a doctor-led healthcare SEO agency gives clinics, care providers and medical brands safer content, stronger trust signals and better search visibility.</p></a>
+        <a class="res-item reveal" href="/info/ymyl-seo"><span class="res-kicker">Topic</span><span class="res-date">22 Jun 2026</span><h3>YMYL SEO for Healthcare Websites</h3><p>YMYL SEO explained for healthcare websites. Learn what YMYL means, why doctor-led content matters and how to build trust for Google and AI search.</p></a>
+        <a class="res-item reveal" href="/blog/google-ai-mode-healthcare-ads"><span class="res-kicker">Blog</span><span class="res-date">21 Jun 2026</span><h3>Google AI Mode healthcare ads: what it means for SEO and GEO</h3><p>Google is testing healthcare ads in AI Mode. Learn what this means for healthcare SEO, AI search, GEO and doctor-led trust signals.</p></a>
+        <a class="res-item reveal" href="/blog/how-to-choose-an-seo-agency-uk"><span class="res-kicker">Blog</span><span class="res-date">15 Jun 2026</span><h3>SEO Agency UK: How to Choose the Right One</h3><p>Looking for the right SEO agency in the UK? This expert guide covers every factor you need to evaluate before signing a contract.</p></a>
+        <a class="res-item reveal" href="/blog/seo-services-uk-what-should-be-included"><span class="res-kicker">Blog</span><span class="res-date">15 Jun 2026</span><h3>SEO Services UK: Complete Guide to What Should Be Included</h3><p>SEO services should include technical SEO, content, authority building, reporting, and GEO readiness. Learn what UK businesses should expect.</p></a>
+        <a class="res-item reveal" href="/info/ai-seo"><span class="res-kicker">Topic</span><span class="res-date">14 Jun 2026</span><h3>AI SEO: How to Optimise for AI-Powered Search</h3><p>AI SEO is the practice of optimising content for AI-powered search. Learn what AI SEO is, how it differs from traditional SEO, and how UK brands rank in AI...</p></a>
+        <a class="res-item reveal" href="/info/ai-visibility"><span class="res-kicker">Topic</span><span class="res-date">14 Jun 2026</span><h3>AI Visibility: How to Make Your Brand Visible to AI</h3><p>AI visibility is how often your brand appears and is cited across AI search and answer engines. Learn how to measure and grow AI visibility for your UK...</p></a>
+        <a class="res-item reveal" href="/info/answer-engine-optimization"><span class="res-kicker">Topic</span><span class="res-date">14 Jun 2026</span><h3>Answer Engine Optimisation (AEO): The Complete Guide</h3><p>Answer Engine Optimisation helps content become the direct answer in Google, voice search, and AI assistants. Learn how AEO works for UK firms.</p></a>
+        <a class="res-item reveal" href="/info/digital-pr"><span class="res-kicker">Topic</span><span class="res-date">14 Jun 2026</span><h3>Digital PR: Building Authority That Ranks &amp; Gets Cited</h3><p>Digital PR earns links, mentions, and authority that boost SEO and AI citations. Learn what digital PR is, how it works, and why it matters for GEO. From...</p></a>
+        <a class="res-item reveal" href="/info/eeat-seo"><span class="res-kicker">Topic</span><span class="res-date">14 Jun 2026</span><h3>E-E-A-T: Experience, Expertise, Authority, Trust</h3><p>E-E-A-T stands for Experience, Expertise, Authoritativeness, and Trustworthiness. Learn what E-E-A-T means in SEO and how to demonstrate it for search and AI.</p></a>
+        <a class="res-item reveal" href="/info/entity-seo"><span class="res-kicker">Topic</span><span class="res-date">14 Jun 2026</span><h3>Entity SEO: Optimising Around Entities, Not Keywords</h3><p>Entity SEO optimises around clearly defined entities so search engines and AI understand who and what you are. Learn what entity SEO is and why it powers GEO.</p></a>
+        <a class="res-item reveal" href="/info/gemini-seo"><span class="res-kicker">Topic</span><span class="res-date">14 Jun 2026</span><h3>Gemini SEO: How to Get Cited by Google Gemini</h3><p>Gemini SEO helps your brand appear in Google Gemini and AI Overviews. Learn how Gemini chooses sources and how to get cited, from UK GEO consultancy Kay & Co.</p></a>
+        <a class="res-item reveal" href="/info/geo-meaning"><span class="res-kicker">Topic</span><span class="res-date">14 Jun 2026</span><h3>GEO Meaning: What Generative Engine Optimisation Means</h3><p>GEO meaning explained: GEO stands for Generative Engine Optimisation, the practice of getting your brand cited by AI answer engines. A clear definition from...</p></a>
+        <a class="res-item reveal" href="/info/google-ai-overviews"><span class="res-kicker">Topic</span><span class="res-date">14 Jun 2026</span><h3>Google AI Overviews: How to Appear in AI Search Results</h3><p>Google AI Overviews summarise answers at the top of search. Learn what AI Overviews are, how they pick sources, and how UK brands get featured in them.</p></a>
+        <a class="res-item reveal" href="/blog/how-to-get-cited-by-chatgpt"><span class="res-kicker">Blog</span><span class="res-date">14 Jun 2026</span><h3>How to Get Cited by ChatGPT: A Practical Guide</h3><p>Want ChatGPT to recommend your brand? Learn practical ChatGPT SEO tactics to get cited by ChatGPT and rank in AI answers, from UK GEO consultancy Kay & Co.</p></a>
+        <a class="res-item reveal" href="/info/llm-seo"><span class="res-kicker">Topic</span><span class="res-date">14 Jun 2026</span><h3>LLM SEO: How to Optimise Content for Large Language Models</h3><p>LLM SEO is the practice of optimising content so large language models understand, trust, and cite your brand. Learn how LLM SEO works and how UK businesses...</p></a>
+        <a class="res-item reveal" href="/info/local-seo"><span class="res-kicker">Topic</span><span class="res-date">14 Jun 2026</span><h3>Local SEO: How UK Businesses Rank Locally</h3><p>Local SEO helps your business appear when nearby customers search. Learn how local SEO works, from Google Business Profile to local citations, for UK...</p></a>
+        <a class="res-item reveal" href="/info/schema-markup"><span class="res-kicker">Topic</span><span class="res-date">14 Jun 2026</span><h3>Schema Markup: Structured Data for SEO &amp; GEO</h3><p>Schema markup is structured data that tells search engines and AI what your content means. Learn what schema markup is, the key types, and why it matters...</p></a>
+        <a class="res-item reveal" href="/info/technical-seo"><span class="res-kicker">Topic</span><span class="res-date">14 Jun 2026</span><h3>Technical SEO: The Complete Guide for 2026</h3><p>Technical SEO is the foundation that lets search engines and AI crawl, understand, and trust your site. Learn the essentials, from crawlability to Core Web...</p></a>
+        <a class="res-item reveal" href="/info/voice-search-optimization"><span class="res-kicker">Topic</span><span class="res-date">14 Jun 2026</span><h3>Voice Search Optimisation: A Practical Guide</h3><p>Voice search optimisation helps your brand be the spoken answer on Siri, Alexa, and Google Assistant. Learn how voice search works and how to optimise for it.</p></a>
+        <a class="res-item reveal" href="/info/zero-click-search"><span class="res-kicker">Topic</span><span class="res-date">14 Jun 2026</span><h3>Zero-Click Search: What It Means for Your Brand</h3><p>Zero-click searches end without a click to any website. Learn what zero-click search means, why it</p></a>
+        <a class="res-item reveal" href="/blog/how-to-rank-in-perplexity-ai"><span class="res-kicker">Blog</span><span class="res-date">13 Jun 2026</span><h3>How to Rank in Perplexity AI: A Perplexity SEO Guide</h3><p>Perplexity AI cites its sources on every answer. Learn how Perplexity SEO works and how to get your brand cited in Perplexity, from UK GEO consultancy Kay & Co.</p></a>
+        <a class="res-item reveal" href="/blog/how-to-choose-a-geo-agency"><span class="res-kicker">Blog</span><span class="res-date">12 Jun 2026</span><h3>How to Choose a GEO Agency (Generative Engine Optimisation)</h3><p>Looking for a GEO agency? Learn what strong generative engine optimisation services include, what to ask, and how UK brands should choose.</p></a>
+        <a class="res-item reveal" href="/blog/what-is-geo-generative-engine-optimization"><span class="res-kicker">Blog</span><span class="res-date">12 Jun 2026</span><h3>What Is GEO? Generative Engine Optimisation Explained</h3><p>A clear UK guide to GEO (Generative Engine Optimisation): what it is, how it differs from SEO, and how to get your brand cited by ChatGPT, Perplexity, and...</p></a>
+        <a class="res-item reveal" href="/blog/future-of-seo-ai"><span class="res-kicker">Blog</span><span class="res-date">11 Jun 2026</span><h3>The Future of SEO: How AI Is Changing Search</h3><p>The future of SEO is AI-driven. Learn how AI search, GEO, and answer engines are changing SEO, and what UK businesses should do now. From consultancy Kay & Co.</p></a>
+        <a class="res-item reveal" href="/blog/geo-marketing-guide-uk"><span class="res-kicker">Blog</span><span class="res-date">10 Jun 2026</span><h3>GEO Marketing: A Guide for UK Businesses</h3><p>GEO marketing puts your brand inside AI answers. Learn what GEO marketing is, how it fits your marketing strategy, and how UK businesses get started. From...</p></a>
+        <a class="res-item reveal" href="/blog/seo-vs-geo-what-uk-businesses-need-to-know"><span class="res-kicker">Blog</span><span class="res-date">5 Jun 2026</span><h3>SEO vs GEO: What UK Businesses Need to Know in 2026</h3><p>SEO vs GEO compared for UK businesses: the differences, why you need both, and how to build one content strategy that wins in Google search and in AI answers.</p></a>
+        <!-- RESFEED:END -->
       </div>
     </div>
   </section>
@@ -117,18 +194,18 @@
         <span>United Kingdom</span>
       </div>
       <div class="footer__grid">
-        <div class="footer__brand"><a class="nav__logo" href="/"><span class="logo-mark" aria-hidden="true"><img src="/assets/img/kayco-logo-mark.svg" alt="" /></span><span class="logo-wordmark">Kay&nbsp;&amp;&nbsp;Co.</span></a><p>Doctor-led healthcare SEO &amp; GEO. Our content is written by doctors, accurate from the first draft.</p></div>
-        <div><h4>Services</h4><ul><li><a href="/services/healthcare-seo-agency/">Healthcare SEO Agency</a></li><li><a href="/services/healthcare-seo-consultant/">Healthcare SEO Consultant</a></li><li><a href="/services/medical-seo-specialists/">Medical SEO Specialists</a></li><li><a href="/services/healthcare-seo-company/">Healthcare SEO Company</a></li></ul></div>
-        <div><h4>Resources</h4><ul><li><a href="/resources/guides/what-is-healthcare-seo/">Healthcare SEO Guide</a></li><li><a href="/resources/checklists/healthcare-seo-checklist/">Healthcare SEO Checklist</a></li><li><a href="/resources/guides/ai-search-for-healthcare-websites/">AI Search for Healthcare</a></li></ul></div>
+        <div class="footer__brand"><a class="nav__logo" href="/"><span class="logo-mark" aria-hidden="true"><img src="/assets/img/kayco-logo-mark.svg" alt="" width="32" height="32" /></span><span class="logo-wordmark">Kay&nbsp;&amp;&nbsp;Co.</span></a><p>Doctor-led healthcare SEO &amp; GEO. Our content is written by doctors, accurate from the first draft.</p></div>
+        <div><h4>Services</h4><ul><li><a href="/healthcare-seo-services/">Healthcare SEO Services</a></li><li><a href="/medical-seo-services/">Medical SEO Services</a></li><li><a href="/ai-seo-for-healthcare/">AI SEO for Healthcare</a></li><li><a href="/services/geo-optimization">GEO Optimisation</a></li><li><a href="/services/">All services</a></li></ul></div>
+        <div><h4>Resources</h4><ul><li><a href="/resources/">All resources</a></li><li><a href="/info/">Topics</a></li><li><a href="/resources/checklists/healthcare-seo-checklist/">Healthcare SEO Checklist</a></li><li><a href="/blog/">Blog</a></li></ul></div>
         <div><h4>Company</h4><ul><li><a href="/doctor-led/">Doctor-Led</a></li><li><a href="/case-studies/welcare/">Welcare Case Study</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li></ul></div>
-        <div><h4>Get in touch</h4><ul><li><a href="mailto:hello@kayco.net">hello@kayco.net</a></li><li><a href="/contact">Book a healthcare SEO audit</a></li><li><span style="color:var(--grey-dim)">United Kingdom</span></li></ul></div>
+        <div><h4>Get in touch</h4><ul><li><a href="mailto:hello@kayco.net">hello@kayco.net</a></li><li><a href="/contact">Book a visibility audit</a></li><li><span style="color:var(--grey-dim)">United Kingdom</span></li></ul></div>
       </div>
       <div class="footer__big" aria-hidden="true">Kay <span class="amp">&amp;</span> Co.</div>
-      <div class="footer__bottom"><p>&copy; <span data-year>2026</span> Kay &amp; Co. All rights reserved. Clinics &middot; Care providers &middot; Medical brands.</p><a class="footer__email" href="mailto:hello@kayco.net">hello@kayco.net</a></div>
+      <div class="footer__bottom"><p>&copy; <span data-year>2026</span> Kay &amp; Co. All rights reserved. The Project Hero Ltd.</p><a class="footer__email" href="mailto:hello@kayco.net">hello@kayco.net</a></div>
     </div>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/main.js?v=resources-hub-20260623" defer></script>
 </body>
 </html>

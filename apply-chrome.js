@@ -1,41 +1,59 @@
-<!DOCTYPE html>
-<html lang="en-GB">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" href="/favicon-48x48.png" type="image/png" sizes="48x48" />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+#!/usr/bin/env node
+/* ============================================================
+   Kay & Co. — shared chrome applier
+   ------------------------------------------------------------
+   Keeps the global navigation (header) and footer identical on
+   every public page. Replaces the <header class="nav"> and
+   <footer class="footer"> blocks with the canonical markup,
+   sets the active state from each page's route, and bumps the
+   CSS/JS cache token. Run after editing the templates below:
 
-  <title>Welcare.org.uk SEO Case Study | Care-Sector SEO | Kay &amp; Co.</title>
-  <meta name="description" content="Welcare.org.uk care-sector SEO case study from Kay &amp; Co., covering technical SEO, content strategy, topical authority and trust-led pages." />
-  <meta name="author" content="Kay & Co." />
-  <meta name="robots" content="index, follow, max-image-preview:large" />
-  <link rel="canonical" href="https://www.kayco.net/case-studies/welcare/" />
+     node apply-chrome.js          # rewrite all pages
+     node apply-chrome.js --check  # fail if any page is stale
+   ============================================================ */
 
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Kay & Co." />
-  <meta property="og:title" content="Welcare.org.uk SEO Case Study | Care-Sector SEO | Kay & Co." />
-  <meta property="og:description" content="A care-sector SEO case study covering technical SEO, healthcare content strategy and topical authority." />
-  <meta property="og:url" content="https://www.kayco.net/case-studies/welcare/" />
-  <meta property="og:locale" content="en_GB" />
-  <meta property="og:image" content="https://www.kayco.net/assets/og/kayco-og.svg" />
-  <meta name="twitter:card" content="summary_large_image" />
+const fs = require('fs');
+const path = require('path');
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/css/style.css?v=resources-hub-20260623" />
-</head>
-<body>
-  <header class="nav">
+const ROOT = __dirname;
+const ASSET_VERSION = 'resources-hub-20260623';
+
+const SKIP_DIRS = new Set(['.git', '.github', 'assets', 'data', 'functions', 'node_modules']);
+
+/* Routes where the "Services" nav item should be marked active. */
+const SERVICE_ROUTES = new Set([
+  '/services/',
+  '/healthcare-seo-services/',
+  '/medical-seo-services/',
+  '/ai-seo-for-healthcare/',
+  '/seo-for-healthcare-providers/',
+  '/seo-for-care-homes/',
+  '/healthcare-seo-agency/',
+  '/healthcare-seo-company/',
+  '/healthcare-seo-consultant/',
+  '/medical-seo-specialists/',
+]);
+
+function isServiceRoute(route) {
+  return route.startsWith('/services/') || route === '/services/seo' ||
+    route === '/services/geo-optimization' || SERVICE_ROUTES.has(route);
+}
+
+function isResourceRoute(route) {
+  return route.startsWith('/resources') || route.startsWith('/info') || route.startsWith('/blog');
+}
+
+/* ---------- Canonical markup ---------- */
+function navMarkup(route) {
+  const servicesActive = isServiceRoute(route) ? ' class="active"' : '';
+  const resourcesActive = isResourceRoute(route) ? ' active' : '';
+  return `<header class="nav">
     <a class="nav__logo" href="/" aria-label="Kay & Co. home"><span class="logo-mark" aria-hidden="true"><img src="/assets/img/kayco-logo-mark.svg" alt="" width="32" height="32" /></span><span class="logo-wordmark">Kay&nbsp;&amp;&nbsp;Co.</span></a>
     <nav aria-label="Primary">
       <ul class="nav__links" id="menu">
-        <li><a href="/services/">Services</a></li>
+        <li><a href="/services/"${servicesActive}>Services</a></li>
         <li class="nav__item nav__item--dropdown">
-          <button class="nav__drop-toggle" type="button" aria-expanded="false" aria-controls="resources-menu">Resources <span class="nav__chevron" aria-hidden="true">v</span></button>
+          <button class="nav__drop-toggle${resourcesActive}" type="button" aria-expanded="false" aria-controls="resources-menu">Resources <span class="nav__chevron" aria-hidden="true">v</span></button>
           <div class="nav__dropdown nav__resource-menu" id="resources-menu">
             <div class="nav__resource-grid">
               <div class="nav__resource-group">
@@ -84,72 +102,10 @@
       </ul>
     </nav>
     <button class="nav__burger" aria-label="Toggle menu" aria-controls="menu" aria-expanded="false"><span></span><span></span><span></span></button>
-  </header>
+  </header>`;
+}
 
-  <section class="page-hero">
-    <div class="container">
-      <div class="case-study-logo case-study-logo--hero reveal">
-        <img src="/assets/img/case-studies/welcare-logo.png" alt="Welcare logo" width="512" height="284" loading="eager" />
-      </div>
-      <p class="eyebrow reveal">Case Study  /  UK Care Sector</p>
-      <h1 class="reveal">Welcare.org.uk SEO Case Study</h1>
-      <p class="lead reveal">A featured care-sector SEO case study showing how Kay &amp; Co. supports search visibility through technical SEO, healthcare content strategy, topical authority and trust-led pages.</p>
-      <div class="hero__actions reveal" style="margin-top:2rem">
-        <a href="/contact" class="btn btn-primary">Book a Healthcare Visibility Audit <span class="arrow">&rarr;</span></a>
-        <a href="/healthcare-seo-services/" class="btn btn-ghost">Healthcare SEO services</a>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container split">
-      <div>
-        <p class="eyebrow reveal">Overview</p>
-        <h2 class="reveal">Real SEO work in a regulated care environment.</h2>
-        <p class="reveal mt-1">Welcare.org.uk is the current flagship proof asset for Kay &amp; Co.'s care-sector SEO experience. The work focused on strengthening organic search foundations for a regulated care provider without relying on unsupported rankings, inflated claims or invented metrics.</p>
-        <p class="reveal">The project covered technical SEO, evergreen informational pages, blog strategy, internal linking and trust-led content planning for audiences including families, professionals and referrers.</p>
-      </div>
-      <div class="panel reveal">
-        <div class="case-study-logo case-study-logo--panel">
-          <img src="/assets/img/case-studies/welcare-logo.png" alt="Welcare logo" width="512" height="284" loading="lazy" />
-        </div>
-        <p class="tag-pill" style="margin-bottom:1.2rem">Featured case study</p>
-        <div class="panel__chip"><span class="logo">UK</span><span style="flex:1;color:var(--grey)">Care-sector SEO</span></div>
-        <div class="panel__chip"><span class="logo">SEO</span><span style="flex:1;color:var(--grey)">Technical SEO foundations</span></div>
-        <div class="panel__chip"><span class="logo">CT</span><span style="flex:1;color:var(--grey)">Healthcare content strategy</span></div>
-        <div class="panel__chip"><span class="logo">TA</span><span style="flex:1;color:var(--grey)">Topical authority growth</span></div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider" />
-
-  <section>
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow reveal">Scope</p>
-        <h2 class="reveal">What the work covered</h2>
-        <p class="reveal">The focus was practical: make the site easier to crawl, easier to understand and better aligned with how people search for care-sector information.</p>
-      </div>
-      <div class="grid-3">
-        <article class="card reveal"><div class="card__icon" aria-hidden="true"></div><h3>Technical SEO</h3><p>Indexing, sitemap structure, crawlability, internal paths and technical search visibility foundations.</p></article>
-        <article class="card reveal"><div class="card__icon" aria-hidden="true"></div><h3>Content strategy</h3><p>Evergreen pages and blogs planned around professional, family and referrer search intent.</p></article>
-        <article class="card reveal"><div class="card__icon" aria-hidden="true"></div><h3>Topical authority</h3><p>A stronger content footprint around care, safeguarding, children's services and trust-based decision-making.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <div class="cta reveal">
-        <h2>Build stronger <span class="gradient-text">healthcare search visibility.</span></h2>
-        <p>Kay &amp; Co. is a doctor-led healthcare SEO agency for care providers, clinics and medical brands that need technical SEO, content strategy and AI search visibility.</p>
-        <div class="cta__actions"><a href="/contact" class="btn btn-primary">Book a Healthcare Visibility Audit <span class="arrow">&rarr;</span></a><a href="/healthcare-seo-services/" class="btn btn-ghost">Explore healthcare SEO</a></div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="footer">
+const FOOTER_MARKUP = `<footer class="footer">
     <div class="container">
       <div class="footer__strap">
         <span class="dot" aria-hidden="true"></span>
@@ -167,10 +123,72 @@
       <div class="footer__big" aria-hidden="true">Kay <span class="amp">&amp;</span> Co.</div>
       <div class="footer__bottom"><p>&copy; <span data-year>2026</span> Kay &amp; Co. All rights reserved. The Project Hero Ltd.</p><a class="footer__email" href="mailto:hello@kayco.net">hello@kayco.net</a></div>
     </div>
-  </footer>
+  </footer>`;
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="/assets/js/main.js?v=resources-hub-20260623" defer></script>
-</body>
-</html>
+/* ---------- File walking + route ---------- */
+function walk(dir, files = []) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (entry.isDirectory()) {
+      if (SKIP_DIRS.has(entry.name)) continue;
+      walk(path.join(dir, entry.name), files);
+      continue;
+    }
+    if (entry.isFile() && entry.name.endsWith('.html')) files.push(path.join(dir, entry.name));
+  }
+  return files;
+}
+
+function toRoute(file) {
+  const rel = path.relative(ROOT, file).replace(/\\/g, '/');
+  if (rel === 'index.html') return '/';
+  if (rel.endsWith('/index.html')) return `/${rel.slice(0, -'index.html'.length)}`;
+  return `/${rel.replace(/\.html$/, '')}`;
+}
+
+function applyChrome(html, route) {
+  let out = html;
+  out = out.replace(/<header class="nav">[\s\S]*?<\/header>/, navMarkup(route));
+  out = out.replace(/<footer class="footer">[\s\S]*?<\/footer>/, FOOTER_MARKUP);
+  out = out.replace(/\/assets\/css\/style\.css(?:\?v=[^"']*)?/g, `/assets/css/style.css?v=${ASSET_VERSION}`);
+  out = out.replace(/\/assets\/js\/main\.js(?:\?v=[^"']*)?/g, `/assets/js/main.js?v=${ASSET_VERSION}`);
+  return out;
+}
+
+function main() {
+  const checkOnly = process.argv.includes('--check');
+  const files = walk(ROOT);
+  let changed = 0;
+  const stale = [];
+  const missing = [];
+
+  for (const file of files) {
+    const rel = path.relative(ROOT, file).replace(/\\/g, '/');
+    const html = fs.readFileSync(file, 'utf8');
+    if (!/<header class="nav">/.test(html) || !/<footer class="footer">/.test(html)) {
+      missing.push(rel);
+      continue;
+    }
+    const route = toRoute(file);
+    const next = applyChrome(html, route);
+    if (next !== html) {
+      if (checkOnly) stale.push(rel);
+      else { fs.writeFileSync(file, next, 'utf8'); changed++; }
+    }
+  }
+
+  if (missing.length) {
+    console.warn(`Skipped ${missing.length} file(s) without nav/footer: ${missing.join(', ')}`);
+  }
+  if (checkOnly) {
+    if (stale.length) {
+      console.error(`Chrome out of date in ${stale.length} file(s):`);
+      for (const f of stale) console.error(`- ${f}`);
+      process.exit(1);
+    }
+    console.log(`Checked ${files.length} file(s); chrome is up to date.`);
+  } else {
+    console.log(`Applied canonical nav + footer to ${changed} file(s) (of ${files.length}).`);
+  }
+}
+
+main();
