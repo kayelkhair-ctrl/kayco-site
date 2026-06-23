@@ -16,7 +16,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = __dirname;
-const ASSET_VERSION = 'resources-hub-20260623';
+const ASSET_VERSION = 'resources-hub-20260623-fix1';
 
 const SKIP_DIRS = new Set(['.git', '.github', 'assets', 'data', 'functions', 'node_modules']);
 
