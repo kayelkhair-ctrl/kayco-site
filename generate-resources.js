@@ -127,9 +127,10 @@ function makeItem(file, src) {
 }
 
 function renderRows(items) {
-  return items.map((it) =>
-    `        <a class="res-item reveal" href="${it.route}"><span class="res-kicker">${it.label}</span><span class="res-date">${fmtDate(it.date)}</span><h3>${it.title}</h3><p>${it.blurb}</p></a>`
-  ).join('\n');
+  return items.map((it) => {
+    const date = it.type === 'Blog' ? `<span class="res-date">${fmtDate(it.date)}</span>` : '';
+    return `        <a class="res-item reveal" href="${it.route}"><span class="res-kicker">${it.label}</span>${date}<h3>${it.title}</h3><p>${it.blurb}</p></a>`;
+  }).join('\n');
 }
 
 function applyToFile(relFile, rows, checkOnly, results) {

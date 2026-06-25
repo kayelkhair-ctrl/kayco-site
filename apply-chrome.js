@@ -16,7 +16,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = __dirname;
-const ASSET_VERSION = 'nav-menu-fix-20260623';
+const ASSET_VERSION = 'content-schema-20260625';
 
 const SKIP_DIRS = new Set(['.git', '.github', 'assets', 'data', 'functions', 'node_modules']);
 

@@ -495,6 +495,8 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 .article__meta { color: var(--grey-dim); font-size: .85rem; letter-spacing: .05em; text-transform: uppercase; font-weight: 700; font-family: var(--font); }
 .article-visual { width: 100%; margin: 2rem auto 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); background: #050508; height: clamp(320px, 46vw, 620px); overflow: hidden; }
 .article-visual img { width: 100%; max-width: none; height: 100%; object-fit: cover; object-position: center; display: block; }
+.article-visual--contain { --visual-pad: clamp(1rem, 3vw, 2.5rem); box-sizing: border-box; background: var(--bg-soft); height: clamp(280px, 34vw, 440px); display: grid; place-items: center; padding: var(--visual-pad); }
+.article-visual--contain img { width: auto; height: auto; max-width: min(100%, 980px); max-height: calc(clamp(280px, 34vw, 440px) - (var(--visual-pad) * 2)); object-fit: contain; }
 .visual-strip { margin: clamp(3.5rem, 8vw, 8rem) calc(var(--page-pad) * -1) 0; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
 .visual-strip__copy { padding: clamp(2rem, 6vw, 6rem); align-self: center; }
 .visual-strip__copy h2, .visual-strip__copy h3 { font-size: clamp(2rem, 4.5vw, 4.5rem); max-width: 14ch; text-transform: uppercase; }
