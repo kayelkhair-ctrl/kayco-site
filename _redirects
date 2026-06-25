@@ -5,3 +5,6 @@ https://kayco.net/* https://www.kayco.net/:splat 301
 /services/healthcare-seo-company/ /healthcare-seo-company/ 301
 /services/healthcare-seo-consultant/ /healthcare-seo-consultant/ 301
 /services/medical-seo-specialists/ /medical-seo-specialists/ 301
+
+# Retired ranking-style blog post
+/blog/best-healthcare-seo-agency-uk /resources/guides/how-to-choose-a-healthcare-seo-agency/ 301
