@@ -36,6 +36,7 @@ const SERVICE_ROUTES = new Set([
   '/seo-for-chiropractors/',
   '/seo-for-physiotherapists/',
   '/seo-for-aesthetic-clinics/',
+  '/seo-for-vets/',
 ]);
 
 function isServiceRoute(route) {
