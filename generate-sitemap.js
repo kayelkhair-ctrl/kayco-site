@@ -122,6 +122,9 @@ function routePriority(route) {
     '/services/seo',
     '/services/geo-optimization',
     '/dental-seo-services/',
+    '/seo-for-chiropractors/',
+    '/seo-for-physiotherapists/',
+    '/seo-for-aesthetic-clinics/',
   ].includes(route)) return '0.9';
   if (route === '/resources/' || route.startsWith('/resources/')) return '0.8';
   if (route === '/blog/' || route === '/info/' || route.startsWith('/info/')) return '0.8';
