@@ -121,6 +121,7 @@ function routePriority(route) {
     '/ai-seo-for-healthcare/',
     '/services/seo',
     '/services/geo-optimization',
+    '/dental-seo-services/',
   ].includes(route)) return '0.9';
   if (route === '/resources/' || route.startsWith('/resources/')) return '0.8';
   if (route === '/blog/' || route === '/info/' || route.startsWith('/info/')) return '0.8';

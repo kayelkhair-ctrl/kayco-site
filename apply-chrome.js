@@ -32,6 +32,7 @@ const SERVICE_ROUTES = new Set([
   '/healthcare-seo-company/',
   '/healthcare-seo-consultant/',
   '/medical-seo-specialists/',
+  '/dental-seo-services/',
 ]);
 
 function isServiceRoute(route) {
