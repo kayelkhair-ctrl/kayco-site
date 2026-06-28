@@ -75,7 +75,7 @@ p { color: var(--grey); font-size: clamp(1rem, 1.15vw, 1.12rem); }
 }
 /* The painted highlighter block is ~1.2em tall (font metrics, not line-height).
    When a highlighted heading wraps, the blocks collide unless the line advance
-   clears that — so give any heading that contains a highlighter enough leading. */
+   clears that, so give any heading that contains a highlighter enough leading. */
 h1:has(.gradient-text), h1:has(.accent-blue),
 h2:has(.gradient-text), h2:has(.accent-blue),
 h3:has(.gradient-text), h3:has(.accent-blue) { line-height: 1.25; }
@@ -83,7 +83,7 @@ h3:has(.gradient-text), h3:has(.accent-blue) { line-height: 1.25; }
 /* ---------- Layout ---------- */
 .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--page-pad); }
 section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
-/* Alternating tinted band — gives the page rhythm so sections don't all read the same */
+/* Alternating tinted band gives the page rhythm so sections don't all read the same */
 .section-alt { background: var(--bg-soft); }
 .section-alt + .section-alt { border-top: 1px solid var(--line); }
 .section-head { max-width: 920px; margin-bottom: clamp(2.5rem, 5vw, 4.5rem); }
@@ -216,7 +216,7 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 @media (prefers-reduced-motion: reduce) { .found__logos li { transition: none; } }
 
 /* ============================================================
-   STRIP (doctor-led ribbon, below the divider line — hugs its text)
+   STRIP (doctor-led ribbon, below the divider line, hugs its text)
    ============================================================ */
 .reach { padding: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #fff; }
 .reach .container { padding-top: .75rem; padding-bottom: .75rem; }

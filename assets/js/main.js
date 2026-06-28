@@ -1,5 +1,5 @@
 /* ============================================================
-   Kay & Co. — Site interactions
+   Kay & Co. - Site interactions
    Nav, mobile menu, native reveals, stat counters,
    FAQ accordion, contact form.
    ============================================================ */
