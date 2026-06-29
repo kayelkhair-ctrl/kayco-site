@@ -513,6 +513,11 @@ section { position: relative; padding: clamp(4.5rem, 9vw, 9rem) 0; }
 .article__body a:hover { box-shadow: inset 0 -.9em 0 var(--accent); }
 .article__body blockquote { border-left: 4px solid var(--accent); padding: .4rem 0 .4rem 1.4rem; margin: 1.8rem 0; color: var(--ink); font-family: var(--display); font-size: clamp(1.5rem, 2.4vw, 2.1rem); font-weight: 700; line-height: 1.12; max-width: 28ch; text-transform: uppercase; }
 .article__body strong { color: var(--ink); }
+.table-scroll { overflow-x: auto; margin: 1.4rem 0 2rem; border: 1px solid var(--line); }
+.article__body table { width: 100%; min-width: 760px; border-collapse: collapse; background: #fff; font-size: .98rem; line-height: 1.45; }
+.article__body th, .article__body td { padding: .85rem 1rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.article__body th { color: var(--ink); font-weight: 800; text-transform: uppercase; font-size: .78rem; letter-spacing: .08em; background: var(--bg-soft); }
+.article__body tr:last-child td { border-bottom: 0; }
 .toc { margin: 2rem 0 2.5rem; padding: 1.25rem 1.4rem; border: 1px solid var(--line); background: var(--paper); }
 .toc h2 { margin: 0 0 .8rem; font-size: 1rem; letter-spacing: 0; }
 .toc ol { margin-bottom: 0; columns: 2; column-gap: 2rem; }
