@@ -2,12 +2,10 @@
 /* ============================================================
    Kay & Co. resources feed generator
    ------------------------------------------------------------
-   Scans blog posts, topics, guides and checklists, derives a
+   Scans blog posts and informational topics, derives a
    title/blurb/date/type for each, sorts newest-first, and
    injects feed rows between <!-- RESFEED:START/END --> markers:
      /resources/index.html            -> all resources
-     /resources/guides/index.html     -> guides only
-     /resources/checklists/index.html -> checklists only
 
      node generate-resources.js          # write feeds
      node generate-resources.js --check  # fail if out of date
@@ -24,15 +22,11 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 const SOURCES = [
   { type: 'Blog', label: 'Blog', dir: 'blog', mode: 'flat' },
   { type: 'Topic', label: 'Topic', dir: 'info', mode: 'flat' },
-  { type: 'Guide', label: 'Guide', dir: 'resources/guides', mode: 'nested' },
-  { type: 'Checklist', label: 'Checklist', dir: 'resources/checklists', mode: 'nested' },
 ];
 
 /* Feed targets: file to write -> which types to include (null = all). */
 const TARGETS = [
   { file: 'resources/index.html', types: null },
-  { file: 'resources/guides/index.html', types: ['Guide'] },
-  { file: 'resources/checklists/index.html', types: ['Checklist'] },
 ];
 
 function read(file) {
